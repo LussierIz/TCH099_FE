@@ -1,17 +1,26 @@
 $(document).ready(() => {
-    let currentDate = getRandomDate()
+    let currentDate = new Date()
     createCalendar(currentDate)
+    addTache()
 
     $("#prevMonth").click(() => {
         currentDate.setMonth(currentDate.getMonth() - 1)
         createCalendar(currentDate)
+        addTache()
     })
 
     $("#nextMonth").click(() => {
         currentDate.setMonth(currentDate.getMonth() + 1)
         createCalendar(currentDate)
+        addTache()
     })
 })
+
+const tacheExemple = {
+    titre: "Devoir",
+    description: "Voici un courte description",
+    date: "2025-02-10"
+}
 
 const DaysOfWeek = Object.freeze({
     Sunday: 0, 
@@ -42,10 +51,10 @@ const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
 const getFirstDay = (year, month) => new Date(year, month, 1).getDay()
 const checkCurrentDate = (day, month, year, today) => day !== null && day === today.getDate() && month === today.getMonth() && year === today.getFullYear()
 const getRandomDate = () => {
-    let year = Math.floor(Math.random() * (2025 - 2000 + 1)) + 2000;
-    let month = Math.floor(Math.random() * 12);
-    let day = Math.floor(Math.random() * getDaysInMonth(year, month)) + 1;
-    return new Date(year, month, day);
+    let year = Math.floor(Math.random() * (2025 - 2000 + 1)) + 2000
+    let month = Math.floor(Math.random() * 12)
+    let day = Math.floor(Math.random() * getDaysInMonth(year, month)) + 1
+    return new Date(year, month, day)
 }
 
 const createCalendar = (date) => {
@@ -84,6 +93,16 @@ const createCalendar = (date) => {
             tbody.append(tr)
         }
         let classes = checkCurrentDate(day, month, year, today) ? "today" : ""
-        tr.append(`<td class="${classes}">${day ? day : ""}</td>`)
+        if (day) {
+            let dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+            let dayCell = $(`<td id="day-${dateString}" class="${classes}">${day}</td>`)
+            tr.append(dayCell)
+        } else {tr.append("<td></td>")}
     })
+}
+
+let addTache = () => {
+    let task = tacheExemple
+    let taskElement = $(`<div class="task">${task.titre}</div>`)
+    $(`#day-${task.date}`).append(taskElement)
 }

@@ -24,10 +24,16 @@ table {
 th, td {
     padding: 15px;
     border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
 }
 th {
     background-color: #007BFF;
     color: white;
+}
+
+tr {
+    font-size: 0.8rem;
 }
 
 #titre {
