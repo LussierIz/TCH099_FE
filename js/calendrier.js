@@ -10,32 +10,41 @@
  * @date 2025-03-11
  */
 
-
-
+/**
+ * Cette fonction s'exécute dès que le DOM (Document Object Model) est complètement chargé.
+ * Cela permet de s'assurer que tous les éléments HTML sont disponibles pour être manipulés,
+ * avant d'exécuter toute logique JavaScript.
+ */
 $(document).ready(() => {
-    let currentDate = new Date() // Récupère la date actuelle
-    createCalendar(currentDate) // Crée le calendrier pour le mois actuel
-    addTache() // Ajoute les tâches associées à ce mois
-    
-    /**
-     * Gestion du clic sur le bouton "Mois précédent".
-     * Met à jour la date en reculant d'un mois, recrée le calendrier et met à jour les tâches.
-     */
-    $("#prevMonth").click(() => {
-        currentDate.setMonth(currentDate.getMonth() - 1)
-        createCalendar(currentDate)
-        addTache()
-    })
+    // Permet d'obtenir les informations importantes de l'url
+    const urlParams = new URLSearchParams(window.location.search)
+    const currentPage = window.location.pathname.split('/').pop()
 
-    /**
-     * Gestion du clic sur le bouton "Mois suivant".
-     * Met à jour la date en avançant d'un mois, recrée le calendrier et met à jour les tâches.
-     */
-    $("#nextMonth").click(() => {
-        currentDate.setMonth(currentDate.getMonth() + 1)
-        createCalendar(currentDate)
-        addTache()
-    })
+    if(currentPage === "index.html"){
+        let currentDate = new Date() // Récupère la date actuelle
+        createCalendar(currentDate) // Crée le calendrier pour le mois actuel
+        addTache() // Ajoute les tâches associées à ce mois
+        
+        /**
+         * Gestion du clic sur le bouton "Mois précédent".
+         * Met à jour la date en reculant d'un mois, recrée le calendrier et met à jour les tâches.
+         */
+        $("#prevMonth").click(() => {
+            currentDate.setMonth(currentDate.getMonth() - 1)
+            createCalendar(currentDate)
+            addTache()
+        })
+
+        /**
+         * Gestion du clic sur le bouton "Mois suivant".
+         * Met à jour la date en avançant d'un mois, recrée le calendrier et met à jour les tâches.
+         */
+        $("#nextMonth").click(() => {
+            currentDate.setMonth(currentDate.getMonth() + 1)
+            createCalendar(currentDate)
+            addTache()
+        })
+    }
 })
 
 /**
