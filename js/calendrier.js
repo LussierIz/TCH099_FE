@@ -103,6 +103,6 @@ const createCalendar = (date) => {
 
 let addTache = () => {
     let task = tacheExemple
-    let taskElement = $(`<div class="task">${task.titre}</div>`)
+    let taskElement = $(`<div class="task"><li>${task.titre}</li></div>`)
     $(`#day-${task.date}`).append(taskElement)
 }
