@@ -46,3 +46,26 @@ tr {
 caption {
     font-size: 1.2rem;
 }
+
+.ajout-Tache {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.ajout-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.show {
+    visibility: visible;
+}

@@ -44,6 +44,10 @@ $(document).ready(() => {
             createCalendar(currentDate)
             addTache()
         })
+
+        $("#montre-tache").click(() => {
+            $(".ajout-Tache").toggleClass("show")
+        })
     }
 })
 
@@ -201,5 +205,5 @@ let addTache = () => {
 }
 
 let addTacheArray = () => {
-    
+
 }
