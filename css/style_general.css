@@ -1,0 +1,11 @@
+.main-container {
+    display: flex;
+}
+
+.calendrier {
+    flex: 4;
+}
+
+.objectifs {
+    flex:2;
+}
