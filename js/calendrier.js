@@ -23,7 +23,7 @@ $(document).ready(() => {
     if(currentPage === "index.html"){
         let currentDate = new Date() // Récupère la date actuelle
         createCalendar(currentDate) // Crée le calendrier pour le mois actuel
-        addTache() // Ajoute les tâches associées à ce mois
+        addTacheArray(tblTache) // Ajoute les tâches associées à ce mois
         
         /**
          * Gestion du clic sur le bouton "Mois précédent".
@@ -32,7 +32,7 @@ $(document).ready(() => {
         $("#prevMonth").click(() => {
             currentDate.setMonth(currentDate.getMonth() - 1)
             createCalendar(currentDate)
-            addTache()
+            addTacheArray(tblTache)
         })
 
         /**
@@ -42,11 +42,21 @@ $(document).ready(() => {
         $("#nextMonth").click(() => {
             currentDate.setMonth(currentDate.getMonth() + 1)
             createCalendar(currentDate)
-            addTache()
+            addTacheArray(tblTache)
         })
 
         $("#montre-tache").click(() => {
             $(".ajout-Tache").toggleClass("show")
+        })
+
+        $("#close").click((event) => {
+            event.preventDefault()
+            $(".ajout-Tache").removeClass("show")
+        })
+
+        $(".ajout-form").submit((event) => {
+            event.preventDefault()
+            ajoutForm()
         })
     }
 })
@@ -192,18 +202,72 @@ const createCalendar = (date) => {
 }
 
 /**
- * Ajoute une tâche à une date spécifique dans le calendrier.
- * 
- * Cette fonction prend un objet tâche (ici `tacheExemple`), puis crée un élément HTML 
- * représentant cette tâche sous forme de `<div>` contenant un `<li>`. Ensuite, elle 
- * l'ajoute à une cellule de calendrier correspondant à la date de la tâche.
+ * Fonction permettant d'ajouter une tâche au calendrier.
  */
-let addTache = () => {
-    let task = tacheExemple
-    let taskElement = $(`<div class="task"><li>${task.titre}</li></div>`)
-    $(`#day-${task.date}`).append(taskElement)
+let ajoutForm = () => {
+    // Récupérer les valeurs des champs du formulaire et supprimer les espaces inutiles
+    let nomTache = $("#nom-tache").val().trim()
+    let descTache = $("#desc-tache").val().trim()
+    let dateTache = $("#date-tache").val().trim()
+
+    /**
+     * Vérification et correction du format de la date.
+     * Si l'utilisateur a entré un jour ou un mois avec un seul chiffre (ex: "2025-3-7"), 
+     * on ajoute un zéro devant pour obtenir un format valide "YYYY-MM-DD".
+     */
+    let dateParts = dateTache.split("-")
+    if (dateParts.length === 3) {
+        let year = dateParts[0]
+        let month = dateParts[1].padStart(2, '0') // Ajoute un zéro si nécessaire
+        let day = dateParts[2].padStart(2, '0')   // Ajoute un zéro si nécessaire
+        dateTache = `${year}-${month}-${day}`
+    } else {
+        alert("Format de date invalide. Utilisez YYYY-MM-DD.")
+        return
+    }
+
+    // Vérifier que tous les champs sont remplis
+    if (nomTache === "" || descTache === "" || dateTache === "") {
+        alert("Veuillez remplir tous les champs.")
+        return
+    }
+
+    // Création de l'objet représentant la tâche
+    const tache = {
+        titre: nomTache,
+        description: descTache,
+        date: dateTache
+    }
+
+    // Ajouter la tâche au tableau des tâches et l'afficher dans le calendrier
+    tblTache.push(tache)
+    addTache(tache)
+    
+    // Réinitialiser le formulaire et fermer la fenêtre d'ajout de tâche
+    $(".ajout-form")[0].reset()
+    $(".ajout-Tache").removeClass("show")
 }
 
-let addTacheArray = () => {
+/**
+ * Ajoute une tâche à une date spécifique dans le calendrier.
+ * 
+ * @param {Object} tache - L'objet représentant la tâche à ajouter
+ * @param {string} tache.titre - Le titre de la tâche
+ * @param {string} tache.date - La date de la tâche au format "YYYY-MM-DD"
+ */
+let addTache = (tache) => {
+    let taskElement = $(`<div class="task"><li>${tache.titre}</li></div>`)
+    $(`#day-${tache.date}`).append(taskElement)
+}
 
+/**
+ * Ajoute toutes les tâches du tableau `tblTache` au calendrier.
+ * 
+ * @param {Array<Object>} tblTache - Tableau contenant toutes les tâches
+ */
+let addTacheArray = (tblTache) => {
+    // Vider le calendrier avant de le mettre à jour pour éviter les doublons
+    $(".task").remove()
+    // Ajouter chaque tâche dans le calendrier
+    tblTache.forEach(tache => addTache(tache))
 }

@@ -10,10 +10,51 @@
 }
 
 .calendrier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.change-mois button {
+  background-color: #ffffff00;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  color: #0f1111;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  touch-action: manipulation;
+  width: 100px;
+}
+
+.change-mois button:hover {
+  background-color: #deeaf0;
+}
+
+.change-mois button:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 0;
+}
+
+#prevMonth {
+    position: absolute;
+    left: 2%;
+}
+
+#nextMonth {
+    position: absolute;
+    right:2%;
 }
 
 table {
@@ -49,7 +90,7 @@ caption {
 
 .ajout-Tache {
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -65,6 +106,18 @@ caption {
     padding: 20px;
     border-radius: 8px;
 }
+
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 
 .show {
     visibility: visible;

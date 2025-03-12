@@ -16,8 +16,10 @@
     </div>
 
     <div class="calendrier">
-        <button id="prevMonth">Previous</button>
-        <button id="nextMonth">Next</button>
+        <div class="change-mois">            
+            <button id="prevMonth">Previous</button>
+            <button id="nextMonth">Next</button>
+        </div>
         <table id="Calendrier">
             <caption id="titre"></caption>
             <thead>
@@ -32,12 +34,14 @@
             </tr>
           </thead>
         </table>
+
+        <button id="montre-tache">Ajouter une activité</button>
     </div>
 
-    <button id="montre-tache">Ajouter une activité</button>
 
     <div class="ajout-Tache">
         <form action="" class="ajout-form">
+            <button id="close">x</button>
             <h2>Ajoute une tache</h2>
             <label for="nom-tache">Nom de la tache : </label>
             <input type="text" id="nom-tache">
@@ -45,6 +49,8 @@
             <input type="text" id="desc-tache">
             <label for="date-tache">Date de la tache : </label>
             <input type="text" id="date-tache">
+            <br>
+            <button>Ajouter</button>
         </form>
     </div>
 
