@@ -14,7 +14,7 @@
  * Cette fonction s'exécute dès que le DOM (Document Object Model) est complètement chargé.
  * Cela permet de s'assurer que tous les éléments HTML sont disponibles pour être manipulés,
  * avant d'exécuter toute logique JavaScript.
- */
+ */ 
 $(document).ready(() => {
     // Permet d'obtenir les informations importantes de l'url
     const urlParams = new URLSearchParams(window.location.search)
@@ -44,6 +44,10 @@ $(document).ready(() => {
             createCalendar(currentDate)
             addTache()
         })
+
+        $("#montre-tache").click(() => {
+            $(".ajout-Tache").toggleClass("show")
+        })
     }
 })
 
@@ -57,6 +61,12 @@ const tacheExemple = {
     description: "Voici un courte description",
     date: "2025-02-10"
 }
+
+/**
+ * Tableau contenant la liste des tâches.
+ * Chaque tâche est représentée sous forme d'objet avec ses propriétés.
+ */
+const tblTache = []
 
 // Énumération pour représenter les jours de la semaine
 const DaysOfWeek = Object.freeze({
@@ -192,4 +202,8 @@ let addTache = () => {
     let task = tacheExemple
     let taskElement = $(`<div class="task"><li>${task.titre}</li></div>`)
     $(`#day-${task.date}`).append(taskElement)
+}
+
+let addTacheArray = () => {
+
 }
