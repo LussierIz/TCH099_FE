@@ -9,3 +9,7 @@
 .objectifs {
     flex:2;
 }
+
+body {
+    background-color: black;
+}
