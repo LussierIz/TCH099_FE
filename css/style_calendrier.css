@@ -19,22 +19,28 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.change-mois {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .change-mois button {
-  background-color: #ffffff00;
-  border: 1px solid #d5d9d9;
-  border-radius: 8px;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  color: #0f1111;
-  cursor: pointer;
-  font-size: 13px;
-  line-height: 29px;
-  padding: 0 10px 0 11px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  touch-action: manipulation;
-  width: 100px;
+    background-color: #ffffff00;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    color: #0f1111;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
 }
 
 .change-mois button:hover {
@@ -45,16 +51,6 @@
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
-}
-
-#prevMonth {
-    position: absolute;
-    left: 2%;
-}
-
-#nextMonth {
-    position: absolute;
-    right:2%;
 }
 
 table {
