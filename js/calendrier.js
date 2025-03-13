@@ -37,7 +37,9 @@ $(document).ready(() => {
 
         /**
          * Gestion du clic sur le bouton "Mois suivant".
-         * Met à jour la date en avançant d'un mois, recrée le calendrier et met à jour les tâches.
+         * Lorsque l'utilisateur clique sur ce bouton, le mois actuellement affiché est avancé d'une unité.
+         * Ensuite, le calendrier est mis à jour pour refléter le nouveau mois et les tâches associées
+         * sont également mises à jour.
          */
         $("#nextMonth").click(() => {
             currentDate.setMonth(currentDate.getMonth() + 1)
@@ -45,15 +47,29 @@ $(document).ready(() => {
             addTacheArray(tblTache)
         })
 
+        /**
+         * Gestion du clic sur le bouton "Afficher/Masquer les tâches".
+         * Permet d'afficher ou de cacher le formulaire d'ajout de tâche en basculant la classe CSS "show".
+         */
         $("#montre-tache").click(() => {
             $(".ajout-Tache").toggleClass("show")
         })
 
+        /**
+         * Gestion du clic sur le bouton "Fermer" du formulaire d'ajout de tâche.
+         * Lorsqu'un utilisateur clique sur ce bouton, l'événement par défaut est annulé 
+         * et le formulaire d'ajout de tâche est caché en supprimant la classe CSS "show".
+         */
         $("#close").click((event) => {
             event.preventDefault()
             $(".ajout-Tache").removeClass("show")
         })
 
+        /**
+         * Gestion de la soumission du formulaire d'ajout de tâche.
+         * Lorsque l'utilisateur soumet le formulaire, l'événement par défaut est annulé
+         * et la fonction `ajoutForm()` est appelée pour ajouter une nouvelle tâche.
+         */
         $(".ajout-form").submit((event) => {
             event.preventDefault()
             ajoutForm()
