@@ -11,8 +11,6 @@ class SidebarManager {
 
     toggle() {
         this.sidebar.classList.toggle('collapsed');
-        
         localStorage.setItem('sidebarCollapsed', this.sidebar.classList.contains('collapsed'));
     }
 }
-const sidebarManager = new SidebarManager();
