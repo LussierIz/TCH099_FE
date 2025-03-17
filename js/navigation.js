@@ -29,28 +29,45 @@ $(document).ready(() => {
     sidebarManager.init()
 
     if (currentPage === "accueil.html"){
+        $("#Accueil-page").addClass("active")
+
+    }
+
+    if (currentPage === "Bloc-note.html"){
+        $("#bloc-note-page").addClass("active")
         
     }
-    if (currentPage === "Bloc-note.html"){
 
-    }
     if (currentPage === "Boutique.html"){
-
+        $("#boutique-page").addClass("active")
+        
     }
+
     if (currentPage === "Etude.html"){
-
+        $("#etude-page").addClass("active")
+        
     }
+
     if (currentPage === "Friend.html"){
-
+        $("#friend-page").addClass("active")
+        
     }
+
     if (currentPage === "login.html"){
-
+        
     }
+
     if (currentPage === "register.html"){
-
+        
     }
 
+    if (currentPage === "objectifs.html"){
+        $("#objectifs-page").addClass("active")
+    }
+    
     if(currentPage === "calendrier.html"){
+        $("#calendrier-page").addClass("active")
+
         let currentDate = new Date() // Récupère la date actuelle
         createCalendar(currentDate) // Crée le calendrier pour le mois actuel
         addTacheArray(tblTache) // Ajoute les tâches associées à ce mois       
