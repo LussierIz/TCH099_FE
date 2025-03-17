@@ -6,6 +6,7 @@
        <!-- pour le css -->
        <link rel="stylesheet" href="/css/style_sidebar.css">
        <link rel="stylesheet" href="/css/style_general.css">
+       <link rel="stylesheet" href="/css/style_objectifs.css">
 
        <!-- Les scripts -->
        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -33,7 +34,7 @@
                 <span class="nav-text">Calendrier</span>
             </button>
 
-            <button class="nav-item" data-section="objectifs">
+            <button class="nav-item" data-section="objectifs" id="objectifs-page">
                 <span class="nav-icon">🎯</span>
                 <span class="nav-text">Objectifs</span>
                 <span class="xp-badge">XP: 250</span>
@@ -77,5 +78,51 @@
             </div>
         </div>
     </nav>
+
+
+    <div class="objectifs">
+        <div class="titre-objectifs">
+            <img src="/images/star-logo-tr.png" class="logo" alt="Astrum Logo">
+            <h2>Objectifs</h2>
+        </div>
+        
+        <div class="theme-form">
+            <form id="objForm">
+                <div class="input-group">
+                    <label for="obj-titre"><span class="star-icon">✦</span>Titre de l'objectif</label>
+                    <input type="text" id="obj-titre" placeholder="Ex: Finir le laboratoire de GTI100" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="obj-desc"><span class="star-icon">✦</span>Description</label>
+                    <textarea id="obj-desc" placeholder="Description"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="obj-diff"><span class="star-icon">✦</span>Difficulté</label>
+                    <div class="star-rating">
+                        <span data-value="1">☆</span>
+                        <span data-value="2">☆</span>
+                        <span data-value="3">☆</span>
+                        <span data-value="4">☆</span>
+                        <span data-value="5">☆</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="obj-echeance"><span class="star-icon">✦</span>Échéance</label>
+                    <input type="date" id="obj-echeance" required>
+                </div>
+
+                <button type="submit" class="btn-obj">
+                    <span class="star-pulse">✧</span> Lancer l'objectif !
+                    <div class="star-trail"></div>
+                </button>
+
+                <div id="liste-objectifs" class="champ-etoile"></div>
+    
+            </form>
+        </div>
+    </div>
 </body>
 </html>
