@@ -2,7 +2,6 @@ class SidebarManager {
     constructor() {
         this.sidebar = document.querySelector('.sidebar');
         this.toggleBtn = document.querySelector('.sidebar-toggle');
-        this.init();
     }
 
     init() {

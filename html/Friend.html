@@ -3,9 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style_sidebar.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="/js/sidebar.js"></script>
+    <script defer src="/js/navigation.js"></script>
     <title>Document</title>
 </head>
 <body>
     
+    <nav class="sidebar">
+        <!-- <div class="sidebar-header">
+            <img src="/images/star-logo-tr.png" class="logo" alt="Astrum">
+            <h1>Astrum</h1>
+        </div> -->
+
+        <div class="sidebar-bar">
+            <button class="sidebar-toggle">◄</button>
+            <button class="nav-item active" data-section="calendar" id="calendrier-page">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Calendrier</span>
+            </button>
+    
+            <button class="nav-item" data-section="objectifs">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">Objectifs</span>
+                <span class="xp-badge">XP: 250</span>
+            </button>
+    
+            <button class="nav-item" data-section="stats">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Statistiques</span>
+            </button>
+            
+            <button class="nav-item" data-section="stats" id="friend-page">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Friends</span>
+            </button>
+    
+            <div class="sidebar-footer">
+                <div class="level-progress">
+                    <div class="progress-bar" style="width: 65%"></div>
+                    <span>Niveau 3</span>
+                </div>
+            </div>
+        </div>
+    </nav>
 </body>
 </html>

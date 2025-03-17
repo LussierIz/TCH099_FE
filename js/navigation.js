@@ -25,12 +25,14 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
-    if(currentPage === "index.html"){
-        const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
+    const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
+    sidebarManager.init()
+
+    if(currentPage === "calendrier.html"){
         let currentDate = new Date() // Récupère la date actuelle
         createCalendar(currentDate) // Crée le calendrier pour le mois actuel
-        addTacheArray(tblTache) // Ajoute les tâches associées à ce mois
-        
+        addTacheArray(tblTache) // Ajoute les tâches associées à ce mois       
+
         /**
          * Gestion du clic sur le bouton "Mois précédent".
          * Met à jour la date en reculant d'un mois, recrée le calendrier et met à jour les tâches.
@@ -81,4 +83,29 @@ $(document).ready(() => {
             ajoutForm()
         })
     }
+
+    $('.sidebar-bar').on('click', 'button', function () {
+        switch (this.id) {
+            case "bloc-note-page":
+                window.location.href = "/html/Bloc-note.html"
+                break
+            case "boutique-page":
+                window.location.href = "/html/Boutique.html"
+                break
+            case "etude-page":
+                window.location.href = "/html/Etude.html"
+                break
+            case "calendrier-page":
+                window.location.href = "/html/calendrier.html"
+                break
+            case "login-page":
+                window.location.href = "/html/login.html"
+                break
+            case "friend-page":
+                window.location.href = "/html/Friend.html"
+                break
+        }
+    })
+
+
 })
