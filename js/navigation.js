@@ -107,6 +107,9 @@ $(document).ready(() => {
             case "friend-page":
                 window.location.href = "/html/Friend.html"
                 break
+            case "objectifs-page":
+                window.location.href = "/html/objectifs.html"
+                break
         }
     })
 
