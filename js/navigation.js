@@ -54,7 +54,7 @@ $(document).ready(() => {
     }
 
     if (currentPage === "login.html"){
-        
+        $("#login-page").addClass("active")
     }
 
     if (currentPage === "register.html"){
