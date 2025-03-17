@@ -28,6 +28,28 @@ $(document).ready(() => {
     const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
     sidebarManager.init()
 
+    if (currentPage === "accueil.html"){
+        
+    }
+    if (currentPage === "Bloc-note.html"){
+
+    }
+    if (currentPage === "Boutique.html"){
+
+    }
+    if (currentPage === "Etude.html"){
+
+    }
+    if (currentPage === "Friend.html"){
+
+    }
+    if (currentPage === "login.html"){
+
+    }
+    if (currentPage === "register.html"){
+
+    }
+
     if(currentPage === "calendrier.html"){
         let currentDate = new Date() // Récupère la date actuelle
         createCalendar(currentDate) // Crée le calendrier pour le mois actuel
@@ -109,6 +131,4 @@ $(document).ready(() => {
                 break
         }
     })
-
-
 })
