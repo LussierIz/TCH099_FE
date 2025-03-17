@@ -86,6 +86,9 @@ $(document).ready(() => {
 
     $('.sidebar-bar').on('click', 'button', function () {
         switch (this.id) {
+            case "Accueil-page":
+                window.location.href = "/html/accueil.html"
+                break
             case "bloc-note-page":
                 window.location.href = "/html/Bloc-note.html"
                 break

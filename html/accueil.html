@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- pour le css -->
-        <link rel="stylesheet" href="/css/style_sidebar.css">
-        <link rel="stylesheet" href="/css/style_general.css">
-        <!-- Les scripts -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script defer src="/js/sidebar.js"></script>
-        <script defer src="/js/navigation.js"></script>
+       <!-- pour le css -->
+       <link rel="stylesheet" href="/css/style_sidebar.css">
+       <link rel="stylesheet" href="/css/style_general.css">
+
+       <!-- Les scripts -->
+       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+       <script defer src="/js/sidebar.js"></script>
+       <script defer src="/js/navigation.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -21,11 +22,17 @@
 
         <div class="sidebar-bar">
             <button class="sidebar-toggle">◄</button>
+            
+            <button class="nav-item active" data-section="Accueil" id="Accueil-page">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Accueil</span>
+            </button>
+
             <button class="nav-item active" data-section="calendar" id="calendrier-page">
                 <span class="nav-icon">📅</span>
                 <span class="nav-text">Calendrier</span>
             </button>
-    
+
             <button class="nav-item" data-section="objectifs">
                 <span class="nav-icon">🎯</span>
                 <span class="nav-text">Objectifs</span>
@@ -69,6 +76,6 @@
                 </div>
             </div>
         </div>
-    </nav> 
+    </nav>
 </body>
 </html>

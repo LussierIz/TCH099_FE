@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/style_sidebar.css">
     <link rel="stylesheet" href="/css/style_general.css">
     <link rel="stylesheet" href="/css/style_calendrier.css">
-    <link rel="stylesheet" href="/css/style_objectifs.css">]
+    <link rel="stylesheet" href="/css/style_objectifs.css">
     <!-- Les scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/calendrier.js"></script>
@@ -26,11 +26,17 @@
 
         <div class="sidebar-bar">
             <button class="sidebar-toggle">◄</button>
+            
+            <button class="nav-item active" data-section="Accueil" id="Accueil-page">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Accueil</span>
+            </button>
+
             <button class="nav-item active" data-section="calendar" id="calendrier-page">
                 <span class="nav-icon">📅</span>
                 <span class="nav-text">Calendrier</span>
             </button>
-    
+
             <button class="nav-item" data-section="objectifs">
                 <span class="nav-icon">🎯</span>
                 <span class="nav-text">Objectifs</span>
@@ -42,9 +48,29 @@
                 <span class="nav-text">Statistiques</span>
             </button>
             
-            <button class="nav-item" data-section="stats" id="friend-page">
-                <span class="nav-icon">📊</span>
+            <button class="nav-item" data-section="" id="friend-page">
+                <span class="nav-icon">😺</span>
                 <span class="nav-text">Friends</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="bloc-note-page">
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">Bloc-Note</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="login-page">
+                <span class="nav-icon">🔑</span>
+                <span class="nav-text">login</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="boutique-page">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-text">boutique</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="etude-page">
+                <span class="nav-icon">🎓</span>
+                <span class="nav-text">Étude</span>
             </button>
     
             <div class="sidebar-footer">
