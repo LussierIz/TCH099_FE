@@ -5,6 +5,12 @@ class SidebarManager {
     }
 
     init() {
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+            this.sidebar.classList.add('collapsed');
+        }
+
+        setTimeout(() => this.sidebar.classList.add('transition-enabled'), 10);
+
         this.toggleBtn.addEventListener('click', () => this.toggle());
     }
 
