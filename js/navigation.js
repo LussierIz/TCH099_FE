@@ -100,6 +100,7 @@ $(document).ready(() => {
          */
         $("#montre-tache").click(() => {
             $(".ajout-Tache").toggleClass("show")
+            $(".calendrier").toggleClass("hidden")
         })
 
         /**
@@ -110,6 +111,7 @@ $(document).ready(() => {
         $("#close").click((event) => {
             event.preventDefault()
             $(".ajout-Tache").removeClass("show")
+            $(".calendrier").removeClass("hidden")
         })
 
         /**
@@ -120,6 +122,7 @@ $(document).ready(() => {
         $(".ajout-form").submit((event) => {
             event.preventDefault()
             ajoutForm()
+            $(".calendrier").removeClass("hidden")
         })
     }
 

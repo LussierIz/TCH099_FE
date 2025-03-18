@@ -1,22 +1,29 @@
-.today {
-    color: aqua;
-}
-
-.header {
+.main-container {
     display: flex;
     justify-content: center;
-    border: 4px solid;
-    border-radius: 8px;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
+    color: white;
+}
+
+.today {
+    color: #ffd700;
 }
 
 .calendrier {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 60%;
     background: white;
     padding: 20px;
     border-radius: 10px;
+    border: 1px solid #667eea;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .change-mois {
@@ -30,7 +37,7 @@
     border: 1px solid #d5d9d9;
     border-radius: 8px;
     box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-    color: #0f1111;
+    color: white;
     cursor: pointer;
     font-size: 13px;
     line-height: 29px;
@@ -44,11 +51,11 @@
 }
 
 .change-mois button:hover {
-  background-color: #deeaf0;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .change-mois button:focus {
-  border-color: #008296;
+  border-color: #ffd700;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
 }
@@ -65,7 +72,7 @@ th, td {
     vertical-align: top;
 }
 th {
-    background-color: #007BFF;
+    background-color: #667eea;
     color: white;
 }
 
@@ -84,25 +91,86 @@ caption {
     font-size: 1.2rem;
 }
 
-.ajout-Tache {
-    visibility: hidden;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;  
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+#montre-tache {
+    background-color: #ffffff00;
+    border: 1px solid #d5d9d9;
     border-radius: 8px;
-    z-index: 1000;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 40%;
+}
+
+#montre-tache:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#montre-tache:focus {
+    border-color: #ffd700;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    outline: 0;
 }
 
 .ajout-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     padding: 20px;
     border-radius: 8px;
 }
 
+.ajout-form label {
+    font-size: 18px;
+    margin: 10px;
+}
+
+.ajout-form input {
+    width: 60%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #667eea;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+#ajouter-Tache {
+    background-color: #ffffff00;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 40%;
+}
+
+#ajouter-Tache:focus {
+    border-color: #ffd700;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    outline: 0;
+}
+
+#ajouter-Tache:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
 #close {
     position: absolute;
@@ -111,10 +179,34 @@ caption {
     background: none;
     border: none;
     font-size: 18px;
+    color: #ffd700;
     cursor: pointer;
 }
 
+.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
 
+.ajout-Tache {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    opacity: 0;
+    transform: scale(0.9);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #667eea;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
 .show {
-    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
 }
