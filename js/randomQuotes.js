@@ -3,7 +3,7 @@ const quotes = [
     "Une seule conversation avec un sage vaut dix ans d'étude.",
     "Même le plus haut arbre naît d'une graine minuscule.",
     "Ne crains pas d'avancer lentement, crains seulement de t'arrêter.",
-    "Le diamant ne peut être poli sans friction, l'homme ne peut atteindre la perfection sans épreuves.",
+    "Le diamant ne peut être poli sans friction, l'Homme ne peut atteindre la perfection sans épreuves.",
     "Quand le vent du changement souffle, certains construisent des murs, d'autres des moulins",
     "Le savoir est un trésor, mais la pratique en est la clé.",
     "Si tu veux être heureux une heure, fais une sieste. Si tu veux être heureux un jour, pêche. Si tu veux être heureux toute une vie, étudie.",
