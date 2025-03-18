@@ -1,0 +1,20 @@
+.accueil-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 25px;
+  }
+  
+.quotes {
+    background: #fff5e6;
+    padding: 25px;
+    border-radius: 15px;
+    grid-column: 1 / -1;
+}
+  
+.objectifs-section {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
