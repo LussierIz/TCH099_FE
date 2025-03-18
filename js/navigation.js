@@ -122,7 +122,6 @@ $(document).ready(() => {
         $(".ajout-form").submit((event) => {
             event.preventDefault()
             ajoutForm()
-            $(".calendrier").removeClass("hidden")
         })
     }
 

@@ -156,9 +156,6 @@ caption {
     padding: 0 10px 0 11px;
     margin-top: 20px;
     text-align: center;
-    text-decoration: none;
-    user-select: none;
-    touch-action: manipulation;
     width: 40%;
 }
 

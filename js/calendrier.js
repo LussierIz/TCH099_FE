@@ -183,6 +183,7 @@ let ajoutForm = () => {
     // Réinitialiser le formulaire et fermer la fenêtre d'ajout de tâche
     $(".ajout-form")[0].reset()
     $(".ajout-Tache").removeClass("show")
+    $(".calendrier").removeClass("hidden")
 }
 
 /**
