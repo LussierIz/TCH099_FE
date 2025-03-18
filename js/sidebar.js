@@ -2,6 +2,7 @@ class SidebarManager {
     constructor() {
         this.sidebar = document.querySelector('.sidebar');
         this.toggleBtn = document.querySelector('.sidebar-toggle');
+        this.mainContent = document.querySelector('.main-container');
     }
 
     init() {
@@ -9,7 +10,10 @@ class SidebarManager {
             this.sidebar.classList.add('collapsed');
         }
 
-        setTimeout(() => this.sidebar.classList.add('transition-enabled'), 10);
+        setTimeout(() => {
+            this.sidebar.classList.add('transition-enabled')
+            this.mainContent.classList.add('transition-enabled')
+        }, 10);
 
         this.toggleBtn.addEventListener('click', () => this.toggle());
     }
