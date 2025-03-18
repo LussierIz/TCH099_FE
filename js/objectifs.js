@@ -1,3 +1,20 @@
+/**
+ * Script pour la gestion des objectifs dans une interface utilisateur.
+ * Ce script permet à l'utilisateur de créer, visualiser et supprimer des objectifs,
+ * tout en attribuant une difficulté à chaque objectif via un système de notation par étoiles.
+ *
+ * Fonctionnalités principales :
+ * - Permet à l'utilisateur de soumettre un formulaire pour ajouter un nouvel objectif.
+ * - Affiche dynamiquement les objectifs ajoutés dans l'interface, y compris le titre, la description,
+ *   la date d'échéance et une barre de progression.
+ * - Gère un système de notation par étoiles pour attribuer une difficulté à chaque objectif.
+ * - Permet de supprimer un objectif via un bouton de suppression.
+ *
+ * @author Jiayi Xu
+ * @version 1.1
+ * @date 2025-03-14
+ */
+
 // Sélection des éléments DOM
 const objForm = document.getElementById('objForm');
 const listeObjectifs = document.getElementById('liste-objectifs');
