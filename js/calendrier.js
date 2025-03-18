@@ -1,4 +1,22 @@
 /**
+ * Script interactif de gestion du calendrier et des tâches.
+ * Ce fichier prend en charge les interactions utilisateur pour :
+ * - Générer dynamiquement un calendrier en fonction du mois et de l'année sélectionnés.
+ * - Ajouter, afficher et gérer des tâches associées à des dates spécifiques.
+ * - Gérer l'affichage et le masquage dynamique du formulaire d'ajout de tâche.
+ * - Mettre à jour le calendrier en fonction des tâches enregistrées.
+ *
+ * Fonctionnalités principales :
+ * - Navigation entre les mois pour afficher le calendrier correspondant.
+ * - Vérification et mise en forme des entrées utilisateur pour l'ajout de tâches.
+ * - Mise à jour dynamique du calendrier avec les tâches enregistrées.
+ *
+ * @author Izak Lussier
+ * @version 1.1
+ * @date 2025-03-11
+ */
+
+/**
  * Objet exemple représentant une tâche.
  * Cet objet pourrait être utilisé comme modèle lors d'une requête asynchrone
  * pour récupérer ou envoyer des tâches à un serveur.

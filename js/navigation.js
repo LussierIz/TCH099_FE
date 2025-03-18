@@ -28,9 +28,13 @@ $(document).ready(() => {
     const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
     sidebarManager.init()
 
+    /**
+     * Vérification de la page actuelle et exécution des procédures correspondantes.
+     * Chaque condition vérifie sur quelle page se trouve l'utilisateur et applique 
+     * les modifications nécessaires.
+     */
     if (currentPage === "accueil.html"){
         $("#Accueil-page").addClass("active")
-
     }
 
     if (currentPage === "Bloc-note.html"){
@@ -125,6 +129,10 @@ $(document).ready(() => {
         })
     }
 
+    /**
+     * Gestion de la navigation entre les pages via la sidebar.
+     * Lorsqu'un bouton est cliqué, l'utilisateur est redirigé vers la page correspondante.
+     */
     $('.sidebar-bar').on('click', 'button', function () {
         switch (this.id) {
             case "Accueil-page":

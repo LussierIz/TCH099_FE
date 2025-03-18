@@ -1,3 +1,17 @@
+/**
+ * Script pour la gestion des citations aléatoires dans une page web.
+ * Ce script permet d'afficher une citation aléatoire parmi une liste prédéfinie,
+ * chaque fois que la fonction `generateQuote()` est appelée.
+ *
+ * Fonctionnalités principales :
+ * - Contient un tableau de citations inspirantes.
+ * - Génère une citation aléatoire à partir du tableau et l'affiche dans un élément HTML avec l'ID `random-quote`.
+ * - La citation est affichée dans un format de citation entre guillemets.
+ *
+ * @author Jiayi Xu
+ * @version 1.1
+ * @date 2025-03-18
+ */
 const quotes = [
     "Le sage apprend des autres, le commun apprend de ses erreurs, le fou n'apprend jamais.",
     "Une seule conversation avec un sage vaut dix ans d'étude.",
