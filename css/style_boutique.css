@@ -1,0 +1,45 @@
+.boutique {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 2rem;
+}
+
+.card-shop {
+    background-color:rgba(11, 15, 44, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+  
+.card-shop:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+  
+.card-shop img {
+    max-width: 80px;
+    margin-bottom: 10px;
+}
+  
+.card-shop p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+  
+.card-shop button {
+    background-color: yellow;
+    border: none;
+    color:rgba(11, 15, 44, 0.95);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+  
+.card-shop button:hover {
+    transform: translateY(-2px);
+}
+  

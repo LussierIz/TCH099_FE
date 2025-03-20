@@ -6,6 +6,7 @@
     <!-- pour le css -->
     <link rel="stylesheet" href="/css/style_sidebar.css">
     <link rel="stylesheet" href="/css/style_general.css">
+    <link rel="stylesheet" href="/css/style_friend.css">
     <!-- Les scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/sidebar.js"></script>
@@ -40,7 +41,7 @@
                 <span class="xp-badge">XP: 250</span>
             </button>
     
-            <button class="nav-item" data-section="stats">
+            <button class="nav-item" data-section="stats" id="statistiques-page">
                 <span class="nav-icon">📊</span>
                 <span class="nav-text">Statistiques</span>
             </button>
@@ -78,14 +79,48 @@
             </div>
         </div>
 
-        <div class="user-profile">
+        <!-- <div class="user-profile">
             <img src="/images/user-avatar.png" alt="Profile" class="user-avatar">
 
             <div class="user-info">
                 <span class="user-name">John Doe</span>
                 <span class="user-role">Etudiant</span>
             </div>
-        </div>
+        </div> -->
     </nav>
+
+    <div class="main-container">
+        <header class="top-header">
+            <div class="user-info">
+                <div class="avatar"></div>
+                <span>Salut, <strong>Victoria</strong></span>
+            </div>
+            <div class="coins-xp">
+                <div class="coins">
+                    <i class="fas fa-coins"></i>
+                    <span>1200</span>
+                </div>
+                <div class="xp">
+                    <i class="fas fa-star"></i>
+                    <span>LVL 5</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="friends">
+            <div class="card-friend">
+                <h3>Leaderboard</h3>
+                <ul class="leaderboard-list">
+                    <li><span>Valentina</span><span>12 hrs</span></li>
+                    <li><span>Diego</span><span>10 hrs</span></li>
+                    <li><span>Alina</span><span>9 hrs</span></li>
+                </ul>
+            </div>
+            <div class="card-friend">
+                <h3>Friend Requests</h3>
+                <p>No new requests</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -159,6 +159,9 @@ $(document).ready(() => {
             case "objectifs-page":
                 window.location.href = "/html/objectifs.html"
                 break
+            case "statistiques-page":
+                window.location.href = "/html/statistiques.html"
+                break
         }
     })
 })

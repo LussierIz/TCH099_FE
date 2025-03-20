@@ -126,9 +126,9 @@
 }
 
 /* Profil utilisateur */
-.user-profile {
+/** .user-profile {
     padding: 1rem;
-    margin-top: auto; /* Pousse vers le bas */
+    margin-top: auto; 
     border-top: 1px solid rgba(255, 215, 0, 0.1);
     display: flex;
     align-items: center;
@@ -155,7 +155,7 @@
 .user-role {
     color: #aab8ff;
     font-size: 0.8rem;
-}
+} **/
 
 /* Adaptation pour la sidebar repliée */
 .sidebar.collapsed .sidebar-title,
@@ -169,7 +169,43 @@
     height: 30px;
 }
 
-.sidebar.collapsed .user-profile {
-    justify-content: center;
+
+
+/** header **/
+.top-header {
+    background: rgba(11, 15, 44, 0.8);
+    color: #ffd700;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+  
+.user-info .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #666;
+}
+
+.coins-xp {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+  
+.coins-xp div {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

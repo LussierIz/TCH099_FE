@@ -42,7 +42,12 @@ const quotes = [
     "Le papillon ne se compare pas aux autres – il apprend à voler avec ses propres ailes.",
     "Le maître a échoué mille fois avant de montrer la voie.",
     "La nuit est sombre pour celui qui ferme les yeux, mais lumineuse pour celui qui allume une lampe.",
-    "Le bambou ne pousse pas en regardant le ciel, mais en ancrant ses racines dans la terre."
+    "Le bambou ne pousse pas en regardant le ciel, mais en ancrant ses racines dans la terre.",
+    "Empty your mind, be formless, shapeless like water. You put water into a cup, it becomes the cup. You put water into a bottle, it becomes the bottle. You put it in a teapot, it becomes the teapot. Now water can flow or it can crash. Be water. (Bruce Lee)",
+    "With great power comes great responsibility (Uncle Ben)",
+    "Yesterday is history, tomorrow is a mystery, and today is a gift... that's why they call it present (Master Oogway)",
+    "Un talent sans effort et un talent perdu.",
+    "I can accept failure, everyone fails at something. But I can't accept not trying."
   ];
   
   function generateQuote() {

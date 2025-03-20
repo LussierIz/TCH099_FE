@@ -44,7 +44,7 @@
                 <span class="xp-badge">XP: 250</span>
             </button>
     
-            <button class="nav-item" data-section="stats">
+            <button class="nav-item" data-section="stats" id="statistiques-page">
                 <span class="nav-icon">📊</span>
                 <span class="nav-text">Statistiques</span>
             </button>
@@ -82,16 +82,34 @@
             </div>
         </div>
 
-        <div class="user-profile">
+        <!-- <div class="user-profile">
             <img src="/images/user-avatar.png" alt="Profile" class="user-avatar">
 
             <div class="user-info">
                 <span class="user-name">John Doe</span>
                 <span class="user-role">Etudiant</span>
             </div>
-        </div>
+        </div> -->
     </nav>
+
     <div class="main-container">
+        <header class="top-header">
+            <div class="user-info">
+                <div class="avatar"></div>
+                <span>Salut, <strong>Victoria</strong></span>
+            </div>
+            <div class="coins-xp">
+                <div class="coins">
+                    <i class="fas fa-coins"></i>
+                    <span>1200</span>
+                </div>
+                <div class="xp">
+                    <i class="fas fa-star"></i>
+                    <span>LVL 5</span>
+                </div>
+            </div>
+        </header>
+        
         <div class="accueil-container">
             <div class="quotes">
                 <div id="random-quote">"{{random_quote}}"</div>
