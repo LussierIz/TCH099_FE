@@ -68,6 +68,10 @@ $(document).ready(() => {
     if (currentPage === "objectifs.html"){
         $("#objectifs-page").addClass("active")
     }
+
+    if (currentPage === "conversation.html"){
+        $("#conversation-page").addClass("active")
+    }
     
     if(currentPage === "calendrier.html"){
         $("#calendrier-page").addClass("active")
@@ -161,6 +165,10 @@ $(document).ready(() => {
                 break
             case "statistiques-page":
                 window.location.href = "/html/statistiques.html"
+                break
+
+            case "conversation-page":
+                window.location.href = "/html/conversation.html"
                 break
         }
     })

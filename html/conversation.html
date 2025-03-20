@@ -6,14 +6,12 @@
         <!-- pour le css -->
         <link rel="stylesheet" href="/css/style_sidebar.css">
         <link rel="stylesheet" href="/css/style_general.css">
-        <link rel="stylesheet" href="/css/style_statistiques.css">
+        <link rel="stylesheet" href="/css/style_conversation.css">
         <!-- Les scripts -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script defer src="/js/sidebar.js"></script>
         <script defer src="/js/navigation.js"></script>
-
-        <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
-    <title>Statistiques</title>
+    <title>Document</title>
 </head>
 <body>
     <nav class="sidebar">
@@ -93,6 +91,7 @@
             </div>
         </div> -->
     </nav>
+
     <div class="main-container">
         <header class="top-header">
             <div class="user-info">
@@ -110,19 +109,58 @@
                 </div>
             </div>
         </header>
-        
-        <div class="stats">
-            <div class="card-stat">
-                <h3>Heures etudiées (Hebdomadaire)</h3>
-                <p class="stats-number">45 hrs</p>
-                <p>stats ici</p>
-              </div>
-              <div class="card-stat">
-                <h3>Objectifs Completes</h3>
-                <p class="stats-number">8</p>
-                <p>Tu as complete 8 sur 10 objectifs cette semaine!</p>
-              </div>
-        </div>
+
+        <div class="chat-container">
+            <section class="chat-list-container">
+                <h2>Messages</h2>
+                <input type="text" id="search-chat" class="chat-search" placeholder="Rechercher une conversation...">
+                <ul class="chat-list">
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 1</span>
+                            <span class="chat-date">18 mars 2025</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 2</span>
+                            <span class="chat-date">17 mars 2025</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 3</span>
+                            <span class="chat-date">16 mars 2025</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 4</span>
+                            <span class="chat-date">16 mars 2025</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 5</span>
+                            <span class="chat-date">16 mars 2025</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="chat-item">
+                            <span class="chat-name">Conversation 6</span>
+                            <span class="chat-date">16 mars 2025</span>
+                        </button>
+                    </li>
+                </ul>
+            </section>
+            
+            <section class="chat-info-container">
+                <h2>Conversation</h2>
+                <div class="conversation-content">
+                    <p>Sélectionnez une conversation pour voir les messages.</p>
+                </div>
+            </section>
+        </div>        
     </div>
 </body>
 </html>
