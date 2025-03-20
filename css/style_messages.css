@@ -1,0 +1,70 @@
+.main-container {
+    height: 100vh;
+    background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #667eea;
+    border-radius: 8px;
+    flex-grow: 1;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.me {
+    align-self: flex-start; /* Aligne à gauche */
+    background: rgba(102, 126, 234, 0.2);
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    max-width: 70%;
+}
+
+.other {
+    align-self: flex-end; /* Aligne à droite */
+    background: rgba(255, 215, 0, 0.2);
+    margin-right: 10px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    max-width: 70%;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid #667eea;
+}
+
+/* Style de l'input */
+.message-input {
+    width: 80%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1em;
+}
+
+/* Style du bouton d'envoi */
+.send-btn {
+    width: 15%;
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.send-btn:hover {
+    background: #5a64e6;
+}

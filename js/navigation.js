@@ -71,6 +71,7 @@ $(document).ready(() => {
 
     if (currentPage === "conversation.html"){
         $("#conversation-page").addClass("active")
+        addEventConvo()
     }
     
     if(currentPage === "calendrier.html"){

@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- pour le css -->
-        <link rel="stylesheet" href="/css/style_sidebar.css">
-        <link rel="stylesheet" href="/css/style_general.css">
-        <link rel="stylesheet" href="/css/style_conversation.css">
-        <!-- Les scripts -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script defer src="/js/sidebar.js"></script>
-        <script defer src="/js/navigation.js"></script>
-        <script defer src="/js/conversation.js"></script>        
+    <!-- pour le css -->
+    <link rel="stylesheet" href="/css/style_sidebar.css">
+    <link rel="stylesheet" href="/css/style_general.css">
+    <link rel="stylesheet" href="/css/style_messages.css">
+    <!-- Les scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="/js/sidebar.js"></script>
+    <script defer src="/js/navigation.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -82,15 +81,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="user-profile">
-            <img src="/images/user-avatar.png" alt="Profile" class="user-avatar">
-
-            <div class="user-info">
-                <span class="user-name">John Doe</span>
-                <span class="user-role">Etudiant</span>
-            </div>
-        </div> -->
     </nav>
 
     <div class="main-container">
@@ -111,57 +101,25 @@
             </div>
         </header>
 
-        <div class="chat-container">
-            <section class="chat-list-container">
-                <h2>Messages</h2>
-                <input type="text" id="search-chat" class="chat-search" placeholder="Rechercher une conversation...">
-                <ul class="chat-list">
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 1</span>
-                            <span class="chat-date">18 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 2</span>
-                            <span class="chat-date">17 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 3</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 4</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 5</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 6</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="chat-info-container">
-                <h2>Conversation</h2>
-                <div class="conversation-content">
-                    <p>Sélectionnez une conversation pour voir les messages.</p>
-                </div>
-            </section>
-        </div>        
+        <div class="messages-container">
+            <p class="me">Messages 1</p>
+            <p class="other">Messages 2</p>
+            <p class="me">Messages 3</p>
+            <p class="other">Messages 4</p>
+            <p class="me">Messages 5</p>
+            <p class="other">Messages 6</p>
+            <p class="me">Messages 7</p>
+            <p class="other">Messages 8</p>
+            <p class="me">Messages 9</p>
+            <p class="other">Messages 10</p>
+            <p class="me">Messages 11</p>
+            <p class="other">Messages 12</p>
+        </div>
+
+        <div class="input-container">
+            <input type="text" class="message-input" placeholder="Écrivez votre message...">
+            <button class="send-btn">Envoyer</button>
+        </div>
     </div>
 </body>
 </html>
