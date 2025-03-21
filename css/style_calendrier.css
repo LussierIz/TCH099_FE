@@ -191,6 +191,7 @@ caption {
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
     width: 40%;
     opacity: 0;
     transform: scale(0.9);
@@ -205,5 +206,5 @@ caption {
 .show {
     opacity: 1;
     transform: scale(1);
-    pointer-events: all;
+    pointer-events: auto;
 }
