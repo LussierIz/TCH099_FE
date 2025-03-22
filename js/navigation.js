@@ -59,10 +59,18 @@ $(document).ready(() => {
 
     if (currentPage === "login.html"){
         $("#login-page").addClass("active")
+
+        $('#btn-login').click(function(event) {
+            event.preventDefault()
+            connect()
+        })
     }
 
     if (currentPage === "register.html"){
-        
+        $('#btn-register').click(function(event){
+            event.preventDefault()
+            register()
+        })
     }
 
     if (currentPage === "objectifs.html"){
@@ -144,13 +152,15 @@ $(document).ready(() => {
                 window.location.href = "/html/accueil.html"
                 break
             case "bloc-note-page":
-                window.location.href = "/html/Bloc-note.html"
+                if (checkLoginStatus()) { window.location.href = "/html/Bloc-note.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "boutique-page":
                 window.location.href = "/html/Boutique.html"
                 break
             case "etude-page":
-                window.location.href = "/html/Etude.html"
+                if (checkLoginStatus()) { window.location.href = "/html/Etude.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "calendrier-page":
                 window.location.href = "/html/calendrier.html"
@@ -159,17 +169,19 @@ $(document).ready(() => {
                 window.location.href = "/html/login.html"
                 break
             case "friend-page":
-                window.location.href = "/html/Friend.html"
+                if (checkLoginStatus()) { window.location.href = "/html/Friend.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "objectifs-page":
-                window.location.href = "/html/objectifs.html"
+                if (checkLoginStatus()) { window.location.href = "/html/objectifs.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "statistiques-page":
                 window.location.href = "/html/statistiques.html"
                 break
-
             case "conversation-page":
-                window.location.href = "/html/conversation.html"
+                if (checkLoginStatus()) { window.location.href = "/html/conversation.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
         }
     })

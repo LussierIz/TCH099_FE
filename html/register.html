@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/sidebar.js"></script>
     <script defer src="/js/navigation.js"></script>
+    <script defer src="/js/connexion.js"></script>
     <title>Document</title>
 
     <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
@@ -97,22 +98,38 @@
     <div class="main-container">
         <form action="" class="register-form">
             <h1>Register</h1>
-    
+        
             <label for="email">Entrer votre adresse courriel</label><br>
             <input type="email" id="email" name="email" required><br>
-    
+        
+            <label for="username">Nom d'utilisateur</label><br>
+            <input type="text" id="username" name="username" required><br>
+        
+            <label for="first_name">Prénom</label><br>
+            <input type="text" id="first_name" name="first_name" required><br>
+        
+            <label for="last_name">Nom</label><br>
+            <input type="text" id="last_name" name="last_name" required><br>
+        
             <label for="password">Créer un mot de passe</label><br>
             <input type="password" id="password" name="password" required><br>
-    
+        
             <label for="confirm-password">Confirmer votre mot de passe</label><br>
             <input type="password" id="confirm-password" name="confirm-password" required><br>
-    
-            <button type="submit" class="btn-register">Créer votre compte</button>
-    
+        
+            <label for="type">Type d'utilisateur</label><br>
+            <select id="type" name="type" required>
+                <option value="etudiant">Étudiant</option>
+                <option value="tuteur">Tuteur</option>
+                <option value="admin">Admin</option>
+            </select><br>
+        
+            <button type="submit" class="btn-register" id="btn-register">Créer votre compte</button>
+        
             <p class="login-link">
                 Déjà un compte ? <a href="/html/login.html">Connectez-vous ici</a>.
             </p>
-        </form>
+        </form>                       
     </div>    
 </body>
 </html>
