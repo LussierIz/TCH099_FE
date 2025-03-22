@@ -23,18 +23,16 @@
 
 .register-form h1 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .register-form label {
-    margin-top: 10px;
     font-size: 1.2rem;
 }
 
 .register-form input {
     width: 60%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 5px;
     border-radius: 5px;
     border: 1px solid #667eea;
     background: rgba(255, 255, 255, 0.1);
@@ -47,7 +45,7 @@
 }
 
 .btn-register {
-    margin-top: 15px;
+    margin-top: 5px;
     padding: 10px;
     background: #ffd700;
     color: black;
@@ -80,4 +78,27 @@
 .login-link a:hover {
     color: #ffea80;
     text-decoration: underline;
+}
+
+.register-form select {
+    width: 30%;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #667eea;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+}
+
+.register-form select:focus {
+    outline: none;
+    border-color: #ffd700;
+}
+
+.register-form select option {
+    background: #1a1f4d;
+    color: white;
 }
