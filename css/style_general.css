@@ -3,7 +3,7 @@ body {
     min-height: 100vh; /**couvre toute l'hauteur de l'ecran **/
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
   }
   
 .main-content {

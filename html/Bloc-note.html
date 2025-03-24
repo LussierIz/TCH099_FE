@@ -6,11 +6,13 @@
         <!-- pour le css -->
         <link rel="stylesheet" href="/css/style_sidebar.css">
         <link rel="stylesheet" href="/css/style_bloc-note.css">
+        <link rel="stylesheet" href="/css/style_general.css">
         <!-- Les scripts -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script defer src="/js/sidebar.js"></script>
         <script defer src="/js/navigation.js"></script>
         <script defer src="/js/connexion.js"></script>
+        <script defer src="/js/note.js"></script>
         <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
     <title>Document</title>
 </head>
@@ -92,15 +94,16 @@
             </div>
         </div> -->
     </nav>
-    <div class="container">
-        <h1><img src="/images/sticky-note.png" alt="Bloc-note" class="icone-note"> Notes</h1>
-        <button class="btn"><img src = "/images/pencil.png" alt="Pencil" class="icone-pencil"> Ajouter des notes</button>
-    <div class="notes-container">
-        <!-- <p contenteditable="true" class="input-box">
-            <img src="/images/remove.png" alt="Remove" class="icone-remove"> -->
-        </p>
+    <div class="main-container">
+        <div class="container">
+            <h1><img src="/images/sticky-note.png" alt="Bloc-note" class="icone-note"> Notes</h1>
+            <button class="btn"><img src = "/images/pencil.png" alt="Pencil" class="icone-pencil"> Ajouter des notes</button>
+            <div class="notes-container">
+                <!-- <p contenteditable="true" class="input-box">
+                    <img src="/images/remove.png" alt="Remove" class="icone-remove"> -->
+                </p>
+            </div>
+        </div>
     </div>
-    </div>
-    <script src="/js/note.js"></script>
 </body>
 </html>

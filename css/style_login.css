@@ -3,7 +3,6 @@
 * {
     padding: 0px;
     margin: 0px;
-    box-sizing: border-box;
 }
 
 :root {
@@ -17,7 +16,6 @@ body {
     background: #f6f5f7;
     display: grid;
     place-content: center;
-    font-family: 'Poppins', sans-serif;
 }
 
 #background-video {
@@ -30,7 +28,7 @@ body {
     z-index: -1; 
 }
 
-.container{
+.container {
     position: relative;
     width: 1000px;
     height: 650px;
@@ -38,7 +36,13 @@ body {
     background-color: #fff;
     box-shadow: 25px 30px 55px rgba(0, 0, 0, 0.467);
     border-radius: 70px;
-    overflow: hidden;
+    overflow: hidden;   
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.container * {
+    box-sizing: border-box;
 }
 
 .form-container{
@@ -71,11 +75,6 @@ h1{
     color: var(--grad-clr1);
 }
 
-h1, p, span {
-    margin: 0;
-    padding: 0;
-}
-
 .social-container{
     margin: 20px 0;
 }
@@ -91,7 +90,7 @@ h1, p, span {
     width: 40px;
 }
 
-span{
+.container span {
     font-size: 12px;
 }
 
@@ -163,7 +162,7 @@ a.forgot{
     border-bottom: 2px solid #EEE;
 }
 
-button{
+.container button{
     border-radius: 20px;
     border: 1px solid var(--grad-clr1);
     background: var(--grad-clr2);
@@ -250,7 +249,7 @@ button{
     color: #fff;
 }
 
- p {
+.container p {
     font-size: 14px;
     font-weight: 300;
     line-height: 20px;
