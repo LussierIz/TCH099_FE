@@ -1,7 +1,7 @@
 const connect = () => {
     // Récupérer les données du formulaire
-    const email = $('#email').val()
-    const password = $('#password').val()
+    const email = $('#email-connect').val()
+    const password = $('#password-connect').val()
 
     // Vérifier si les champs sont remplis
     if (!email || !password) {
@@ -16,7 +16,7 @@ const connect = () => {
     }
 
     // Désactiver le bouton de connexion pendant l'envoi de la requête
-    const loginButton = $('.btn-login')
+    const loginButton = $('#btn-login')
     loginButton.prop('disabled', true)
     loginButton.text('Connexion en cours...')
 
@@ -46,7 +46,7 @@ const connect = () => {
             }))
 
             // Rediriger vers la page principale après 150ms
-            setTimeout(() => {  window.location.href = "/html/accueil.html" }, 1000)
+            setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
         } else {
             // Si la connexion échoue
             alert(data.error || "Erreur lors de la connexion.")
@@ -64,11 +64,11 @@ const connect = () => {
 }
 
 const register = () => {
-    const email = $('#email').val()
-    const password = $('#password').val()
-    const username = $('#username').val()
-    const firstName = $('#first_name').val()
-    const lastName = $('#last_name').val()
+    const email = $('#email-register').val()
+    const password = $('#password-register').val()
+    const username = $('#username-register').val()
+    const firstName = $('#prenom-register').val()
+    const lastName = $('#nom-register').val()
     const type = $('#type').val()
 
     // Vérifier si les champs sont remplis
@@ -86,9 +86,14 @@ const register = () => {
         nom: lastName,
         type: type
     }
+ 
+    // Désactiver le bouton de connexion pendant l'envoi de la requête
+    const registerButton = $('#btn-register')
+    registerButton.prop('disabled', true)
+    registerButton.text('Enregistrement en cours...')
 
     fetch("http://localhost:8000/api/register", {
-        method: "POST", // Assurez-vous d'utiliser POST
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
@@ -104,9 +109,7 @@ const register = () => {
                 username: data.username, // Stocker le nom d'utilisateur
                 type: data.type // Stocker le type (étudiant, tuteur, admin)
             }))
-
-            // Rediriger vers la page de connexion après un délai
-            setTimeout(() => { window.location.href = "/html/accueil.html" }, 1000)
+            setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
         } else {
             alert(data.error || "Erreur lors de l'enregistrement.")
         }
@@ -114,6 +117,11 @@ const register = () => {
     .catch(error => {
         console.error("Erreur lors de l'enregistrement :", error)
         alert("Une erreur est survenue. Veuillez réessayer.")
+    })
+    .finally(() => {
+        // Réactiver le bouton après la requête (même en cas d'erreur)
+        registerButton.prop('disabled', false)
+        registerButton.text('Se connecter')
     })
 }
 

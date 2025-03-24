@@ -64,6 +64,11 @@ $(document).ready(() => {
             event.preventDefault()
             connect()
         })
+
+        $('#btn-register').click(function(event){
+            event.preventDefault()
+            register()
+        })
     }
 
     if (currentPage === "register.html"){
