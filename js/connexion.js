@@ -41,6 +41,7 @@ const connect = () => {
 
             localStorage.setItem("user", JSON.stringify({
                 logged_in: true,
+                id: data.id,
                 username: data.username, // Stocker le nom d'utilisateur
                 type: data.type // Stocker le type (étudiant, tuteur, admin)
             }))
@@ -106,6 +107,7 @@ const register = () => {
 
             localStorage.setItem("user", JSON.stringify({
                 logged_in: true,
+                id: data.id,
                 username: data.username, // Stocker le nom d'utilisateur
                 type: data.type // Stocker le type (étudiant, tuteur, admin)
             }))
