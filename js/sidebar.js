@@ -58,12 +58,12 @@ class SidebarManager {
 
     applyState(state) {
         this.sidebar.classList.remove('collapsed', 'hidden');
-        this.mainContent.style.marginLeft = '250px';
+        this.mainContent.style.marginLeft = '240px';
 
         switch(state) {
             case 'collapsed':
                 this.sidebar.classList.add('collapsed');
-                this.mainContent.style.marginLeft = '60px';
+                this.mainContent.style.marginLeft = '90px';
                 break;
             case 'hidden':
                 this.sidebar.classList.add('hidden');
