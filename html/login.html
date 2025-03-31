@@ -97,79 +97,81 @@
     <video autoplay muted loop id="background-video">
         <source src="/video/stars.mp4" type="video/mp4">
     </video>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="">
-                <h1>Créer un compte</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>ou entrez votre adresse email pour vous inscrire</span>
-                <div class="infield">
-                    <input type="text" placeholder="prénom" id="prenom-register"/>
-                    <label></label>
-                </div>
-                <div class="infield">
-                    <input type="text" placeholder="Nom" id="nom-register"/>
-                    <label></label>
-                </div>
-                <div class="infield">
-                    <input type="text" placeholder="Username" id="username-register"/>
-                    <label></label>
-                </div>
-                <div class="infield">
-                    <input type="email" placeholder="Email" name="email" id="email-register"/>
-                    <label></label>
-                </div>
-                <div class="infield">
-                    <input type="password" placeholder="Mot de passe" id="password-register"/>
-                    <label></label>
-                </div>
-                <select id="type" name="type" required>
-                    <option value="etudiant">Étudiant</option>
-                    <option value="tuteur">Tuteur</option>
-                    <option value="admin">Admin</option>
-                </select><br>
-                <button id="btn-register">S'inscrire</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form action="">
-                <h1>Se connecter</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>ou utilisez votre compte</span>
-                <div class="infield">
-                    <input type="email" placeholder="Email" name="email" id="email-connect"/>
-                    <label></label>
-                </div>
-                <div class="infield">
-                    <input type="password" placeholder="Mot de passe" id="password-connect"/>
-                    <label></label>
-                </div>
-                <a href="#" class="forgot">Mot de passe oublié?</a>
-                <button id="btn-login">Se connecter</button>
-            </form>
-        </div>
-        <div class="overlay-container" id="overlayCon">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Bienvenue!</h1>
-                    <p>Connectez-vous avec vos informations personnelles.</p>
-                    <button>Se connecter</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Rejoignez nous!</h1>
-                    <p>Astrum : L'endroit où les études deviennent un plaisir.</p>
-                    <button>S'inscrire</button>
-                </div>
+    <div class="main-container">  
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form action="">
+                    <h1>Créer un compte</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>ou entrez votre adresse email pour vous inscrire</span>
+                    <div class="infield">
+                        <input type="text" placeholder="prénom" id="prenom-register"/>
+                        <label></label>
+                    </div>
+                    <div class="infield">
+                        <input type="text" placeholder="Nom" id="nom-register"/>
+                        <label></label>
+                    </div>
+                    <div class="infield">
+                        <input type="text" placeholder="Username" id="username-register"/>
+                        <label></label>
+                    </div>
+                    <div class="infield">
+                        <input type="email" placeholder="Email" name="email" id="email-register"/>
+                        <label></label>
+                    </div>
+                    <div class="infield">
+                        <input type="password" placeholder="Mot de passe" id="password-register"/>
+                        <label></label>
+                    </div>
+                    <select id="type" name="type" required>
+                        <option value="etudiant">Étudiant</option>
+                        <option value="tuteur">Tuteur</option>
+                        <option value="admin">Admin</option>
+                    </select><br>
+                    <button id="btn-register">S'inscrire</button>
+                </form>
             </div>
-            <button id="overlayBtn"></button>
+            <div class="form-container sign-in-container">
+                <form action="">
+                    <h1>Se connecter</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>ou utilisez votre compte</span>
+                    <div class="infield">
+                        <input type="email" placeholder="Email" name="email" id="email-connect"/>
+                        <label></label>
+                    </div>
+                    <div class="infield">
+                        <input type="password" placeholder="Mot de passe" id="password-connect"/>
+                        <label></label>
+                    </div>
+                    <a href="#" class="forgot">Mot de passe oublié?</a>
+                    <button id="btn-login">Se connecter</button>
+                </form>
+            </div>
+            <div class="overlay-container" id="overlayCon">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Bienvenue!</h1>
+                        <p>Connectez-vous avec vos informations personnelles.</p>
+                        <button>Se connecter</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Rejoignez nous!</h1>
+                        <p>Astrum : L'endroit où les études deviennent un plaisir.</p>
+                        <button>S'inscrire</button>
+                    </div>
+                </div>
+                <button id="overlayBtn"></button>
+            </div>
         </div>
     </div>  
 </body>
