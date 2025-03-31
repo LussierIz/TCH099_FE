@@ -117,45 +117,9 @@
                 <h2>Messages</h2>
                 <div class="input-chat">
                     <input type="text" id="search-chat" class="chat-search" placeholder="Rechercher une conversation...">
-                    <button class="new-chat">new chat</button>
+                    <button class="new-chat" id="new-chat">new chat</button>
                 </div>
                 <ul class="chat-list">
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 1</span>
-                            <span class="chat-date">18 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 2</span>
-                            <span class="chat-date">17 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 3</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 4</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 5</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="chat-item">
-                            <span class="chat-name">Conversation 6</span>
-                            <span class="chat-date">16 mars 2025</span>
-                        </button>
-                    </li>
                 </ul>
             </section>
             
@@ -163,8 +127,24 @@
                 <h2>Conversation</h2>
                 <div class="conversation-content">
                     <p>Sélectionnez une conversation pour voir les messages.</p>
+                    <div id="user-id"></div>
                 </div>
             </section>
+        </div>  
+
+        <div class="ajout-Convo">
+            <form action="" class="ajout-form">
+                <button type="button" id="close">x</button>
+                <h2>Créer une conversation</h2>
+        
+                <label for="id-invite">ID de l'invité</label>
+                <input type="text" id="id-invite" name="id-invite" required>
+        
+                <label for="nom-convo">Nom de la conversation</label>
+                <input type="text" id="nom-convo" name="nom-convo" required>
+                <br>
+                <button type="submit" id="ajouter-Convo">Ajouter</button>
+            </form>
         </div>        
     </div>
 </body>

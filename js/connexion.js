@@ -1,21 +1,17 @@
 const connect = () => {
-    // Récupérer les données du formulaire
     const email = $('#email-connect').val()
     const password = $('#password-connect').val()
 
-    // Vérifier si les champs sont remplis
     if (!email || !password) {
         alert('Veuillez remplir tous les champs.')
         return
     }
 
-    // Préparer les données à envoyer dans la requête POST
     const dataConnect = {
         courriel: email,
         mot_passe: password
     }
 
-    // Désactiver le bouton de connexion pendant l'envoi de la requête
     const loginButton = $('#btn-login')
     loginButton.prop('disabled', true)
     loginButton.text('Connexion en cours...')
@@ -34,7 +30,6 @@ const connect = () => {
         return response.json()
     })
     .then(data => {
-        // Vérifier si la connexion a réussi
         if (data.success) {
             console.log(data)
             alert("Connexion réussie !")
@@ -42,14 +37,11 @@ const connect = () => {
             localStorage.setItem("user", JSON.stringify({
                 logged_in: true,
                 id: data.id,
-                username: data.username, // Stocker le nom d'utilisateur
-                type: data.type // Stocker le type (étudiant, tuteur, admin)
+                type: data.statut
             }))
 
-            // Rediriger vers la page principale après 150ms
             setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
         } else {
-            // Si la connexion échoue
             alert(data.error || "Erreur lors de la connexion.")
         }
     })
@@ -58,7 +50,6 @@ const connect = () => {
         alert("Une erreur est survenue, veuillez réessayer.")
     })
     .finally(() => {
-        // Réactiver le bouton après la requête (même en cas d'erreur)
         loginButton.prop('disabled', false)
         loginButton.text('Se connecter')
     })
@@ -67,28 +58,23 @@ const connect = () => {
 const register = () => {
     const email = $('#email-register').val()
     const password = $('#password-register').val()
-    const username = $('#username-register').val()
     const firstName = $('#prenom-register').val()
     const lastName = $('#nom-register').val()
     const type = $('#type').val()
 
-    // Vérifier si les champs sont remplis
-    if (!email || !password || !username || !firstName || !lastName || !type) {
+    if (!email || !password || !firstName || !lastName || !type) {
         alert('Veuillez remplir tous les champs.')
         return
     }
 
-    // Créer un objet avec les données à envoyer
     const dataRegister = {
-        courriel: email,
-        mot_passe: password,
-        username: username,
+        email: email,
+        mot_de_passe: password,
         prenom: firstName,
         nom: lastName,
-        type: type
+        statut: type
     }
  
-    // Désactiver le bouton de connexion pendant l'envoi de la requête
     const registerButton = $('#btn-register')
     registerButton.prop('disabled', true)
     registerButton.text('Enregistrement en cours...')
@@ -108,8 +94,7 @@ const register = () => {
             localStorage.setItem("user", JSON.stringify({
                 logged_in: true,
                 id: data.id,
-                username: data.username, // Stocker le nom d'utilisateur
-                type: data.type // Stocker le type (étudiant, tuteur, admin)
+                type: data.statut
             }))
             setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
         } else {
@@ -121,7 +106,6 @@ const register = () => {
         alert("Une erreur est survenue. Veuillez réessayer.")
     })
     .finally(() => {
-        // Réactiver le bouton après la requête (même en cas d'erreur)
         registerButton.prop('disabled', false)
         registerButton.text('Se connecter')
     })

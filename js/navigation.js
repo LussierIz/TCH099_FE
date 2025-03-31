@@ -84,7 +84,33 @@ $(document).ready(() => {
 
     if (currentPage === "conversation.html"){
         $("#conversation-page").addClass("active")
-        addEventConvo()
+        userID()
+        getConvo()
+
+        /**
+         * Gestion du clic sur le bouton "Afficher/Masquer les tâches".
+         * Permet d'afficher ou de cacher le formulaire d'ajout de tâche en basculant la classe CSS "show".
+         */
+        $("#new-chat").click(() => {
+            $(".ajout-Convo").toggleClass("show")
+            $(".chat-container").toggleClass("hidden")
+        })
+        
+        /**
+         * Gestion du clic sur le bouton "Fermer" du formulaire d'ajout de tâche.
+         * Lorsqu'un utilisateur clique sur ce bouton, l'événement par défaut est annulé 
+         * et le formulaire d'ajout de tâche est caché en supprimant la classe CSS "show".
+         */
+        $("#close").click((event) => {
+            event.preventDefault()
+            $(".ajout-Convo").removeClass("show")
+            $(".chat-container").removeClass("hidden")
+        })
+
+        $(".ajout-form").submit((event) => {
+            event.preventDefault()
+            newConvo()
+        })
     }
     
     if(currentPage === "calendrier.html"){
