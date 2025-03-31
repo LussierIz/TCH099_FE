@@ -10,6 +10,7 @@
     width:80%;
     justify-self: center;
     margin-top: 4%;
+    transition: all 0.4s ease-in-out;
 }
 
 .input-chat {
@@ -88,7 +89,7 @@
     border-radius: 8px;
     border: 1px solid #667eea;
     transition: background 0.3s ease, transform 0.2s ease;
-    margin-bottom: 8px; /* Espacement entre les boutons */
+    margin-bottom: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -106,4 +107,107 @@
     font-size: 0.9em;
     color: #ffd700;
     font-style: italic;
+}
+
+.ajout-Convo {
+    position: absolute;
+    top: 32%;
+    left: 42%;
+    transform: scale(0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    max-width: 400px;
+    opacity: 0;
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #667eea;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.ajout-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.ajout-form input {
+    width: 90%;
+    max-width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #667eea;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+.ajout-form input:focus {
+    border-color: #ffd700;
+    box-shadow: 0px 0px 5px #ffd700;
+}
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #ffd700;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+#close:hover {
+    color: red;
+    transform: scale(1.1);
+}
+
+#ajouter-Convo {
+    background-color: transparent;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    text-align: center;
+    width: 50%;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#ajouter-Convo:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+#ajouter-Convo:focus {
+    border-color: #ffd700;
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    outline: 0;
 }
