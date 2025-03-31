@@ -1,131 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- pour le css -->
-    <link rel="stylesheet" href="/css/style_sidebar.css">
-    <link rel="stylesheet" href="/css/style_general.css">
-    <link rel="stylesheet" href="/css/style_friend.css">
+    <link rel="stylesheet" href="/css/style_sidebar.css" />
+    <link rel="stylesheet" href="/css/style_general.css" />
+    <link rel="stylesheet" href="/css/style_friend.css" />
     <!-- Les scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/sidebar.js"></script>
     <script defer src="/js/navigation.js"></script>
     <script defer src="/js/connexion.js"></script>
-    <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
+    <link rel="icon" href="/images/star-logo-tr.png" type="image/png" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="sidebar">
-        <div class="sidebar-header">
-            <img src="/images/star-logo-tr.png" class="logo" alt="Astrum">
-            <h1 class="sidebar-title">Astrum</h1>
+      <div class="sidebar-header">
+        <img src="/images/star-logo-tr.png" class="logo" alt="Astrum" />
+        <h1 class="sidebar-title">Astrum</h1>
+      </div>
+
+      <div class="sidebar-bar">
+        <button class="sidebar-toggle">◄</button>
+
+        <button class="nav-item" data-section="Accueil" id="Accueil-page">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Accueil</span>
+        </button>
+
+        <button class="nav-item" data-section="calendar" id="calendrier-page">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text">Calendrier</span>
+        </button>
+
+        <button class="nav-item" data-section="objectifs" id="objectifs-page">
+          <span class="nav-icon">🎯</span>
+          <span class="nav-text">Objectifs</span>
+          <span class="xp-badge">XP: 250</span>
+        </button>
+
+        <button class="nav-item" data-section="stats" id="statistiques-page">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Statistiques</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="friend-page">
+          <span class="nav-icon">😺</span>
+          <span class="nav-text">Friends</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="bloc-note-page">
+          <span class="nav-icon">📝</span>
+          <span class="nav-text">Bloc-Note</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="login-page">
+          <span class="nav-icon">🔑</span>
+          <span class="nav-text">login</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="boutique-page">
+          <span class="nav-icon">🛒</span>
+          <span class="nav-text">boutique</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="etude-page">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Étude</span>
+        </button>
+
+        <button class="nav-item" data-section="" id="conversation-page">
+          <span class="nav-icon">💬</span>
+          <span class="nav-text">Messages</span>
+        </button>
+
+        <div class="sidebar-footer">
+          <div class="level-progress">
+            <div class="progress-bar" style="width: 65%"></div>
+            <span>Niveau 3</span>
+          </div>
         </div>
-
-        <div class="sidebar-bar">
-            <button class="sidebar-toggle">◄</button>
-            
-            <button class="nav-item" data-section="Accueil" id="Accueil-page">
-                <span class="nav-icon">🏠</span>
-                <span class="nav-text">Accueil</span>
-            </button>
-
-            <button class="nav-item" data-section="calendar" id="calendrier-page">
-                <span class="nav-icon">📅</span>
-                <span class="nav-text">Calendrier</span>
-            </button>
-
-            <button class="nav-item" data-section="objectifs" id="objectifs-page">
-                <span class="nav-icon">🎯</span>
-                <span class="nav-text">Objectifs</span>
-                <span class="xp-badge">XP: 250</span>
-            </button>
-    
-            <button class="nav-item" data-section="stats" id="statistiques-page">
-                <span class="nav-icon">📊</span>
-                <span class="nav-text">Statistiques</span>
-            </button>
-            
-            <button class="nav-item" data-section="" id="friend-page">
-                <span class="nav-icon">😺</span>
-                <span class="nav-text">Friends</span>
-            </button>
-
-            <button class="nav-item" data-section="" id="bloc-note-page">
-                <span class="nav-icon">📝</span>
-                <span class="nav-text">Bloc-Note</span>
-            </button>
-
-            <button class="nav-item" data-section="" id="login-page">
-                <span class="nav-icon">🔑</span>
-                <span class="nav-text">login</span>
-            </button>
-
-            <button class="nav-item" data-section="" id="boutique-page">
-                <span class="nav-icon">🛒</span>
-                <span class="nav-text">boutique</span>
-            </button>
-
-            <button class="nav-item" data-section="" id="etude-page">
-                <span class="nav-icon">🎓</span>
-                <span class="nav-text">Étude</span>
-            </button>
-
-            <button class="nav-item" data-section="" id="conversation-page">
-                <span class="nav-icon">💬</span>
-                <span class="nav-text">Messages</span>
-            </button>
-    
-            <div class="sidebar-footer">
-                <div class="level-progress">
-                    <div class="progress-bar" style="width: 65%"></div>
-                    <span>Niveau 3</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="user-profile">
-            <img src="/images/user-avatar.png" alt="Profile" class="user-avatar">
-
-            <div class="user-info">
-                <span class="user-name">John Doe</span>
-                <span class="user-role">Etudiant</span>
-            </div>
-        </div> -->
+      </div>
     </nav>
 
     <div class="main-container">
-        <header class="top-header">
-            <div class="user-info">
-                <div class="avatar"></div>
-                <span>Salut, <strong>Victoria</strong></span>
-            </div>
-            <div class="coins-xp">
-                <div class="coins">
-                    <i class="fas fa-coins"></i>
-                    <span>1200</span>
-                </div>
-                <div class="xp">
-                    <i class="fas fa-star"></i>
-                    <span>LVL 5</span>
-                </div>
-            </div>
-        </header>
-
-        <div class="friends">
-            <div class="card-friend">
-                <h3>Leaderboard</h3>
-                <ul class="leaderboard-list">
-                    <li><span>Valentina</span><span>12 hrs</span></li>
-                    <li><span>Diego</span><span>10 hrs</span></li>
-                    <li><span>Alina</span><span>9 hrs</span></li>
-                </ul>
-            </div>
-            <div class="card-friend">
-                <h3>Friend Requests</h3>
-                <p>No new requests</p>
-            </div>
+      <!-- FRIENDS PAGE -->
+      <div class="friend-page" id="friend-section">
+        <div class="friend-search">
+          <input
+            type="text"
+            placeholder="Search friends..."
+            class="search-bar"
+          />
         </div>
+
+        <!-- Friends List -->
+        <div class="friends-grid">
+          <div class="friend-card">
+            <div class="friend-avatar"></div>
+            <h3>Friend 1</h3>
+            <p>Level 5 • XP: 120</p>
+          </div>
+
+          <div class="friend-card">
+            <div class="friend-avatar"></div>
+            <h3>Friend 2</h3>
+            <p>Level 2 • XP: 60</p>
+          </div>
+
+          <div class="friend-card">
+            <div class="friend-avatar"></div>
+            <h3>Friend 3</h3>
+            <p>Level 7 • XP: 200</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-widget">
+        <!-- Add Friend -->
+        <div class="widget-item add-friend">
+          <button class="widget-btn" title="Add Friend">➕</button>
+          <div class="widget-popup">
+            <input type="text" placeholder="Search for friend..." class="widget-search" />
+            <button class="widget-send">Send Request</button>
+          </div>
+        </div>
+      
+        <!-- Friend Requests -->
+        <div class="widget-item friend-requests">
+          <button class="widget-btn" title="Friend Requests">🔔</button>
+          <div class="widget-popup">
+            <p>No new requests</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERBOARD -->
+      <div class="leaderboard-container">
+        <h2>Leaderboard</h2>
+        <ul>
+          <li>Michael • 37 heures</li>
+          <li>Alice • 28 heures</li>
+          <li>Peter • 20 heures</li>
+          <li>John • 5 heures</li>
+          <li>Charlotte • 0 heures</li>
+        </ul>
+      </div>
     </div>
-</body>
+  </body>
 </html>
