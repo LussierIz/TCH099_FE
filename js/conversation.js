@@ -109,3 +109,12 @@ const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return date.toLocaleDateString('fr-FR', options)
 }
+
+const userID = () => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (user && user.id) {
+        $('#user-id').text("Voici votre id pour créer une conversation : " + user.id);
+    } else {
+        $('#user-id').text("Voici votre id pour créer une conversation : Utilisateur non connecté");
+    }
+}

@@ -84,6 +84,7 @@ $(document).ready(() => {
 
     if (currentPage === "conversation.html"){
         $("#conversation-page").addClass("active")
+        userID()
         getConvo()
 
         /**
