@@ -59,6 +59,14 @@
     margin-left: 110px;
 }
 
+.sidebar.hidden + .main-container {
+    margin-left: 0;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
 .sidebar {
     width: 200px;
     height: 100vh;

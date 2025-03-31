@@ -16,6 +16,8 @@ class SidebarManager {
         this.sidebar = document.querySelector('.sidebar');
         this.toggleBtn = document.querySelector('.sidebar-toggle');
         this.mainContent = document.querySelector('.main-container');
+        this.states = ['expanded', 'collapsed', 'hidden'];
+        this.currentState = localStorage.getItem('sidebarState') || 'expanded';
     }
 
     /**
@@ -25,10 +27,13 @@ class SidebarManager {
      * Ajoute des classes CSS nécessaires pour activer les transitions.
      */
     init() {
+
+        this.applyState(this.currentState);
+
         // Vérification si la sidebar est réduite dans le localStorage
-        if (localStorage.getItem('sidebarCollapsed') === 'true') {
-            this.sidebar.classList.add('collapsed');
-        }
+        // if (localStorage.getItem('sidebarCollapsed') === 'true') {
+        //     this.sidebar.classList.add('collapsed');
+        // }
 
         // Ajoute les classes pour les transitions après un petit délai
         setTimeout(() => {
@@ -44,7 +49,27 @@ class SidebarManager {
      * Sauvegarde l'état de la sidebar dans le localStorage pour conserver l'état entre les sessions.
      */
     toggle() {
-        this.sidebar.classList.toggle('collapsed');
-        localStorage.setItem('sidebarCollapsed', this.sidebar.classList.contains('collapsed'));
+        const currentIndex = this.states.indexOf(this.currentState);
+        this.currentState = this.states[(currentIndex + 1) % this.states.length];
+
+        this.applyState(this.currentState);
+        localStorage.setItem('sidebarState', this.currentState);
+    }
+
+    applyState(state) {
+        this.sidebar.classList.remove('collapsed', 'hidden');
+        this.mainContent.style.marginLeft = '250px';
+
+        switch(state) {
+            case 'collapsed':
+                this.sidebar.classList.add('collapsed');
+                this.mainContent.style.marginLeft = '60px';
+                break;
+            case 'hidden':
+                this.sidebar.classList.add('hidden');
+                this.mainContent.style.marginLeft = '0';
+                break;
+            // 'expanded' est l'etat par defaut
+        }
     }
 }
