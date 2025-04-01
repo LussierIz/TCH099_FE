@@ -32,7 +32,7 @@ const getMessages = () => {
         data.messages.forEach(function(message) {
             const messageElement = $('<p></p>')
 
-            if (message.id_utilisateur === user.id) {
+            if (message.id_utilisateur === user.user_id) {
                 messageElement.addClass("me")
             } else {
                 messageElement.addClass("other")
@@ -59,7 +59,7 @@ const newMessage = () => {
     }
     
     const dataMessage = {
-        id_utilisateur: user.id,
+        id_utilisateur: user.user_id,
         id_chat: convoID,
         texte:texteMessage
     }

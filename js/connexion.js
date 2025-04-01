@@ -35,7 +35,8 @@ const connect = () => {
             alert("Connexion réussie !")
 
         localStorage.setItem("user", JSON.stringify({
-            token: data.token
+            token: data.token,
+            user_id: data.id
         }))
 
         setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
@@ -91,7 +92,8 @@ const register = () => {
             alert("Enregistrement réussi !")
 
         localStorage.setItem("user", JSON.stringify({
-            token: data.token
+            token: data.token,
+            user_id: data.id
         }))
         
         setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
@@ -110,5 +112,5 @@ const register = () => {
 }
 
 const checkLoginStatus = () => {
-    return JSON.parse(localStorage.getItem("user"))?.token || false
+    return JSON.parse(localStorage.getItem("user"))?.user_id || false
 }

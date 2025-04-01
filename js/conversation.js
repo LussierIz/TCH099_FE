@@ -2,7 +2,7 @@ const getConvo = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     
 
-    fetch (`http://localhost:8000/api/convo/${user.id}`, {
+    fetch (`http://localhost:8000/api/convo/${user.user_id}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${user.token}`,
@@ -72,7 +72,7 @@ const newConvo = () => {
 
     const dataLogin = {
         chat_name: chat_name,
-        id_utilisateur: user.id,
+        id_utilisateur: user.user_id,
         id_invite: id_invite,
     };
 
@@ -125,8 +125,8 @@ const formatDate = (dateString) => {
 
 const userID = () => {
     const user = JSON.parse(localStorage.getItem("user"))
-    if (user && user.id) {
-        $('#user-id').text("Voici votre id pour créer une conversation : " + user.id);
+    if (user && user.user_id) {
+        $('#user-id').text("Voici votre id pour créer une conversation : " + user.user_id);
     } else {
         $('#user-id').text("Voici votre id pour créer une conversation : Utilisateur non connecté");
     }
