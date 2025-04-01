@@ -60,7 +60,7 @@ const newConvo = () => {
     const id_invite = $('#id-invite').val();
     const chat_name = $('#nom-convo').val();
 
-    if (!user || !user.id) {
+    if (!user || !user.user_id) {
         alert("Utilisateur non connecté !")
         return
     }
