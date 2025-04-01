@@ -15,24 +15,32 @@ const getConvo = () => {
 
         console.log(data)
 
-        const chatList = $('.chat-list')
-            chatList.empty()
+        const chatList = $('.chat-list');
+        chatList.empty();
 
-            data.conversations.forEach(function(convoArray) {
-                convoArray.forEach(function(convo) {
-                    const listItem = $('<li></li>')
-                    const button = $('<button></button>').addClass('chat-item')
-            
-                    const chatName = $('<span></span>').addClass('chat-name').text(convo.chat_name || "Unnamed Conversation")
-            
-                    // Formater la date
-                    const chatDate = $('<span></span>').addClass('chat-date').text(formatDate(convo.date))
-            
-                    button.append(chatName, chatDate);
-                    listItem.append(button);
-                    chatList.append(listItem);
-                })
-            })
+        if (!data.conversations || data.conversations.length === 0) {
+            chatList.append('<li>Aucune conversation disponible</li>')
+            return
+        }
+
+        data.conversations.flat().forEach(convo => {
+        const listItem = $('<li></li>')
+            const button = $('<button></button>')
+                .addClass('chat-item')
+                .attr('data-id', convo.id_chat)
+
+            const chatName = $('<span></span>')
+                .addClass('chat-name')
+                .text(convo.chat_name || "Unnamed Conversation")
+
+            const chatDate = $('<span></span>')
+                .addClass('chat-date')
+                .text(formatDate(convo.date))
+
+            button.append(chatName, chatDate)
+            listItem.append(button)
+            chatList.append(listItem)
+        });
 
             addEventConvo()
     })
@@ -92,13 +100,12 @@ const newConvo = () => {
     })
 }
 
-
 const addEventConvo = () => {
-    $(".chat-item").each(function() {
-        $(this).on('click', () => {
-            window.location.href = "/html/messages.html"
-        })
-    });
+    $(".chat-item").off("click").on("click", function() {
+        const convoID = $(this).data('id')
+        localStorage.setItem('currentChatID', convoID)
+        window.location.href = "/html/messages.html"
+    })
 }
 
 const formatDate = (dateString) => {
