@@ -49,7 +49,29 @@ $(document).ready(() => {
 
     if (currentPage === "Etude.html"){
         $("#etude-page").addClass("active")
+        const displayElement = $('.timer-pomodoro')
+        const pomodoro = new Pomodoro(displayElement)
+
+        $('#start-pomodoro').on('click', () => {
+            pomodoro.start()
+        })
+
+        $('#stop-pomodoro').on('click', () => {
+            pomodoro.stop()
+        })
+
+        $('#initial-pomodoro').on('click', () => {
+            pomodoro.reset(25 * 60)
+        })
+
+        $('#short-break').on('click', () => {
+            pomodoro.reset(5 * 60)
+
+        })
         
+        $('#long-break').on('click', () => {
+            pomodoro.reset(15 * 60)
+        })
     }
 
     if (currentPage === "Friend.html"){
