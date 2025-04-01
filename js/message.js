@@ -11,7 +11,11 @@ const getMessages = () => {
     }
 
     fetch (`http://localhost:8000/api/convo/messages/${convoID}`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            'Content-Type': 'application/json'
+        }
     })
     .then(response => {
         if (!response.ok) {
@@ -65,6 +69,7 @@ const newMessage = () => {
     fetch("http://localhost:8000/api/convo/messages/new", {
         method: 'POST',
         headers: {
+            "Authorization": `Bearer ${user.token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataMessage)

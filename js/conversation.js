@@ -1,8 +1,13 @@
 const getConvo = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    
 
     fetch (`http://localhost:8000/api/convo/${user.id}`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            "Content-Type": "application/json"
+        }
     })
     .then(response => {
         if (!response.ok) {
@@ -77,6 +82,7 @@ const newConvo = () => {
     fetch("http://localhost:8000/api/convo/new", {
         method: 'POST',
         headers: {
+            "Authorization": `Bearer ${user.token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataLogin)
