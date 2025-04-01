@@ -112,6 +112,20 @@ $(document).ready(() => {
             newConvo()
         })
     }
+
+    if(currentPage ===  "messages.html"){
+        getMessages()
+
+        $(".send-btn").on("click", function() {
+            newMessage()
+        });
+    
+        $("#message-text").on("keypress", function(e) {
+            if (e.which === 13) {
+                newMessage()
+            }
+        });
+    }
     
     if(currentPage === "calendrier.html"){
         $("#calendrier-page").addClass("active")

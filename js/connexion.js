@@ -30,17 +30,16 @@ const connect = () => {
         return response.json()
     })
     .then(data => {
-        if (data.success) {
+        if (data.token) {
             console.log(data)
             alert("Connexion réussie !")
 
-            localStorage.setItem("user", JSON.stringify({
-                logged_in: true,
-                id: data.id,
-                type: data.statut
-            }))
+        localStorage.setItem("user", JSON.stringify({
+            token: data.token,
+            user_id: data.id
+        }))
 
-            setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
+        setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
         } else {
             alert(data.error || "Erreur lors de la connexion.")
         }
@@ -88,15 +87,16 @@ const register = () => {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
+        if (data.token) {
+            console.log(data)
             alert("Enregistrement réussi !")
 
-            localStorage.setItem("user", JSON.stringify({
-                logged_in: true,
-                id: data.id,
-                type: data.statut
-            }))
-            setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
+        localStorage.setItem("user", JSON.stringify({
+            token: data.token,
+            user_id: data.id
+        }))
+        
+        setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
         } else {
             alert(data.error || "Erreur lors de l'enregistrement.")
         }
@@ -112,5 +112,5 @@ const register = () => {
 }
 
 const checkLoginStatus = () => {
-    return JSON.parse(localStorage.getItem("user"))?.logged_in || false
+    return JSON.parse(localStorage.getItem("user"))?.user_id || false
 }
