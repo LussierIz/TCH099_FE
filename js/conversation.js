@@ -9,7 +9,18 @@ const getConvo = () => {
             "Content-Type": "application/json"
         }
     })
-    .then(response => {
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }
@@ -50,8 +61,13 @@ const getConvo = () => {
             addEventConvo()
     })
     .catch(error => {
-        console.error("Erreur lors de l'obtention des conversations :", error)
-        alert("Une erreur est survenue, veuillez réessayer.")
+        console.error("Erreur lors de l'obtention des conversations :", error);
+
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
 }
 
@@ -87,11 +103,22 @@ const newConvo = () => {
         },
         body: JSON.stringify(dataLogin)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP : ${response.status}`);
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
         }
-        return response.json();
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
     })
     .then(data => {
         alert("Conversation créée avec succès !")

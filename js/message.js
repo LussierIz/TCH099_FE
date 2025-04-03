@@ -17,7 +17,18 @@ const getMessages = () => {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => {
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }
@@ -74,7 +85,18 @@ const newMessage = () => {
         },
         body: JSON.stringify(dataMessage)
     })
-    .then(response => {
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }

@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- pour le css -->
         <link rel="stylesheet" href="/css/style_sidebar.css">
         <link rel="stylesheet" href="/css/style_general.css">
+        <link rel="stylesheet" href="/css/style_etude.css">
         <!-- Les scripts -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script defer src="/js/sidebar.js"></script>
         <script defer src="/js/navigation.js"></script>
+        <script defer src="/js/etude.js"></script>
         <script defer src="/js/connexion.js"></script>
         <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
     <title>Document</title>
@@ -93,7 +95,36 @@
         </div> -->
     </nav>
     <div class="main-container">
-        
+        <div class="pomodoro-container">
+            <div class="button-pomodoro">
+                <div class="set-pomodoro">
+                    <button id="initial-pomodoro">Pomodoro</button>
+                </div>
+                <div class="set-pomodoro">
+                    <button id="short-break">Short break</button>
+                </div>
+                <div class="set-pomodoro">
+                    <button id="long-break">Long break</button>
+                </div>
+            </div>
+
+            <div class="timer-pomodoro">
+                25:00
+            </div>
+
+            <div class="start-pomodoro">
+                <button id="start-pomodoro">Start</button>
+                <button id="stop-pomodoro">Stop</button>
+            </div>
+
+            <div class="pomodoro-description">
+                <p>
+                    Utilisez la technique Pomodoro pour améliorer votre productivité ! 
+                    Travaillez pendant 25 minutes, puis prenez une courte pause. 
+                    Alternez entre Pomodoro, pauses courtes et longues pour rester concentré.
+                </p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
