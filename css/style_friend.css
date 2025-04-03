@@ -104,7 +104,7 @@
 
 
 /**************************************************
- LEADERBOARD 
+ ADD friends
 **************************************************/
 
 .floating-widget {
@@ -115,12 +115,14 @@
     flex-direction: column;
     gap: 10px;
     z-index: 1000;
-  }
+}
   
+
 .widget-item {
     position: relative;
 }
   
+
 .widget-btn {
     background: #ffd700;
     border: none;
@@ -135,20 +137,20 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
   
+
 .widget-popup {
     display: none;
     position: absolute;
-    right: 60px; 
-    bottom: 0;
+    bottom: 0; 
+    right: 60px;
     background: rgba(11, 15, 44, 0.95);
-    color: #fff;
     padding: 10px;
     border-radius: 8px;
-    min-width: 200px;
+    width: 200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
   
-.widget-item:hover .widget-popup {
+.widget-item.open .widget-popup {
     display: block;
 }
   
@@ -161,8 +163,9 @@
     background: rgba(255, 255, 255, 0.15);
     color: #ffd700;
     outline: none;
+    box-sizing: border-box;
 }
-  
+
 .widget-popup button {
     width: 100%;
     padding: 8px;
@@ -177,10 +180,4 @@
   
 .widget-popup button:hover {
     background: #e6c200;
-}
-  
-.widget-popup p {
-    margin: 0;
-    text-align: center;
-    font-size: 0.9rem;
-} 
+ }

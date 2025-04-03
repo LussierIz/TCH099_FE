@@ -12,8 +12,9 @@
     <script defer src="/js/sidebar.js"></script>
     <script defer src="/js/navigation.js"></script>
     <script defer src="/js/connexion.js"></script>
+    <script defer src="/js/friends.js"></script>
     <link rel="icon" href="/images/star-logo-tr.png" type="image/png" />
-    <title>Document</title>
+    <title>Friends</title>
   </head>
   <body>
     <nav class="sidebar">
@@ -121,10 +122,10 @@
       <div class="floating-widget">
         <!-- Add Friend -->
         <div class="widget-item add-friend">
-          <button class="widget-btn" title="Add Friend">➕</button>
-          <div class="widget-popup">
-            <input type="text" placeholder="Search for friend..." class="widget-search" />
-            <button class="widget-send">Send Request</button>
+          <button class="widget-btn" id="addFriendBtn" title="Add Friend">➕</button>
+          <div class="widget-popup" id="addFriendPopup">
+            <input type="text" placeholder="Entrez le ID de l'ami" class="widget-search" />
+            <button class="widget-send" onclick="sendFriendRequest()">Envoyer</button>
           </div>
         </div>
       
