@@ -187,5 +187,5 @@
 }
 
 #deconnexion {
-    visibility: hidden;
+    display: none;
 }
