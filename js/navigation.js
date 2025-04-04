@@ -25,6 +25,8 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
+    afficherDeconnexion()
+
     const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
     sidebarManager.init()
 

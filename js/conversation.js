@@ -1,6 +1,8 @@
 const getConvo = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    
+    const user = JSON.parse(localStorage.getItem("user"))
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
 
     fetch (`http://localhost:8000/api/convo/${user.user_id}`, {
         method: "GET",
@@ -69,12 +71,21 @@ const getConvo = () => {
 
         alert("Une erreur est survenue, veuillez réessayer.");
     })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }
 
 const newConvo = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const id_invite = $('#id-invite').val();
-    const chat_name = $('#nom-convo').val();
+    const user = JSON.parse(localStorage.getItem("user"))
+    const id_invite = $('#id-invite').val()
+    const chat_name = $('#nom-convo').val()
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
 
     if (!user || !user.user_id) {
         alert("Utilisateur non connecté !")
@@ -129,7 +140,12 @@ const newConvo = () => {
         alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
-        newChatButton.prop('disabled', false).text('Ajouter');
+        newChatButton.prop('disabled', false).text('Ajouter')
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
     })
 }
 

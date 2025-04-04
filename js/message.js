@@ -1,6 +1,9 @@
 const getMessages = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const convoID = JSON.parse(localStorage.getItem("currentChatID"));
+    const user = JSON.parse(localStorage.getItem("user"))
+    const convoID = JSON.parse(localStorage.getItem("currentChatID"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
 
     console.log(convoID)
 
@@ -57,12 +60,22 @@ const getMessages = () => {
         console.error("Erreur lors de l'obtention des Messages :", error)
         alert("Une erreur est survenue, veuillez réessayer.")
     })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }
 
 const newMessage = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const convoID = JSON.parse(localStorage.getItem("currentChatID"))
     const texteMessage = $('#message-text').val()
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
 
     if (!texteMessage.trim()) {
         alert("Veuillez entrer un message.")
@@ -112,5 +125,10 @@ const newMessage = () => {
     })
     .finally(() => {
         $(".send-btn").prop("disabled", false).text("Envoyer")
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
     })
 }

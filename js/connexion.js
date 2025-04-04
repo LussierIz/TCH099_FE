@@ -2,6 +2,9 @@ const connect = () => {
     const email = $('#email-connect').val()
     const password = $('#password-connect').val()
 
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
     if (!email || !password) {
         alert('Veuillez remplir tous les champs.')
         return
@@ -51,6 +54,12 @@ const connect = () => {
     .finally(() => {
         loginButton.prop('disabled', false)
         loginButton.text('Se connecter')
+
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
     })
 }
 
@@ -60,6 +69,9 @@ const register = () => {
     const firstName = $('#prenom-register').val()
     const lastName = $('#nom-register').val()
     const type = $('#type').val()
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
 
     if (!email || !password || !firstName || !lastName || !type) {
         alert('Veuillez remplir tous les champs.')
@@ -108,7 +120,29 @@ const register = () => {
     .finally(() => {
         registerButton.prop('disabled', false)
         registerButton.text('Se connecter')
+
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
     })
+}
+
+const afficherDeconnexion = () => {
+    const buttonDeconnexion = $('#deconnexion')
+    if(checkLoginStatus()){
+        buttonDeconnexion.css('visibility', 'visible')
+        buttonDeconnexion.off('click').on('click', deconnexion)
+    } else {
+        buttonDeconnexion.css('visibility', 'hidden')
+        buttonDeconnexion.off('click')
+    }
+}
+
+const deconnexion = () => {
+    localStorage.removeItem("user")
+    window.location.href = "/html/login.html"
 }
 
 const checkLoginStatus = () => {
