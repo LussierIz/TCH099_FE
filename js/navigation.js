@@ -49,29 +49,46 @@ $(document).ready(() => {
         
     }
 
+    if(currentPage === "statistiques.html"){
+        getStats()
+    }
+
     if (currentPage === "Etude.html"){
         $("#etude-page").addClass("active")
         const displayElement = $('.timer-pomodoro')
         const pomodoro = new Pomodoro(displayElement)
+        let session = ""
+        let tempsCumule = 0
+        let sessionCounter = 0
 
         $('#start-pomodoro').on('click', () => {
             pomodoro.start()
+            sessionCounter++
         })
 
         $('#stop-pomodoro').on('click', () => {
             pomodoro.stop()
+            if (typeSession === "pomodoro" && tempsCumule > 0) {
+                enregistrerSessionEtude(tempsCumule)
+                tempsCumule = 0
+            } else {
+                console.log("C'était une pause, pas d'envoi")
+            }
         })
 
         $('#initial-pomodoro').on('click', () => {
+            session = "pomodoro"
             pomodoro.reset(25 * 60)
         })
 
         $('#short-break').on('click', () => {
+            session = "short-break"
             pomodoro.reset(5 * 60)
 
         })
         
         $('#long-break').on('click', () => {
+            session = "long-break"
             pomodoro.reset(15 * 60)
         })
     }

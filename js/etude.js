@@ -4,6 +4,7 @@ class Pomodoro {
         this.duration = duration
         this.remainingTime = duration
         this.interval = null
+        this.tempsCumule = 0
     }
 
     formatTime(seconds){
@@ -21,10 +22,11 @@ class Pomodoro {
         this.interval = setInterval(() => {
             if (this.remainingTime > 0) {
                 this.remainingTime--
+                this.tempsCumule = this.duration - this.remainingTime
                 this.updateDisplay()
             } else {
                 this.stop()
-                alert("Temps écoulé !")
+                this.showNotification("Temps écoulé !")
             }
         }, 1000)
     }
@@ -39,4 +41,23 @@ class Pomodoro {
         this.remainingTime = duration
         this.updateDisplay()
     }
+
+    getTempsCumule() {
+        return this.tempsCumule
+    }
+
+    getSessionCounter() {
+        return this.sessionCounter
+    }
+
+    showNotification(message) {
+        
+    }
+}
+
+const enregistrerSessionEtude = (tempsCumule) => {
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
 }
