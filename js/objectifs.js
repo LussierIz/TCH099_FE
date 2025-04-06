@@ -15,67 +15,159 @@
  * @date 2025-03-14
  */
 
-// Sélection des éléments DOM
-const objForm = document.getElementById('objForm');
-const listeObjectifs = document.getElementById('liste-objectifs');
-const starRating = document.querySelectorAll('.star-rating span');
+document.addEventListener("DOMContentLoaded", function () {
+    loadObjectifs();
 
-// Gestion des étoiles de difficulté
-let selectedDifficulty = 1; // par défaut
-
-starRating.forEach(star => {
-    star.addEventListener('click', function() {
-        selectedDifficulty = parseInt(this.dataset.value);
-        updateStarRating(selectedDifficulty);
-    });
+    const objForm = document.getElementById("objForm");
+    if (objForm) {
+        objForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            createObjective();
+        });
+    }
 });
 
-// Mettre à jour l'affichage des étoiles
-function updateStarRating(difficulty) {
-    starRating.forEach((star, index) => {
-        star.classList.toggle('active', index < difficulty);
-    });
-}
+// Fonction pour créer un nouvel objectif
+function createObjective() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.user_id || !user.token) {
+        alert("Vous devez être connecté.");
+        return;
+    }
 
-// Soumission du formulaire
-objForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Récupération des valeurs du formulaire
-    const newGoal = {
-        titre: document.getElementById('obj-titre').value,
-        description: document.getElementById('obj-desc').value,
-        difficulte: selectedDifficulty,
-        echeance: document.getElementById('obj-echeance').value,
-        progress: 0 // Progression initiale
+    // Récupérer les valeurs du formulaire
+    const newObjective = {
+        id_utilisateur: user.user_id,
+        titre: document.getElementById("obj-titre").value,
+        description: document.getElementById("obj-desc").value,
+        date_debut: new Date().toISOString().split("T")[0], // date du jour au format YYYY-MM-DD
+        date_fin: document.getElementById("obj-echeance").value,
+        statut: "En cours"
     };
 
-    // Ajout de l'objectif à la liste
-    addGoalToUI(newGoal);
+    fetch("http://localhost:8000/api/create-objectif/create", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newObjective)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert(data.success);
+                // Actualiser la liste des objectifs
+                loadObjectifs();
+                // Réinitialiser le formulaire
+                document.getElementById("objForm").reset();
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Erreur lors de la création de l'objectif :", error);
+            alert("Une erreur s'est produite lors de la création de l'objectif.");
+        });
+}
 
-    // Réinitialisation du formulaire
-    this.reset();
-    updateStarRating(1); // Réinitialiser les étoiles
-});
+// Fonction pour charger les objectifs de l'utilisateur
+function loadObjectifs() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.user_id || !user.token) {
+        console.error("Informations utilisateur manquantes");
+        return;
+    }
 
-// Ajouter un objectif à l'interface
-function addGoalToUI(goal) {
-    const goalCard = document.createElement('div');
-    goalCard.className = 'objectif-card';
-    goalCard.innerHTML = `
-        <h3>${goal.titre}</h3>
-        <p>${goal.description}</p>
-        <div class="goal-progress">
-            <div class="progress-bar" style="width: ${goal.progress}%"></div>
-        </div>
-        <span class="goal-deadline">${new Date(goal.echeance).toLocaleDateString()}</span>
-        <button class="btn-delete">Supprimer</button>
+    fetch("http://localhost:8000/api/get-objectifs/" + user.user_id, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const objectifsContainer = document.getElementById("liste-objectifs");
+            objectifsContainer.innerHTML = "";
+            if (data.success && data.objectifs.length > 0) {
+                data.objectifs.forEach(obj => {
+                    addObjectiveToUI(obj);
+                });
+            } else {
+                objectifsContainer.innerHTML = "<p>Aucun objectif trouvé.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Erreur lors du chargement des objectifs :", error);
+            alert("Une erreur s'est produite lors du chargement des objectifs.");
+        });
+}
+// Ajouter un objectif à l'interface utilisateur
+function addObjectiveToUI(obj) {
+    const card = document.createElement("div");
+    card.classList.add("objectif-card");
+    card.setAttribute("data-id", obj.id_objectif);
+    card.innerHTML = `
+      <h3>${obj.titre}</h3>
+      <p>${obj.description}</p>
+      <span class="goal-deadline">${new Date(obj.date_fin).toLocaleDateString()}</span>
+      <button class="btn-delete">Supprimer</button>
     `;
 
     // Gestion de la suppression
-    goalCard.querySelector('.btn-delete').addEventListener('click', () => {
-        goalCard.remove();
+    card.querySelector(".btn-delete").addEventListener("click", function () {
+        if (confirm("Voulez-vous vraiment supprimer cet objectif ?")) {
+            deleteObjective(obj.id_objectif);
+        }
     });
 
-    listeObjectifs.appendChild(goalCard);
+    document.getElementById("liste-objectifs").appendChild(card);
+}
+
+// Fonction pour supprimer un objectif
+function deleteObjective(id) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.user_id || !user.token) {
+        alert("Vous devez être connecté.");
+        return;
+    }
+
+    fetch("http://localhost:8000/api/delete-objectif/" + id, {
+        method: "DELETE",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert(data.success);
+                // Rafraîchir la liste des objectifs
+                // apres suppression reussite
+                loadObjectifs();
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Erreur lors de la suppression de l'objectif :", error);
+            alert("Une erreur s'est produite lors de la suppression de l'objectif.");
+        });
 }
