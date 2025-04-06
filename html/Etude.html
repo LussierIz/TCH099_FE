@@ -17,6 +17,7 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="loading-bar"></div>
     <nav class="sidebar">
         <div class="sidebar-header">
             <img src="/images/star-logo-tr.png" class="logo" alt="Astrum">
@@ -99,36 +100,62 @@
         </div> -->
     </nav>
     <div class="main-container">
-        <div class="pomodoro-container">
-            <div class="button-pomodoro">
-                <div class="set-pomodoro">
-                    <button id="initial-pomodoro">Pomodoro</button>
+        <div class="pomodoro-session-container">
+            <div class="pomodoro-container  card-style">
+                <div class="button-pomodoro">
+                    <div class="set-pomodoro">
+                        <button id="initial-pomodoro">Pomodoro</button>
+                    </div>
+                    <div class="set-pomodoro">
+                        <button id="short-break">Short break</button>
+                    </div>
+                    <div class="set-pomodoro">
+                        <button id="long-break">Long break</button>
+                    </div>
                 </div>
-                <div class="set-pomodoro">
-                    <button id="short-break">Short break</button>
+    
+                <div class="timer-pomodoro">
+                    25:00
                 </div>
-                <div class="set-pomodoro">
-                    <button id="long-break">Long break</button>
+    
+                <div class="start-pomodoro">
+                    <button id="start-pomodoro">Start</button>
+                    <button id="stop-pomodoro">Stop</button>
+                </div>
+    
+                <div class="pomodoro-description">
+                    <p>
+                        Utilisez la technique Pomodoro pour améliorer votre productivité ! 
+                        Travaillez pendant 25 minutes, puis prenez une courte pause. 
+                        Alternez entre Pomodoro, pauses courtes et longues pour rester concentré.
+                    </p>
                 </div>
             </div>
-
-            <div class="timer-pomodoro">
-                25:00
-            </div>
-
-            <div class="start-pomodoro">
-                <button id="start-pomodoro">Start</button>
-                <button id="stop-pomodoro">Stop</button>
-            </div>
-
-            <div class="pomodoro-description">
-                <p>
-                    Utilisez la technique Pomodoro pour améliorer votre productivité ! 
-                    Travaillez pendant 25 minutes, puis prenez une courte pause. 
-                    Alternez entre Pomodoro, pauses courtes et longues pour rester concentré.
-                </p>
+    
+            <div class="session card-style">
+                <h1>Nombre de session total : </h1>
             </div>
         </div>
+
+        <div class="explication  card-style">
+            <h1>À quoi sert Étude ?</h1>
+            <p>
+                La section <strong>Étude</strong> est conçue pour t'aider à rester concentré et motivé dans tes sessions de travail.
+                Grâce à un minuteur inspiré de la méthode Pomodoro, tu peux organiser ton temps efficacement en alternant périodes d’étude et pauses.
+            </p>
+            <p>
+                Mais ce n’est pas tout : chaque session d’étude te permet également de <strong>gagner de l’expérience (XP)</strong> ! 
+                Après seulement <strong>10 minutes d’étude effective</strong>, tu commences à accumuler de l’XP, te rétribuant pour ton effort et ta régularité.
+            </p>
+            <p>
+                L’XP gagnée est automatiquement ajoutée à ta banque une fois ta session terminée. Plus tu étudies, plus tu progresses !
+                C’est un moyen ludique de suivre ton engagement, débloquer des niveaux, et te fixer des objectifs concrets.
+            </p>
+            <p>
+                Que tu travailles pour un examen ou que tu veuilles simplement rester productif, la section Étude est ton alliée pour développer
+                ta discipline tout en rendant l’expérience gratifiante. 💪📚
+            </p>
+        </div>        
     </div>
 </body>
 </html>

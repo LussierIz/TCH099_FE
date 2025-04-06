@@ -55,40 +55,54 @@ $(document).ready(() => {
 
     if (currentPage === "Etude.html"){
         $("#etude-page").addClass("active")
+        getNombreSession()
         const displayElement = $('.timer-pomodoro')
         const pomodoro = new Pomodoro(displayElement)
-        let session = ""
+        let typeSession = "pomodoro"
         let tempsCumule = 0
-        let sessionCounter = 0
+        let startTime
+        let endTime
 
         $('#start-pomodoro').on('click', () => {
             pomodoro.start()
-            sessionCounter++
+            if (typeSession === "pomodoro"){
+                startTime = new Date().toISOString().slice(0, 19).replace('T', ' ')
+            }
         })
 
         $('#stop-pomodoro').on('click', () => {
             pomodoro.stop()
+            tempsCumule = pomodoro.getTempsCumule()
+
+            console.log(tempsCumule)
+
             if (typeSession === "pomodoro" && tempsCumule > 0) {
-                enregistrerSessionEtude(tempsCumule)
+                endTime = new Date().toISOString().slice(0, 19).replace('T', ' ')
+                console.log(startTime)
+                console.log(endTime)
+
+                if (tempsCumule > 600){enregistrerSessionEtude(tempsCumule, startTime, endTime)}
+
                 tempsCumule = 0
+                pomodoro.reset(25 * 60)
             } else {
                 console.log("C'était une pause, pas d'envoi")
             }
         })
 
         $('#initial-pomodoro').on('click', () => {
-            session = "pomodoro"
+            typeSession = "pomodoro"
             pomodoro.reset(25 * 60)
         })
 
         $('#short-break').on('click', () => {
-            session = "short-break"
+            typeSession = "short-break"
             pomodoro.reset(5 * 60)
 
         })
         
         $('#long-break').on('click', () => {
-            session = "long-break"
+            typeSession = "long-break"
             pomodoro.reset(15 * 60)
         })
     }
