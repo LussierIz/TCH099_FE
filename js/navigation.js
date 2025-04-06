@@ -271,12 +271,17 @@ $(document).ready(() => {
                 break
         }
     });
-    
+
     $("#username, .avatar").on("click", function () {
         if (checkLoginStatus()) {
             window.location.href = "/html/profile.html"; 
         } else {
             window.location.href = "/html/login.html"; 
         }
+    });
+
+    $(".back-btn").on("click", function () {
+        console.log("Back button clicked");
+        window.location.href = "/html/accueil.html"
     });
 });

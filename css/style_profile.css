@@ -9,7 +9,7 @@ body, .main-content {
 .top-header {
     background: rgba(255, 255, 255, 0.1);
     padding: 1.5rem;
-    text-align: center;
+    text-align: left;
     color: #ffd700;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-radius: 0 0 10px 10px;
@@ -108,4 +108,31 @@ body, .main-content {
 .profile-card p {
     color: #aab8ff;
     font-size: 1rem;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(11, 15, 44, 0.9);
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    z-index: 1000;
+}
+
+.back-btn {
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #ffd700;
+    color: #1a1f4d;
 }
