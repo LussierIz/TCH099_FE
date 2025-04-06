@@ -169,6 +169,7 @@
     height: 40px;
     border-radius: 50%;
     background: #666;
+    cursor: pointer;
 }
 
 .coins-xp {

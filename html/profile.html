@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- pour le css -->
+    <link rel="stylesheet" href="/css/style_profile.css" />
+
+    <!-- Les scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="/js/account.js"></script>
+    <script defer src="/js/navigation.js"></script>
+    <link rel="icon" href="/images/star-logo-tr.png" type="image/png" />
+    <title>Profil</title>
+</head>
+
+<body>
+    <div class="main-content">
+        <header class="top-header">
+            <h1>Mon Profil</h1>
+        </header>
+
+        <div class="profile-container">
+            <!-- section photo profil -->
+            <div class="profile-left">
+                <div class="profile-avatar">
+                    <img src="/images/avatar-placeholder.png" alt="Avatar" />
+                </div>
+                <h2 id="userFullName">Prenom Nom</h2>
+                <p id="userEmail">ex@example.com</p>
+                <button class="logout-btn" id="logoutBtn">Se Déconnecter</button>
+            </div>
+
+            <!-- informations personnelles de l'utilisateur -->
+            <div class="profile-right">
+                <h2>Informations Personnelles</h2>
+                <div class="profile-cards">
+                    <div class="profile-card">
+                        <h3>Nom</h3>
+                        <p id="userNom">Nom</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Prénom</h3>
+                        <p id="userPrenom">Prénom</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>ID</h3>
+                        <p id="userID">1</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Date d'inscription</h3>
+                        <p id="userInsc">01 Avril 2025</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Email</h3>
+                        <p id="userEmail2">ex@example.com</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Statut</h3>
+                        <p id="userStatut">Etudiant</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <button class="back-btn">Retour</button>
+    </footer>
+</body>
+
+</html>
