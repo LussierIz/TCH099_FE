@@ -49,6 +49,10 @@ $(document).ready(() => {
         
     }
 
+    if(currentPage === "statistiques.html"){
+        getStats()
+    }
+
     if (currentPage === "Etude.html"){
         $("#etude-page").addClass("active")
         const displayElement = $('.timer-pomodoro')
