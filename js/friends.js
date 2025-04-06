@@ -40,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  getFriendList();
+});
+
 
 //envoyer une demande d'ami
 function sendFriendRequest() {
@@ -149,6 +153,9 @@ function updateFriendRequest(requestId, action) {
       alert(data.success || data.error);
       // Apres avoir renouvelé la requete, rafrachis la liste de requetes d'amis
       getFriendRequests();
+      if (action == "accept") {
+        getFriendList();
+      }
     })
     .catch(error => {
       console.error("Erreur lors de la mise à jour de la demande d'ami:", error);
@@ -162,6 +169,41 @@ function getFriendList() {
     console.error("Informations manquantes sur l'utilisateur");
     return;
   }
+  fetch(`http://localhost:8000/api/friend-list/${user.user_id}`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${user.token}`,
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    const friendsContainer = document.querySelector(".friends-grid");
+    friendsContainer.innerHTML = "";
+
+    if (data.success && data.friends && data.friends.length > 0) {
+      data.friends.forEach(friend => {
+        const card = document.createElement("div");
+        card.classList.add("friend-card");
+        card.innerHTML = `
+          <div class="friend-avatar"></div>
+          <h3>${friend.prenom} ${friend.nom}</h3>
+          <p>${friend.email}</p>
+        `;
+        friendsContainer.appendChild(card);
+      });
+    } else {
+      friendsContainer.innerHTML = "<p>Aucun ami trouvé.</p>";
+    }
+  })
+  .catch(error => {
+    console.error("Erreur lors de la récupération de la liste d'amis:", error);
+  });
 
 }
 
