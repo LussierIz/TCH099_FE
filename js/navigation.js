@@ -270,5 +270,13 @@ $(document).ready(() => {
                 else { window.location.href = "/html/login.html" }
                 break
         }
-    })
-})
+    });
+    
+    $("#username, .avatar").on("click", function () {
+        if (checkLoginStatus()) {
+            window.location.href = "/html/profile.html"; 
+        } else {
+            window.location.href = "/html/login.html"; 
+        }
+    });
+});

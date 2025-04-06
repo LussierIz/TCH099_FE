@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     generateUsername();
+    populateUserInfo();
 });
 
 
@@ -24,3 +25,35 @@ function generateUsername() {
         .catch(err => console.error('Failed to fetch user data:', err));
 }
 
+function populateUserInfo() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.user_id || !user.token) {
+        console.error("User information is missing");
+        return;
+    }
+    fetch(`http://localhost:8000/api/get-user/${user.user_id}`, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.user) {
+            document.getElementById('userNom').textContent = data.user.nom;
+            document.getElementById('userPrenom').textContent = data.user.prenom;
+            document.getElementById('userID').textContent = data.user.id_utilisateur;
+            document.getElementById('userEmail2').textContent = data.user.email;
+            document.getElementById('userStatut').textContent = data.user.statut;
+            document.getElementById('userInsc').textContent = data.user.date_inscription;
+
+            document.getElementById('userFullName').textContent = data.user.prenom + " " + data.user.nom;
+            document.getElementById('userEmail').textContent = data.user.email;
+
+        } else {
+            console.error(data.error);
+        }
+    })
+    .catch(err => console.error('Echec de la recuperation des donnees dutilisateur:', err));
+}
