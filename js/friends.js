@@ -5,50 +5,13 @@
  * @version 1.1
  * @date 2025-04-02
  */
-
-//html ajouter amis
-document.addEventListener("DOMContentLoaded", function () {
-  const addFriendBtn = document.getElementById('addFriendBtn');
-  if (addFriendBtn) {
-    addFriendBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      const widgetItem = this.closest('.widget-item');
-      widgetItem.classList.toggle('open');
-    });
-  }
-
-  document.addEventListener('click', function (e) {
-    document.querySelectorAll('.widget-item.open').forEach(function (item) {
-      if (!item.contains(e.target)) {
-        item.classList.remove('open');
-      }
-    });
-  });
-});
-
-//html requetes d'amis
-document.addEventListener("DOMContentLoaded", function () {
-  const friendRequestsBtn = document.querySelector(".widget-item.friend-requests .widget-btn");
-  if (friendRequestsBtn) {
-    friendRequestsBtn.addEventListener("click", function (e) {
-      const widgetItem = this.closest('.widget-item');
-      widgetItem.classList.toggle('open');
-      if (widgetItem.classList.contains('open')) {
-        getFriendRequests();
-      }
-    });
-  }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-  getFriendList();
-});
-
-
 //envoyer une demande d'ami
 function sendFriendRequest() {
   const user = JSON.parse(localStorage.getItem("user"));
   const receiverId = document.getElementById("friend-id").value.trim();
+
+  $("#loading-bar").css("visibility", "visible")
+  $("#loading-bar").css("width", "50%")
 
   if (!receiverId) {
     alert("Entrez un ID ami valide");
@@ -68,11 +31,22 @@ function sendFriendRequest() {
     },
     body: JSON.stringify(data)
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
+    .then(async response => {
+      if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+              alert("Votre session a expiré. Veuillez vous reconnecter.");
+          } else {
+              alert("Erreur d'authentification : " + errorData.error);
+          }
+          window.location.href = "/html/login.html";
+          return await Promise.reject("Unauthorized");
       }
-      return response.json();
+
+      if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`)
+      }
+      return response.json()
     })
     .then(responseData => {
       if (responseData.success) {
@@ -84,13 +58,23 @@ function sendFriendRequest() {
     .catch(error => {
       console.error("Erreur lors de lenvoi de la demande dami:", error);
       alert("Une erreur sest produite. Veuillez reessayer!");
-    });
+    })
+    .finally(() => {
+      $("#loading-bar").css("width", "100%")
+      setTimeout(() => {
+          $("#loading-bar").css("visibility", "hidden")
+          $("#loading-bar").css("width", "0%")
+      }, 200)
+  })
 
 }
 
 //requetes d'amis
 function getFriendRequests() {
   const user = JSON.parse(localStorage.getItem("user"));
+  $("#loading-bar").css("visibility", "visible")
+  $("#loading-bar").css("width", "50%")
+
   if (!user || !user.user_id || !user.token) {
     console.error("Informations manquantes sur l'utilisateur");
     return;
@@ -103,11 +87,21 @@ function getFriendRequests() {
       "Content-Type": "application/json"
     }
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
+    .then(async response => {
+      if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+              alert("Votre session a expiré. Veuillez vous reconnecter.");
+          } else {
+              alert("Erreur d'authentification : " + errorData.error);
+          }
+          window.location.href = "/html/login.html";
+          return await Promise.reject("Unauthorized");
       }
-      return response.json();
+      if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`)
+      }
+      return response.json()
     })
     .then(data => {
       const popup = document.querySelector(".widget-item.friend-requests .widget-popup");
@@ -130,11 +124,21 @@ function getFriendRequests() {
     })
     .catch(error => {
       console.error("Erreur lors de la récupération de demandes d'ami:", error);
-    });
+    })
+    .finally(() => {
+      $("#loading-bar").css("width", "100%")
+      setTimeout(() => {
+          $("#loading-bar").css("visibility", "hidden")
+          $("#loading-bar").css("width", "0%")
+      }, 200)
+  })
 }
 
 function updateFriendRequest(requestId, action) {
   const user = JSON.parse(localStorage.getItem("user"));
+  $("#loading-bar").css("visibility", "visible")
+  $("#loading-bar").css("width", "50%")
+
   fetch(`http://localhost:8000/api/friend-request/${requestId}`, {
     method: "PUT",
     headers: {
@@ -143,11 +147,22 @@ function updateFriendRequest(requestId, action) {
     },
     body: JSON.stringify({ action: action })
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
+    .then(async response => {
+      if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+              alert("Votre session a expiré. Veuillez vous reconnecter.");
+          } else {
+              alert("Erreur d'authentification : " + errorData.error);
+          }
+          window.location.href = "/html/login.html";
+          return await Promise.reject("Unauthorized");
       }
-      return response.json();
+
+      if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`)
+      }
+      return response.json()
     })
     .then(data => {
       alert(data.success || data.error);
@@ -160,11 +175,21 @@ function updateFriendRequest(requestId, action) {
     .catch(error => {
       console.error("Erreur lors de la mise à jour de la demande d'ami:", error);
       alert("Une erreur s'est produite. Veuillez réessayer!");
-    });
+    })
+    .finally(() => {
+      $("#loading-bar").css("width", "100%")
+      setTimeout(() => {
+          $("#loading-bar").css("visibility", "hidden")
+          $("#loading-bar").css("width", "0%")
+      }, 200)
+  })
 }
 
 function getFriendList() {
   const user = JSON.parse(localStorage.getItem("user"));
+  $("#loading-bar").css("visibility", "visible")
+  $("#loading-bar").css("width", "50%")
+
   if (!user || !user.user_id || !user.token) {
     console.error("Informations manquantes sur l'utilisateur");
     return;
@@ -176,12 +201,23 @@ function getFriendList() {
       "Content-Type": "application/json"
     }
   })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    return response.json();
-  })
+    .then(async response => {
+      if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+              alert("Votre session a expiré. Veuillez vous reconnecter.");
+          } else {
+              alert("Erreur d'authentification : " + errorData.error);
+          }
+          window.location.href = "/html/login.html";
+          return await Promise.reject("Unauthorized");
+      }
+
+      if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`)
+      }
+      return response.json()
+    })
   .then(data => {
     const friendsContainer = document.querySelector(".friends-grid");
     friendsContainer.innerHTML = "";
@@ -203,7 +239,14 @@ function getFriendList() {
   })
   .catch(error => {
     console.error("Erreur lors de la récupération de la liste d'amis:", error);
-  });
+  })
+  .finally(() => {
+    $("#loading-bar").css("width", "100%")
+    setTimeout(() => {
+        $("#loading-bar").css("visibility", "hidden")
+        $("#loading-bar").css("width", "0%")
+    }, 200)
+})
 
 }
 

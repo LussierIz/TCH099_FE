@@ -1,5 +1,8 @@
 function generateUsername() {
     const user = JSON.parse(localStorage.getItem('user'));
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
     fetch(`http://localhost:8000/api/get-user/${user.user_id}`, {
         method: 'GET',
         headers: {
@@ -23,8 +26,6 @@ function generateUsername() {
                 throw new Error(`Erreur HTTP : ${response.status}`)
             }
             return response.json()
-
-            response.json()
         })
         .then(data => {
             if (data.success) {
@@ -36,9 +37,6 @@ function generateUsername() {
         })
         .catch(err => console.error('Failed to fetch user data:', err))
         .finally(() => {
-            loginButton.prop('disabled', false)
-            loginButton.text('Se connecter')
-    
             $("#loading-bar").css("width", "100%")
             setTimeout(() => {
                 $("#loading-bar").css("visibility", "hidden")
@@ -49,6 +47,8 @@ function generateUsername() {
 
 function populateUserInfo() {
     const user = JSON.parse(localStorage.getItem('user'));
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
     if (!user || !user.user_id || !user.token) {
         console.error("User information is missing");
         return;
@@ -76,8 +76,6 @@ function populateUserInfo() {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }
         return response.json()
-
-        response.json()
     })
     .then(data => {
         if (data.success && data.user) {
@@ -97,9 +95,6 @@ function populateUserInfo() {
     })
     .catch(err => console.error('Echec de la recuperation des donnees dutilisateur:', err))
     .finally(() => {
-        loginButton.prop('disabled', false)
-        loginButton.text('Se connecter')
-
         $("#loading-bar").css("width", "100%")
         setTimeout(() => {
             $("#loading-bar").css("visibility", "hidden")

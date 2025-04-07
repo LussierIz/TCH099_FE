@@ -111,6 +111,35 @@ $(document).ready(() => {
     if (currentPage === "Friend.html"){
         $("#friend-page").addClass("active")
         
+        const addFriendBtn = document.getElementById('addFriendBtn');
+        if (addFriendBtn) {
+          addFriendBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const widgetItem = this.closest('.widget-item');
+            widgetItem.classList.toggle('open');
+          });
+        }
+      
+        document.addEventListener('click', function (e) {
+          document.querySelectorAll('.widget-item.open').forEach(function (item) {
+            if (!item.contains(e.target)) {
+              item.classList.remove('open');
+            }
+          });
+        });
+      
+        const friendRequestsBtn = document.querySelector(".widget-item.friend-requests .widget-btn");
+        if (friendRequestsBtn) {
+          friendRequestsBtn.addEventListener("click", function (e) {
+            const widgetItem = this.closest('.widget-item');
+            widgetItem.classList.toggle('open');
+            if (widgetItem.classList.contains('open')) {
+              getFriendRequests();
+            }
+          });
+        }
+      
+        getFriendList();
     }
 
     if (currentPage === "login.html"){

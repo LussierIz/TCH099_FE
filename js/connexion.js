@@ -137,3 +137,14 @@ const deconnexion = () => {
 const checkLoginStatus = () => {
     return JSON.parse(localStorage.getItem("user"))?.user_id || false
 }
+
+function showLoading(percent = 50) {
+    $("#loading-bar").css({ visibility: "visible", width: `${percent}%` });
+}
+
+function hideLoading() {
+    $("#loading-bar").css("width", "100%");
+    setTimeout(() => {
+        $("#loading-bar").css({ visibility: "hidden", width: "0%" });
+    }, 200);
+}
