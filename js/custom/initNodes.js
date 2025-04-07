@@ -1,4 +1,5 @@
 //initialisation de nodes.js
+//jiayi xu
 var nodesjs = new NodesJs({
     id: "nodesCanvas",
     width: window.innerWidth,
@@ -19,3 +20,6 @@ window.addEventListener('resize', function () {
     nodesjs.setWidth(window.innerWidth);
     nodesjs.setHeight(window.innerHeight);
 });
+
+
+
