@@ -129,17 +129,6 @@ const register = () => {
     })
 }
 
-const afficherDeconnexion = () => {
-    const buttonDeconnexion = $('#deconnexion')
-    if(checkLoginStatus()){
-        buttonDeconnexion.css('display', 'block')
-        buttonDeconnexion.off('click').on('click', deconnexion)
-    } else {
-        buttonDeconnexion.css('display', 'none')
-        buttonDeconnexion.off('click')
-    }
-}
-
 const deconnexion = () => {
     localStorage.removeItem("user")
     window.location.href = "/html/login.html"

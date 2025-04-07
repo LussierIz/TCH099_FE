@@ -1,9 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    generateUsername();
-    populateUserInfo();
-});
-
-
 function generateUsername() {
     const user = JSON.parse(localStorage.getItem('user'));
     fetch(`http://localhost:8000/api/get-user/${user.user_id}`, {

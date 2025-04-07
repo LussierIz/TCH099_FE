@@ -25,10 +25,10 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
-    afficherDeconnexion()
-
-    const sidebarManager = new SidebarManager() //! On peut changer l'implementation de cette class
-    sidebarManager.init()
+    if(currentPage !== "profile.html"){
+        const sidebarManager = new SidebarManager()
+        sidebarManager.init()
+    }
 
     /**
      * Vérification de la page actuelle et exécution des procédures correspondantes.
@@ -37,20 +37,21 @@ $(document).ready(() => {
      */
     if (currentPage === "accueil.html"){
         $("#Accueil-page").addClass("active")
+        generateUsername()
     }
 
     if (currentPage === "Bloc-note.html"){
-        $("#bloc-note-page").addClass("active")
-        
+        $("#bloc-note-page").addClass("active")        
     }
 
     if (currentPage === "Boutique.html"){
         $("#boutique-page").addClass("active")
-        
+        generateUsername()
     }
 
     if(currentPage === "statistiques.html"){
         getStats()
+        generateUsername()
     }
 
     if (currentPage === "Etude.html"){
@@ -139,6 +140,7 @@ $(document).ready(() => {
 
     if (currentPage === "conversation.html"){
         $("#conversation-page").addClass("active")
+        generateUsername()
         userID()
         getConvo()
 
@@ -242,6 +244,13 @@ $(document).ready(() => {
         })
     }
 
+    if (currentPage === "profile.html"){
+        populateUserInfo()
+        $('#logoutBtn').on('click', () => {
+            deconnexion()
+        })    
+    }
+
     /**
      * Gestion de la navigation entre les pages via la sidebar.
      * Lorsqu'un bouton est cliqué, l'utilisateur est redirigé vers la page correspondante.
@@ -249,14 +258,16 @@ $(document).ready(() => {
     $('.sidebar-bar').on('click', 'button', function () {
         switch (this.id) {
             case "Accueil-page":
-                window.location.href = "/html/accueil.html"
+                if (checkLoginStatus()) { window.location.href = "/html/accueil.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "bloc-note-page":
                 if (checkLoginStatus()) { window.location.href = "/html/Bloc-note.html" } 
                 else { window.location.href = "/html/login.html" }
                 break
             case "boutique-page":
-                window.location.href = "/html/Boutique.html"
+                if (checkLoginStatus()) { window.location.href = "/html/Boutique.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "etude-page":
                 if (checkLoginStatus()) { window.location.href = "/html/Etude.html" } 
@@ -266,7 +277,8 @@ $(document).ready(() => {
                 window.location.href = "/html/calendrier.html"
                 break
             case "login-page":
-                window.location.href = "/html/login.html"
+                if (checkLoginStatus()) { window.location.href = "/html/login.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "friend-page":
                 if (checkLoginStatus()) { window.location.href = "/html/Friend.html" } 
@@ -277,7 +289,8 @@ $(document).ready(() => {
                 else { window.location.href = "/html/login.html" }
                 break
             case "statistiques-page":
-                window.location.href = "/html/statistiques.html"
+                if (checkLoginStatus()) { window.location.href = "/html/statistiques.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "conversation-page":
                 if (checkLoginStatus()) { window.location.href = "/html/conversation.html" } 
