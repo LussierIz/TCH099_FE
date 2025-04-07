@@ -224,6 +224,7 @@ $(document).ready(() => {
     
     if(currentPage === "calendrier.html"){
         $("#calendrier-page").addClass("active")
+        getTache()
 
         let currentDate = new Date() // Récupère la date actuelle
         createCalendar(currentDate) // Crée le calendrier pour le mois actuel

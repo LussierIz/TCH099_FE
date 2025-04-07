@@ -161,9 +161,10 @@ const createCalendar = (date) => {
  */
 let ajoutForm = () => {
     // Récupérer les valeurs des champs du formulaire et supprimer les espaces inutiles
-    let nomTache = $("#nom-tache").val().trim()
+    let nomTache = $("#nom-tache").val()
     let descTache = $("#desc-tache").val().trim()
     let dateTache = $("#date-tache").val().trim()
+    let nomObjectif = $('#objectif-tache').val()
 
     /**
      * Vérification et correction du format de la date.
@@ -191,12 +192,15 @@ let ajoutForm = () => {
     const tache = {
         titre: nomTache,
         description: descTache,
-        date: dateTache
+        date: dateTache,
+        titre_objectif: nomObjectif
     }
 
     // Ajouter la tâche au tableau des tâches et l'afficher dans le calendrier
     tblTache.push(tache)
     addTache(tache)
+
+    createTache(tache)
     
     // Réinitialiser le formulaire et fermer la fenêtre d'ajout de tâche
     $(".ajout-form")[0].reset()
@@ -209,11 +213,11 @@ let ajoutForm = () => {
  * 
  * @param {Object} tache - L'objet représentant la tâche à ajouter
  * @param {string} tache.titre - Le titre de la tâche
- * @param {string} tache.date - La date de la tâche au format "YYYY-MM-DD"
+ * @param {string} tache.date_fin - La date de la tâche au format "YYYY-MM-DD"
  */
 let addTache = (tache) => {
     let taskElement = $(`<div class="task"><li>${tache.titre}</li></div>`)
-    $(`#day-${tache.date}`).append(taskElement)
+    $(`#day-${tache.date_fin}`).append(taskElement)
 }
 
 /**
@@ -226,4 +230,106 @@ let addTacheArray = (tblTache) => {
     $(".task").remove()
     // Ajouter chaque tâche dans le calendrier
     tblTache.forEach(tache => addTache(tache))
+}
+
+let createTache = (tache) => {
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
+    tacheData = tache
+
+    console.log(tacheData)
+
+    fetch("http://localhost:8000/api/creer-tache", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(tacheData)
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
+        if (!response.ok) {
+            const errorData = await response.json(); // Récupérer l'erreur depuis la réponse JSON
+            throw new Error(`Erreur HTTP : ${response.status}, Message: ${errorData.error || 'Erreur inconnue'}`);
+        }
+    })
+    .then(data => {
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error("Erreur lors de la création de l'objectif:", error);
+        alert("Une erreur est survenue, veuillez réessayer.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
+}
+
+let getTache = () => {
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
+    fetch(`http://localhost:8000/api/get-taches/${user.user_id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+        addTacheArray(data.taches)
+    })
+    .catch(error => {
+        console.error("Erreur lors du chargement des objectifs :", error);
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }

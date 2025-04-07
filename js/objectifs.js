@@ -17,6 +17,9 @@
 // Fonction pour créer un nouvel objectif
 function createObjective() {
     const user = JSON.parse(localStorage.getItem("user"));
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+    
     if (!user || !user.user_id || !user.token) {
         alert("Vous devez être connecté.");
         return;
@@ -123,6 +126,8 @@ function loadObjectifs() {
     .then(data => {
         const objectifsContainer = document.getElementById("liste-objectifs");
         objectifsContainer.innerHTML = "";
+
+        console.log(data)
         if (data.success && data.objectifs.length > 0) {
             data.objectifs.forEach(obj => {
                 addObjectiveToUI(obj);
