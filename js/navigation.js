@@ -110,7 +110,7 @@ $(document).ready(() => {
 
     if (currentPage === "Friend.html"){
         $("#friend-page").addClass("active")
-        
+
         const addFriendBtn = document.getElementById('addFriendBtn');
         if (addFriendBtn) {
           addFriendBtn.addEventListener('click', function (e) {
@@ -165,6 +165,15 @@ $(document).ready(() => {
 
     if (currentPage === "objectifs.html"){
         $("#objectifs-page").addClass("active")
+        loadObjectifs();
+
+        const objForm = document.getElementById("objForm");
+        if (objForm) {
+            objForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                createObjective();
+            });
+        }
     }
 
     if (currentPage === "conversation.html"){

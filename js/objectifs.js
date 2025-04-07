@@ -14,19 +14,6 @@
  * @version 1.1
  * @date 2025-03-14
  */
-
-document.addEventListener("DOMContentLoaded", function () {
-    loadObjectifs();
-
-    const objForm = document.getElementById("objForm");
-    if (objForm) {
-        objForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            createObjective();
-        });
-    }
-});
-
 // Fonction pour créer un nouvel objectif
 function createObjective() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -73,18 +60,28 @@ function createObjective() {
         .catch(error => {
             console.error("Erreur lors de la création de l'objectif :", error);
             alert("Une erreur s'est produite lors de la création de l'objectif.");
-        });
+        })
+        .finally(() => {
+            $("#loading-bar").css("width", "100%")
+            setTimeout(() => {
+                $("#loading-bar").css("visibility", "hidden")
+                $("#loading-bar").css("width", "0%")
+            }, 200)
+        })
 }
 
 // Fonction pour charger les objectifs de l'utilisateur
 function loadObjectifs() {
     const user = JSON.parse(localStorage.getItem("user"));
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
     if (!user || !user.user_id || !user.token) {
         console.error("Informations utilisateur manquantes");
         return;
     }
 
-    fetch("http://localhost:8000/api/get-objectifs/" + user.user_id, {
+    fetch(`http://localhost:8000/api/get-objectif/${user.user_id}`, {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + user.token,
@@ -111,7 +108,14 @@ function loadObjectifs() {
         .catch(error => {
             console.error("Erreur lors du chargement des objectifs :", error);
             alert("Une erreur s'est produite lors du chargement des objectifs.");
-        });
+        })
+        .finally(() => {
+            $("#loading-bar").css("width", "100%")
+            setTimeout(() => {
+                $("#loading-bar").css("visibility", "hidden")
+                $("#loading-bar").css("width", "0%")
+            }, 200)
+        })
 }
 // Ajouter un objectif à l'interface utilisateur
 function addObjectiveToUI(obj) {
@@ -143,7 +147,7 @@ function deleteObjective(id) {
         return;
     }
 
-    fetch("http://localhost:8000/api/delete-objectif/" + id, {
+    fetch(`http://localhost:8000/api/delete-objectif/${id}`, {
         method: "DELETE",
         headers: {
             "Authorization": "Bearer " + user.token,
@@ -169,5 +173,12 @@ function deleteObjective(id) {
         .catch(error => {
             console.error("Erreur lors de la suppression de l'objectif :", error);
             alert("Une erreur s'est produite lors de la suppression de l'objectif.");
-        });
+        })
+        .finally(() => {
+            $("#loading-bar").css("width", "100%")
+            setTimeout(() => {
+                $("#loading-bar").css("visibility", "hidden")
+                $("#loading-bar").css("width", "0%")
+            }, 200)
+        })
 }
