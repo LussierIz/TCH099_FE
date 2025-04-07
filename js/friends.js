@@ -41,7 +41,7 @@ function sendFriendRequest() {
           }
           window.location.href = "/html/login.html";
           return await Promise.reject("Unauthorized");
-      }
+        }
 
       if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`)
@@ -57,7 +57,11 @@ function sendFriendRequest() {
     })
     .catch(error => {
       console.error("Erreur lors de lenvoi de la demande dami:", error);
-      alert("Une erreur sest produite. Veuillez reessayer!");
+      if (error === "Unauthorized") {
+        return;
+      }
+
+      alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -97,7 +101,7 @@ function getFriendRequests() {
           }
           window.location.href = "/html/login.html";
           return await Promise.reject("Unauthorized");
-      }
+        }
       if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`)
       }
@@ -123,7 +127,11 @@ function getFriendRequests() {
       }
     })
     .catch(error => {
-      console.error("Erreur lors de la récupération de demandes d'ami:", error);
+      if (error === "Unauthorized") {
+        return;
+      }
+
+      alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -157,7 +165,7 @@ function updateFriendRequest(requestId, action) {
           }
           window.location.href = "/html/login.html";
           return await Promise.reject("Unauthorized");
-      }
+        }
 
       if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`)
@@ -174,7 +182,11 @@ function updateFriendRequest(requestId, action) {
     })
     .catch(error => {
       console.error("Erreur lors de la mise à jour de la demande d'ami:", error);
-      alert("Une erreur s'est produite. Veuillez réessayer!");
+      if (error === "Unauthorized") {
+        return;
+      }
+
+      alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -211,7 +223,7 @@ function getFriendList() {
           }
           window.location.href = "/html/login.html";
           return await Promise.reject("Unauthorized");
-      }
+        }
 
       if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`)
@@ -239,6 +251,11 @@ function getFriendList() {
   })
   .catch(error => {
     console.error("Erreur lors de la récupération de la liste d'amis:", error);
+    if (error === "Unauthorized") {
+      return;
+  }
+
+  alert("Une erreur est survenue, veuillez réessayer.");
   })
   .finally(() => {
     $("#loading-bar").css("width", "100%")

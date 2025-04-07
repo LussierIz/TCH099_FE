@@ -19,7 +19,7 @@ function generateUsername() {
                     alert("Erreur d'authentification : " + errorData.error);
                 }
                 window.location.href = "/html/login.html";
-                throw new Error("Unauthorized"); 
+                return await Promise.reject("Unauthorized");
             }
     
             if (!response.ok) {
@@ -35,7 +35,14 @@ function generateUsername() {
                 console.error(data.error);
             }
         })
-        .catch(err => console.error('Failed to fetch user data:', err))
+        .catch(error => {
+            console.error('Failed to fetch user data:', error)
+            if (error === "Unauthorized") {
+                return;
+            }
+    
+            alert("Une erreur est survenue, veuillez réessayer.");
+        })
         .finally(() => {
             $("#loading-bar").css("width", "100%")
             setTimeout(() => {
@@ -69,7 +76,7 @@ function populateUserInfo() {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -93,7 +100,14 @@ function populateUserInfo() {
             console.error(data.error);
         }
     })
-    .catch(err => console.error('Echec de la recuperation des donnees dutilisateur:', err))
+    .catch(error => {
+        console.error('Failed to fetch user data:', error)
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
+    })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
         setTimeout(() => {

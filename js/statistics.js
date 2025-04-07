@@ -35,7 +35,11 @@ const getStats = () => {
     })
     .catch(error => {
         console.error("Erreur lors de l'obtention des Messages :", error)
-        alert("Une erreur est survenue, veuillez réessayer.")
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

@@ -84,7 +84,7 @@ const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -97,6 +97,10 @@ const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
     })
     .catch(error => {
         console.error("Erreur lors de la création :", error);
+        if (error === "Unauthorized") {
+            return;
+        }
+
         alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
@@ -130,7 +134,7 @@ const getNombreSession = () => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -152,7 +156,11 @@ const getNombreSession = () => {
     })
     .catch(error => {
         console.error("Erreur lors de l'obtention des Messages :", error)
-        alert("Une erreur est survenue, veuillez réessayer.")
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

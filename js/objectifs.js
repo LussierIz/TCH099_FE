@@ -49,7 +49,7 @@ function createObjective() {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -70,7 +70,11 @@ function createObjective() {
     })
     .catch(error => {
         console.error("Erreur lors de la création de l'objectif :", error);
-        alert("Une erreur s'est produite lors de la création de l'objectif.");
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -108,7 +112,7 @@ function loadObjectifs() {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -129,7 +133,11 @@ function loadObjectifs() {
     })
     .catch(error => {
         console.error("Erreur lors du chargement des objectifs :", error);
-        alert("Une erreur s'est produite lors du chargement des objectifs.");
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -185,7 +193,7 @@ function deleteObjective(id) {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            throw new Error("Unauthorized"); 
+            return await Promise.reject("Unauthorized");
         }
 
         if (!response.ok) {
@@ -205,7 +213,11 @@ function deleteObjective(id) {
     })
     .catch(error => {
         console.error("Erreur lors de la suppression de l'objectif :", error);
-        alert("Une erreur s'est produite lors de la suppression de l'objectif.");
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
