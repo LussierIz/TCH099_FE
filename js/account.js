@@ -7,7 +7,25 @@ function generateUsername() {
             "Content-Type": "application/json"
         }
     })
-        .then(response => response.json())
+        .then(async response => {
+            if (response.status === 401) {
+                const errorData = await response.json();
+                if (errorData.error === "Token expiré!") {
+                    alert("Votre session a expiré. Veuillez vous reconnecter.");
+                } else {
+                    alert("Erreur d'authentification : " + errorData.error);
+                }
+                window.location.href = "/html/login.html";
+                return await Promise.reject("Unauthorized");
+            }
+    
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP : ${response.status}`)
+            }
+            return response.json()
+
+            response.json()
+        })
         .then(data => {
             if (data.success) {
                 localStorage.setItem('prenom', data.user.prenom);
@@ -16,7 +34,17 @@ function generateUsername() {
                 console.error(data.error);
             }
         })
-        .catch(err => console.error('Failed to fetch user data:', err));
+        .catch(err => console.error('Failed to fetch user data:', err))
+        .finally(() => {
+            loginButton.prop('disabled', false)
+            loginButton.text('Se connecter')
+    
+            $("#loading-bar").css("width", "100%")
+            setTimeout(() => {
+                $("#loading-bar").css("visibility", "hidden")
+                $("#loading-bar").css("width", "0%")
+            }, 200)
+        })
 }
 
 function populateUserInfo() {
@@ -32,7 +60,25 @@ function populateUserInfo() {
             "Content-Type": "application/json"
         }
     })
-    .then(response => response.json())
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+
+        response.json()
+    })
     .then(data => {
         if (data.success && data.user) {
             document.getElementById('userNom').textContent = data.user.nom;
@@ -49,5 +95,15 @@ function populateUserInfo() {
             console.error(data.error);
         }
     })
-    .catch(err => console.error('Echec de la recuperation des donnees dutilisateur:', err));
+    .catch(err => console.error('Echec de la recuperation des donnees dutilisateur:', err))
+    .finally(() => {
+        loginButton.prop('disabled', false)
+        loginButton.text('Se connecter')
+
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }
