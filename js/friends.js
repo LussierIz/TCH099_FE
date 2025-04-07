@@ -109,11 +109,13 @@ function getFriendRequests() {
     })
     .then(data => {
       const popup = document.querySelector(".widget-item.friend-requests .widget-popup");
+      const requestBtn = document.querySelector(".widget-item.friend-requests .widget-btn");
       popup.innerHTML = ""; // enleve le contenu d'avant
 
       if (data.success && data.requests && data.requests.length > 0) {
         data.requests.forEach(request => {
           const requestDiv = document.createElement("div");
+          requestBtn.classList.add('has-requests');
           requestDiv.classList.add("friend-request-item");
           requestDiv.innerHTML = `
             <p>Demande d'ami de l'utilisateur ${request.id_utilisateur1}</p>
@@ -123,6 +125,7 @@ function getFriendRequests() {
           popup.appendChild(requestDiv);
         });
       } else {
+        requestBtn.classList.remove('has-requests');
         popup.innerHTML = `<p>Aucune demande d'ami</p>`;
       }
     })
