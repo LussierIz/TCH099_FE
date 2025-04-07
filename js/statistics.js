@@ -32,6 +32,33 @@ const getStats = () => {
         if (data.error){throw new Error("Erreur reçue du serveur: " + data.error)}
 
         console.log(data)
+
+        const now = new Date()
+        const startOfWeek = new Date(now)
+        startOfWeek.setDate(now.getDate() - now.getDay())
+        startOfWeek.setHours(0, 0, 0, 0)
+
+        let totalSeconds = 0
+
+        $.each(data, function(_, session) {
+            const sessionDate = new Date(session.date_debut + 'T00:00:00')
+
+            if (sessionDate >= startOfWeek && sessionDate <= now) {
+                const durationParts = session.Duree.split(':')
+                const hours = parseInt(durationParts[0])
+                const minutes = parseInt(durationParts[1])
+                const seconds = parseInt(durationParts[2])
+
+                totalSeconds += (hours * 3600) + (minutes * 60) + seconds
+            } else {
+                console.log("Non dans la semaine: ", session.date_debut)
+            }
+        });
+
+        const totalHours = (totalSeconds / 3600).toFixed(1)
+        $('#weekly-hours .stats-number').text(`${totalHours} hrs`)
+
+        
     })
     .catch(error => {
         console.error("Erreur lors de l'obtention des Messages :", error)

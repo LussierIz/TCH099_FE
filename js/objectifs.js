@@ -96,7 +96,7 @@ function loadObjectifs() {
         return;
     }
 
-    fetch(`http://localhost:8000/api/get-objectif/${user.user_id}`, {
+    fetch(`http://localhost:8000/api/get-objectifs/${user.user_id}`, {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + user.token,
