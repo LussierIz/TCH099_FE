@@ -40,34 +40,45 @@ function createObjective() {
         },
         body: JSON.stringify(newObjective)
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                alert(data.success);
-                // Actualiser la liste des objectifs
-                loadObjectifs();
-                // Réinitialiser le formulaire
-                document.getElementById("objForm").reset();
-            } else if (data.error) {
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            console.error("Erreur lors de la création de l'objectif :", error);
-            alert("Une erreur s'est produite lors de la création de l'objectif.");
-        })
-        .finally(() => {
-            $("#loading-bar").css("width", "100%")
-            setTimeout(() => {
-                $("#loading-bar").css("visibility", "hidden")
-                $("#loading-bar").css("width", "0%")
-            }, 200)
-        })
+            window.location.href = "/html/login.html";
+            throw new Error("Unauthorized"); 
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        if (data.success) {
+            alert(data.success);
+            // Actualiser la liste des objectifs
+            loadObjectifs();
+            // Réinitialiser le formulaire
+            document.getElementById("objForm").reset();
+        } else if (data.error) {
+            alert(data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la création de l'objectif :", error);
+        alert("Une erreur s'est produite lors de la création de l'objectif.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }
 
 // Fonction pour charger les objectifs de l'utilisateur
@@ -88,34 +99,45 @@ function loadObjectifs() {
             "Content-Type": "application/json"
         }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const objectifsContainer = document.getElementById("liste-objectifs");
-            objectifsContainer.innerHTML = "";
-            if (data.success && data.objectifs.length > 0) {
-                data.objectifs.forEach(obj => {
-                    addObjectiveToUI(obj);
-                });
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
             } else {
-                objectifsContainer.innerHTML = "<p>Aucun objectif trouvé.</p>";
+                alert("Erreur d'authentification : " + errorData.error);
             }
-        })
-        .catch(error => {
-            console.error("Erreur lors du chargement des objectifs :", error);
-            alert("Une erreur s'est produite lors du chargement des objectifs.");
-        })
-        .finally(() => {
-            $("#loading-bar").css("width", "100%")
-            setTimeout(() => {
-                $("#loading-bar").css("visibility", "hidden")
-                $("#loading-bar").css("width", "0%")
-            }, 200)
-        })
+            window.location.href = "/html/login.html";
+            throw new Error("Unauthorized"); 
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        const objectifsContainer = document.getElementById("liste-objectifs");
+        objectifsContainer.innerHTML = "";
+        if (data.success && data.objectifs.length > 0) {
+            data.objectifs.forEach(obj => {
+                addObjectiveToUI(obj);
+            });
+        } else {
+            objectifsContainer.innerHTML = "<p>Aucun objectif trouvé.</p>";
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors du chargement des objectifs :", error);
+        alert("Une erreur s'est produite lors du chargement des objectifs.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }
 // Ajouter un objectif à l'interface utilisateur
 function addObjectiveToUI(obj) {
@@ -154,31 +176,42 @@ function deleteObjective(id) {
             "Content-Type": "application/json"
         }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                alert(data.success);
-                // Rafraîchir la liste des objectifs
-                // apres suppression reussite
-                loadObjectifs();
-            } else if (data.error) {
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            console.error("Erreur lors de la suppression de l'objectif :", error);
-            alert("Une erreur s'est produite lors de la suppression de l'objectif.");
-        })
-        .finally(() => {
-            $("#loading-bar").css("width", "100%")
-            setTimeout(() => {
-                $("#loading-bar").css("visibility", "hidden")
-                $("#loading-bar").css("width", "0%")
-            }, 200)
-        })
+            window.location.href = "/html/login.html";
+            throw new Error("Unauthorized"); 
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        if (data.success) {
+            alert(data.success);
+            // Rafraîchir la liste des objectifs
+            // apres suppression reussite
+            loadObjectifs();
+        } else if (data.error) {
+            alert(data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la suppression de l'objectif :", error);
+        alert("Une erreur s'est produite lors de la suppression de l'objectif.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
 }

@@ -84,7 +84,7 @@ const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            return await Promise.reject("Unauthorized");
+            throw new Error("Unauthorized"); 
         }
 
         if (!response.ok) {
@@ -130,7 +130,7 @@ const getNombreSession = () => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            return await Promise.reject("Unauthorized");
+            throw new Error("Unauthorized"); 
         }
 
         if (!response.ok) {

@@ -20,7 +20,7 @@ const getConvo = () => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            return await Promise.reject("Unauthorized");
+            throw new Error("Unauthorized"); 
         }
 
         if (!response.ok) {
@@ -123,7 +123,7 @@ const newConvo = () => {
                 alert("Erreur d'authentification : " + errorData.error);
             }
             window.location.href = "/html/login.html";
-            return await Promise.reject("Unauthorized");
+            throw new Error("Unauthorized"); 
         }
 
         if (!response.ok) {
