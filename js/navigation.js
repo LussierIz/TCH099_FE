@@ -25,7 +25,7 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
-    if(currentPage !== "profile.html"){
+    if(currentPage !== "profile.html" && currentPage !== "login.html"){
         const sidebarManager = new SidebarManager()
         sidebarManager.init()
     }
