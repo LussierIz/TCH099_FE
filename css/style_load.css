@@ -1,0 +1,11 @@
+#loading-bar {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(to right, #f7e268, #FFD700);
+    transition: width 0.15s ease-in-out;
+    z-index: 1005;
+}

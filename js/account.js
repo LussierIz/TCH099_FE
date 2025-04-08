@@ -53,7 +53,7 @@ function generateUsername() {
 }
 
 function populateUserInfo() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'))
     $("#loading-bar").css("visibility", "visible")
     $("#loading-bar").css("width", "50%")
     if (!user || !user.user_id || !user.token) {

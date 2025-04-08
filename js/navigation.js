@@ -337,6 +337,10 @@ $(document).ready(() => {
                 if (checkLoginStatus()) { window.location.href = "/html/conversation.html" } 
                 else { window.location.href = "/html/login.html" }
                 break
+            case "profile-page":
+                if (checkLoginStatus()) { window.location.href = "/html/profile.html" } 
+                else { window.location.href = "/html/login.html" }
+                break
         }
     });
 
