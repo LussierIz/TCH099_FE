@@ -313,7 +313,8 @@ $(document).ready(() => {
                 else { window.location.href = "/html/login.html" }
                 break
             case "calendrier-page":
-                window.location.href = "/html/calendrier.html"
+                if (checkLoginStatus()) { window.location.href = "/html/calendrier.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "login-page":
                 if (checkLoginStatus()) { window.location.href = "/html/login.html" } 

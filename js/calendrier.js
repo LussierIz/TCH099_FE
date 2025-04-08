@@ -315,7 +315,7 @@ let getTache = () => {
     })
     .then(data => {
         console.log(data)
-        addTacheArray(data.taches)
+        if(data.taches){addTacheArray(data.taches)}
     })
     .catch(error => {
         console.error("Erreur lors du chargement des objectifs :", error);
