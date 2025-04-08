@@ -1,88 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astrum</title>
-    <link rel="stylesheet" href="/css/style_index.css">
-    </head>
-<body>
-  <div class="container">
-    <nav>
-        <h1><img src= "/images/stars_logo.png" class="stars"><a href="index.html" id="logo">ASTRUM</a></h1>
-        <ul>
-            <li><a href="index.html">Acceuil</a></li>
-            <li><a href="login.html">Se connecter</a></li>
-            <li><a href="login.html">S'inscrire</a></li>
-        </ul>
-    </div>
-    </nav>
 
-    <div class="content-section content1">
-        <div class="text-content">
-        <h2>Étudiez, collaborez, progressez</h2>
-        <p>Astrum révolutionne votre apprentissage avec des outils intuitifs : 
-            suivi personnalisé de vos sessions d'étude, défis motivants avec vos amis, 
-            espace de notes organisé et messagerie instantanée pour échanger avec votre réseau. 
-            Gagnez des récompenses et transformez chaque effort en victoire !</p>
-        </div>
-        <div class="images-content">
-        <img src="/images/workspace.png" alt="espace travail" class="workspace" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- pour le css -->
+  <link rel="stylesheet" href="/css/style_index.css">
+
+  <!-- Les scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="/js/custom/nodes.js" defer></script>
+  <script defer src="/js/custom/initNodes.js"></script>
+  <title>Astrum</title>
+</head>
+
+<body>
+  <canvas id="nodesCanvas"></canvas>
+
+  <header id="main-header">
+    <nav>
+      <h1>
+        <img src="/images/stars_logo.png" class="stars">
+        <a href="index.html" id="logo">ASTRUM</a>
+      </h1>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="login.html">Se connecter</a></li>
+        <li><a href="login.html">S'inscrire</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div class="content-section content1">
+    <div class="text-content">
+      <h2>Étudiez, collaborez, progressez</h2>
+      <p>Astrum révolutionne votre apprentissage avec des outils intuitifs :
+        suivi personnalisé de vos sessions d'étude, défis motivants avec vos amis,
+        espace de notes organisé et messagerie instantanée pour échanger avec votre réseau.
+        Gagnez des récompenses et transformez chaque effort en victoire !</p>
+    </div>
+    <div class="images-content">
+      <img src="/images/workspace.png" alt="espace travail" class="workspace">
     </div>
   </div>
 
   <div class="content-section content2">
     <div class="text-content">
-    <h2>Fonctionnalités</h2>
-    <p class="fonctionalite">Astrum propose un suivi personnalisé des heures d'étude via un minuteur, 
-        des défis interactifs pour stimuler la productivité, 
-        et des récompenses pour célébrer les progrès. Les utilisateurs peuvent également interagir avec leurs amis, 
-        envoyer des encouragements et participer à des compétitions amicales, 
+      <h2>Fonctionnalités</h2>
+      <p class="fonctionalite">Astrum propose un suivi personnalisé des heures d'étude via un minuteur,
+        des défis interactifs pour stimuler la productivité,
+        et des récompenses pour célébrer les progrès. Les utilisateurs peuvent également interagir avec leurs amis,
+        envoyer des encouragements et participer à des compétitions amicales,
         rendant l'apprentissage à la fois engageant et social.</p>
     </div>
     <div class="images-content">
-        <img src="/images/illustration.png" alt="espace travail" class="features">
+      <img src="/images/illustration.png" alt="espace travail" class="features">
     </div>
   </div>
 
   <div class="content-section content3">
     <div class="text-content">
-    <h2>Prenez des notes et organisez votre étude</h2>
-    <p class="bloc-notes">Astrum offre également un espace dédié à la prise de notes, 
-        permettant aux étudiants d'organiser leurs idées et leurs cours dans un bloc-notes intégré. 
-        Ils peuvent créer, modifier et classer leurs notes facilement, pour un accès rapide et 
+      <h2>Prenez des notes et organisez votre étude</h2>
+      <p class="bloc-notes">Astrum offre également un espace dédié à la prise de notes,
+        permettant aux étudiants d'organiser leurs idées et leurs cours dans un bloc-notes intégré.
+        Ils peuvent créer, modifier et classer leurs notes facilement, pour un accès rapide et
         une meilleure gestion de leur apprentissage. Cette fonctionnalité complète l'expérience d'étude
         en centralisant toutes les ressources au même endroit, pour une productivité optimale.</p>
     </div>
     <div class="images-content">
-        <img src="/images/blocnote.png" alt="espace travail" class="notes">
-  </div>
+      <img src="/images/blocnote.png" alt="espace travail" class="notes">
     </div>
+  </div>
 
   <div class="content-section content4">
     <div class="text-content">
-    <h2>Collaborez et motivez-vous en équipe avec Astrum</h2>
-    <p class="teamwork">Astrum facilite le travail en groupe en permettant aux étudiants de former des équipes, 
-        de partager leurs objectifs et de suivre leurs progrès collectifs. 
-        Grâce aux défis personnalisables, les membres peuvent se lancer des challenges stimulants, 
-        comme atteindre un nombre d'heures d'étude ou compléter des tâches spécifiques. 
-        Cette dimension collaborative renforce l'engagement et transforme l'apprentissage en une aventure motivante et solidaire.</p>
+      <h2>Collaborez et motivez-vous en équipe avec Astrum</h2>
+      <p class="teamwork">Astrum facilite le travail en groupe en permettant aux étudiants de former des équipes,
+        de partager leurs objectifs et de suivre leurs progrès collectifs.
+        Grâce aux défis personnalisables, les membres peuvent se lancer des challenges stimulants,
+        comme atteindre un nombre d'heures d'étude ou compléter des tâches spécifiques.
+        Cette dimension collaborative renforce l'engagement et transforme l'apprentissage en une aventure motivante et
+        solidaire.</p>
     </div>
     <div class="images-content">
-        <img src="/images/Teamwork.png" alt="espace travail" class="team">
-  </div>
+      <img src="/images/Teamwork.png" alt="espace travail" class="team">
     </div>
+  </div>
 
   <div class="content-section content5">
     <div class="text-content">
-    <h2>L'aspect social et motivant</h2>
-    <p class="messagerie">Astrum propose un espace de discussion convivial où les étudiants peuvent échanger des messages avec leurs amis pour s'encourager mutuellement ou 
-        planifier des sessions de travail. Les tuteurs ont également accès à ce chat pour guider leurs élèves, répondre à leurs questions et leur proposer 
-        des défis stimulants. Cette messagerie instantanée crée un environnement d'étude interactif et soutenant, parfait pour progresser ensemble.</p>
+      <h2>L'aspect social et motivant</h2>
+      <p class="messagerie">Astrum propose un espace de discussion convivial où les étudiants peuvent échanger des
+        messages avec leurs amis pour s'encourager mutuellement ou
+        planifier des sessions de travail. Les tuteurs ont également accès à ce chat pour guider leurs élèves, répondre
+        à leurs questions et leur proposer
+        des défis stimulants. Cette messagerie instantanée crée un environnement d'étude interactif et soutenant,
+        parfait pour progresser ensemble.</p>
     </div>
     <div class="images-content">
-        <img src="/images/message.png" alt="espace travail" class="messages">
-  </div>
+      <img src="/images/message.png" alt="espace travail" class="messages">
     </div>
+  </div>
+
+  <div class="contributors-section">
+    <h2>Nos contributeurs</h2>
+    <div class="contributor-marquee">
+      <div class="contributors-items">
+        <span class="contributor-item">Izak Lussier</span>
+        <span class="contributor-item">Jiayi Xu</span>
+        <span class="contributor-item">Jerome de Grace</span>
+        <span class="contributor-item">Ouerdia Choubane</span>
+
+        <span class="contributor-item">Izak Lussier</span>
+        <span class="contributor-item">Jiayi Xu</span>
+        <span class="contributor-item">Jerome de Grace</span>
+        <span class="contributor-item">Ouerdia Choubane</span>
+      </div>
+
+    </div>
+  </div>
+  <footer>
+    <!-- rien pr linstant -->
+  </footer>
 </body>
 </html>

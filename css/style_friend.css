@@ -181,3 +181,15 @@
 .widget-popup button:hover {
     background: #e6c200;
  }
+
+ .widget-btn.has-requests::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    border-radius: 50%;
+    border: 2px solid rgba(11, 15, 44, 0.95);
+  }

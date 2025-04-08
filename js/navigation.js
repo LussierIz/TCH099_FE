@@ -140,6 +140,7 @@ $(document).ready(() => {
         }
       
         getFriendList();
+        getFriendRequests();
     }
 
     if (currentPage === "login.html"){
