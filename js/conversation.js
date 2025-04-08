@@ -126,6 +126,12 @@ const newConvo = () => {
             return await Promise.reject("Unauthorized");
         }
 
+        if (response.status === 403) {
+            const errorData = await response.json();
+            alert(errorData.error);
+            location.reload();
+        }
+
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }
@@ -137,7 +143,6 @@ const newConvo = () => {
     })
     .catch(error => {
         console.error("Erreur lors de la création :", error);
-        alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {
         newChatButton.prop('disabled', false).text('Ajouter')

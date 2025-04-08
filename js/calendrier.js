@@ -238,6 +238,7 @@ let createTache = (tache) => {
     $("#loading-bar").css("visibility", "visible")
     $("#loading-bar").css("width", "50%")
 
+    tache.id_utilisateur = user.user_id 
     tacheData = tache
 
     console.log(tacheData)
@@ -263,7 +264,7 @@ let createTache = (tache) => {
         }
 
         if (!response.ok) {
-            const errorData = await response.json(); // Récupérer l'erreur depuis la réponse JSON
+            const errorData = await response.json();
             throw new Error(`Erreur HTTP : ${response.status}, Message: ${errorData.error || 'Erreur inconnue'}`);
         }
     })
