@@ -1,17 +1,16 @@
 //initialisation de nodes.js
-//jiayi xu
 var nodesjs = new NodesJs({
     id: "nodesCanvas",
     width: window.innerWidth,
     height: window.innerHeight,
-    number: 100,
+    number: 120,
     particleSize: 2,
-    lineSize: 1,
-    particleColor: [255, 255, 255, 0.3],
-    lineColor: "255,255,255",
-    backgroundFrom: [10, 25, 100],
-    backgroundTo: [25, 50, 150],
-    backgroundDuration: 5000,
+    lineSize: 2,
+    particleColor: [20, 20, 20, 1],
+    lineColor: "200,210,255", 
+    backgroundFrom: [245, 245, 245],
+    backgroundTo: [230, 230, 230],
+    backgroundDuration: 3000,
     speed: 20,
     pointerCircleRadius: 150,
 });
