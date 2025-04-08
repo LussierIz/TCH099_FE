@@ -25,7 +25,7 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
-    if(currentPage !== "profile.html"){
+    if(currentPage !== "profile.html" && currentPage !== "login.html"){
         const sidebarManager = new SidebarManager()
         sidebarManager.init()
     }
@@ -314,7 +314,8 @@ $(document).ready(() => {
                 else { window.location.href = "/html/login.html" }
                 break
             case "calendrier-page":
-                window.location.href = "/html/calendrier.html"
+                if (checkLoginStatus()) { window.location.href = "/html/calendrier.html" } 
+                else { window.location.href = "/html/login.html" }
                 break
             case "login-page":
                 if (checkLoginStatus()) { window.location.href = "/html/login.html" } 
@@ -334,6 +335,10 @@ $(document).ready(() => {
                 break
             case "conversation-page":
                 if (checkLoginStatus()) { window.location.href = "/html/conversation.html" } 
+                else { window.location.href = "/html/login.html" }
+                break
+            case "profile-page":
+                if (checkLoginStatus()) { window.location.href = "/html/profile.html" } 
                 else { window.location.href = "/html/login.html" }
                 break
         }
