@@ -280,7 +280,7 @@ let afficherTachesParObjectif = (titreObjectif) => {
                     (à remettre pour le <em>${t.date_fin}</em>${estEnRetard && t.statut !== "complété" ? " ⚠️ En retard" : ""})
                 </span><br>
                 <em style="color: ${couleur}">Statut : ${t.statut}</em><br>
-                ${t.statut !== "complété" ? `<button onclick="completerTache(${t.id_tache})">Marquer comme complété</button>` : ""}
+                ${t.statut !== "complété" ? `<button onclick="showConfirmationModal(${t.id_tache})">Marquer comme complété</button>` : ""}
             </div>
         `)
     })
@@ -405,6 +405,22 @@ let getTache = () => {
     })
 }
 
+function showConfirmationModal(tacheId) {
+    const modal = document.getElementById('confirmationModal')
+    const confirmButton = document.getElementById('confirmButton')
+    const cancelButton = document.getElementById('cancelButton')
+    modal.style.display = 'flex'
+
+    confirmButton.onclick = function() {
+        completerTache(tacheId)
+        modal.style.display = 'none'
+    };
+
+    cancelButton.onclick = function() {
+        modal.style.display = 'none'
+    };
+}
+
 function completerTache(tacheId) {
     const user = JSON.parse(localStorage.getItem("user"))
 
@@ -417,7 +433,7 @@ function completerTache(tacheId) {
             "Authorization": "Bearer " + user.token,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ tache_id: tacheId })
+        body: JSON.stringify({ tache_id: tacheId, id_utilisateur: user.user_id })
     })
     .then(async response => {
         if (response.status === 401) {
