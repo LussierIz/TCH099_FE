@@ -362,6 +362,11 @@ $(document).ready(() => {
                 if (checkLoginStatus()) { window.location.href = "/html/profile.html" } 
                 else { window.location.href = "/html/login.html" }
                 break
+            case "Devoirs-page":
+                if (checkLoginStatus()) { window.location.href = "/html/Devoirs.html" } 
+                else { window.location.href = "/html/login.html" }
+                break
+    
         }
     });
 
