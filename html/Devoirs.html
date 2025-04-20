@@ -1,0 +1,172 @@
+Devoirs.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- pour le css -->
+    <link rel="stylesheet" href="/css/style_sidebar.css">
+    <link rel="stylesheet" href="/css/style_general.css">
+    <link rel="stylesheet" href="/css/style_devoirs.css">
+    <link rel="stylesheet" href="/css/style_load.css">
+    <!-- Les scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="/js/sidebar.js"></script>
+    <script defer src="/js/navigation.js"></script>
+    <script defer src="/js/connexion.js"></script>
+    <script defer src="/js/account.js"></script>
+    <script defer src="/js/devoirs.js"></script>
+    <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
+    <title>Devoirs</title>
+</head>
+<body>
+    <div id="loading-bar"></div>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="/images/star-logo-tr.png" class="logo" alt="Astrum">
+            <h1 class="sidebar-title">Astrum</h1>
+        </div>
+
+        <div class="sidebar-bar">
+            <button class="sidebar-toggle">◄</button>
+
+            <button class="nav-item" data-section="Devoirs" id="Devoirs-page">
+                <span class="nav-icon">📚</span>
+                <span class="nav-text">Devoirs</span>
+            </button>
+            
+            <button class="nav-item" data-section="Accueil" id="Accueil-page">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Accueil</span>
+            </button>
+
+            <button class="nav-item" data-section="calendar" id="calendrier-page">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Calendrier</span>
+            </button>
+
+            <button class="nav-item" data-section="objectifs" id="objectifs-page">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">Objectifs</span>
+                <span class="xp-badge">XP: 250</span>
+            </button>
+    
+            <button class="nav-item" data-section="stats" id="statistiques-page">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Statistiques</span>
+            </button>
+            
+            <button class="nav-item" data-section="" id="friend-page">
+                <span class="nav-icon">😺</span>
+                <span class="nav-text">Friends</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="bloc-note-page">
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">Bloc-Note</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="login-page">
+                <span class="nav-icon">🔑</span>
+                <span class="nav-text">login</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="boutique-page">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-text">boutique</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="etude-page">
+                <span class="nav-icon">🎓</span>
+                <span class="nav-text">Étude</span>
+            </button>
+
+            <button class="nav-item" data-section="" id="conversation-page">
+                <span class="nav-icon">💬</span>
+                <span class="nav-text">Messages</span>
+            </button>
+            
+            <button class="nav-item" data-section="" id="profile-page">
+                <span class="nav-icon">😎</span>
+                <span class="nav-text">Profile</span>
+            </button>
+    
+            <!-- <div class="sidebar-footer">
+                <div class="level-progress">
+                    <div class="progress-bar" style="width: 65%"></div>
+                    <span>Niveau 3</span>
+                </div>
+            </div> -->
+        </div>
+
+    </nav>
+
+    <div class="main-container">
+        <header class="top-header">
+            <div class="user-info">
+                <div class="avatar"></div>
+                <span>Salut, <strong id="username"></strong></span>
+            </div>
+            <div class="coins-xp">
+                <div class="coins">
+                    <i class="fas fa-coins"></i>
+                    <span>1200</span>
+                </div>
+                <div class="xp">
+                    <i class="fas fa-star"></i>
+                    <span>LVL 5</span>
+                </div>
+            </div>
+        </header>
+        <div class="devoirs-container">
+            <h1>Gestion des Devoirs</h1>
+            
+            <div class="devoirs-liste">
+                <h2>Mes devoirs créés</h2>
+                <div id="devoirs-list" class="devoirs-grid">
+                    <!-- Les devoirs seront chargés ici dynamiquement -->
+                </div>
+            </div>
+    
+            <div class="devoirs-ajout">
+                <div class="titre-devoirs">
+                    <img src="/images/star-logo-tr.png" class="logo" alt="Astrum Logo">
+                    <h2>Nouveau Devoir</h2>
+                </div>
+                
+                <div class="devoir-form">
+                    <form id="devoir-form">
+                        <div class="input-group">
+                            <label for="titre"><span class="star-icon">✦</span>Titre du devoir *</label>
+                            <input type="text" id="titre" name="titre" required 
+                                   placeholder="Ex: Exercices de mathématiques">
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="description"><span class="star-icon">✦</span>Description</label>
+                            <textarea id="description" name="description" rows="5"
+                                      placeholder="Détails du devoir..."></textarea>
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="date_limite"><span class="star-icon">✦</span>Date limite</label>
+                            <input type="date" id="date_limite" name="date_limite">
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="fichiers"><span class="star-icon">✦</span>Pièces jointes</label>
+                            <input type="file" id="fichiers" name="fichiers" multiple>
+                        </div>
+            
+                        <button type="submit" class="btn-devoir" id="submit-btn">
+                            <span class="star-pulse">✧</span> Créer le devoir
+                            <div class="star-trail"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
