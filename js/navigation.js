@@ -180,8 +180,27 @@ $(document).ready(() => {
     if (currentPage === "conversation.html"){
         $("#conversation-page").addClass("active")
         generateUsername()
-        userID()
         getConvo()
+
+        let searchTimeout;
+
+    $('#search-chat').on('input', function () {
+        clearTimeout(searchTimeout)
+        const terme = $(this).val()
+
+        searchTimeout = setTimeout(() => {
+            rechercherConversations(terme);
+        }, 1000)
+    })
+
+    $('#search-chat').on('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            clearTimeout(searchTimeout)
+            const terme = $(this).val()
+            rechercherConversations(terme)
+        }
+    })
 
         /**
          * Gestion du clic sur le bouton "Afficher/Masquer les tâches".
@@ -260,6 +279,7 @@ $(document).ready(() => {
         $("#montre-tache").click(() => {
             $(".ajout-Tache").toggleClass("show")
             $(".calendrier").toggleClass("hidden")
+            $(".objectif-section").toggleClass("hidden")
         })
 
         /**
@@ -271,6 +291,7 @@ $(document).ready(() => {
             event.preventDefault()
             $(".ajout-Tache").removeClass("show")
             $(".calendrier").removeClass("hidden")
+            $(".objectif-section").removeClass("hidden")
         })
 
         /**

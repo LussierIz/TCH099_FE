@@ -31,7 +31,7 @@ const tacheExemple = {
  * Tableau contenant la liste des tâches.
  * Chaque tâche est représentée sous forme d'objet avec ses propriétés.
  */
-const tblTache = []
+let tblTache = []
 
 // Énumération pour représenter les jours de la semaine
 const DaysOfWeek = Object.freeze({
@@ -216,20 +216,89 @@ let ajoutForm = () => {
  * @param {string} tache.date_fin - La date de la tâche au format "YYYY-MM-DD"
  */
 let addTache = (tache) => {
-    let taskElement = $(`<div class="task"><li>${tache.titre}</li></div>`)
+    const today = new Date()
+    const tacheDate = new Date(tache.date_fin)
+    const isPast = tacheDate < today.setHours(0, 0, 0, 0)
+
+    let couleur = "white"
+    if (tache.statut === "complété") {
+        couleur = "lightblue"
+    } else if (tache.statut === "En cours" && isPast) {
+        couleur = "red"
+    } else if (tache.statut === "En cours" && !isPast) {
+        couleur = "white"
+    }
+
+    let taskElement = $(`<div class="task" style="color: ${couleur};"><li>${tache.titre}</li></div>`)
     $(`#day-${tache.date_fin}`).append(taskElement)
 }
 
 /**
  * Ajoute toutes les tâches du tableau `tblTache` au calendrier.
  * 
- * @param {Array<Object>} tblTache - Tableau contenant toutes les tâches
+ * @param {Array<Object>} tblTacheInput - Tableau contenant toutes les tâches
  */
-let addTacheArray = (tblTache) => {
+let addTacheArray = (tblTacheInput) => {
     // Vider le calendrier avant de le mettre à jour pour éviter les doublons
     $(".task").remove()
+    // Ajouter toute les taches dans le tableau
+    tblTache = tblTacheInput
     // Ajouter chaque tâche dans le calendrier
     tblTache.forEach(tache => addTache(tache))
+}
+
+let afficherTachesParObjectif = (titreObjectif) => {
+    const tachesFiltrees = tblTache.filter(t => t.objectif_titre === titreObjectif)
+
+    const container = $("#taches-par-objectif")
+    container.empty()
+
+    if (tachesFiltrees.length === 0) {
+        container.html("<p>Aucune tâche pour cet objectif.</p>")
+        return
+    }
+
+    const today = new Date()
+
+    tachesFiltrees.forEach(t => {
+        const dateFin = new Date(t.date_fin)
+        const estEnRetard = dateFin < today.setHours(0, 0, 0, 0)
+
+        let couleur = "white"
+        if (t.statut === "complété") {
+            couleur = "lightblue"
+        } else if (t.statut === "En cours" && estEnRetard) {
+            couleur = "red"
+        } else if (t.statut === "En cours" && !estEnRetard) {
+            couleur = "white"
+        }
+
+        container.append(`
+            <div class="tache-item" style="border-left: 4px solid ${couleur}; padding: 10px; margin-bottom: 10px;">
+                <strong style="color: ${couleur}">${t.titre}</strong><br>
+                <span style="color: ${couleur}">
+                    (à remettre pour le <em>${t.date_fin}</em>${estEnRetard && t.statut !== "complété" ? " ⚠️ En retard" : ""})
+                </span><br>
+                <em style="color: ${couleur}">Statut : ${t.statut}</em><br>
+                ${t.statut !== "complété" ? `<button onclick="completerTache(${t.id_tache})">Marquer comme complété</button>` : ""}
+            </div>
+        `)
+    })
+}
+
+let afficherObjectifs = (objectifs) => {
+    const container = $("#objectif-liste")
+    container.empty()
+
+    objectifs.forEach(obj => {
+        const card = $(`
+            <div class="objectif-card" data-titre="${obj.titre}">
+                <h4>${obj.titre}</h4>
+            </div>
+        `)
+        card.on("click", () => afficherTachesParObjectif(obj.titre))
+        container.append(card)
+    })
 }
 
 let createTache = (tache) => {
@@ -317,6 +386,7 @@ let getTache = () => {
     .then(data => {
         console.log(data)
         if(data.taches){addTacheArray(data.taches)}
+        afficherObjectifs(data.objectifs)
     })
     .catch(error => {
         console.error("Erreur lors du chargement des objectifs :", error);
@@ -325,6 +395,56 @@ let getTache = () => {
         }
 
         alert("Une erreur est survenue, veuillez réessayer.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
+}
+
+function completerTache(tacheId) {
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
+    fetch("http://localhost:8000/api/set-statut", {
+        method: "PUT",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ tache_id: tacheId })
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json()
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.")
+            } else {
+                alert("Erreur d'authentification : " + errorData.error)
+            }
+            window.location.href = "/html/login.html"
+            return await Promise.reject("Unauthorized")
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+
+        return response.json()
+    })
+    .then(data => {
+        console.log("Tâche mise à jour :", data)
+        window.location.reload()
+    })
+    .catch(error => {
+        console.error("Erreur lors de la mise à jour :", error)
+        if (error === "Unauthorized") return
+        alert("Une erreur est survenue, veuillez réessayer.")
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

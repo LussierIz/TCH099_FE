@@ -50,6 +50,11 @@
     align-items: center;
 }
 
+.chat-info-container p {
+    margin-top: 0;
+    font-size: larger;
+}
+
 .chat-search {
     width: 40%;
     padding: 10px;

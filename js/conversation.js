@@ -154,6 +154,66 @@ const newConvo = () => {
     })
 }
 
+const rechercherConversations = (terme) => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (!user || !terme.trim()) {
+        getConvo()
+        return
+    }
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
+    fetch(`http://localhost:8000/api/convo/search/${user.user_id}?q=${encodeURIComponent(terme)}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const chatList = $('.chat-list')
+        chatList.empty()
+
+        if (!data.conversations || data.conversations.length === 0) {
+            chatList.append('<li>Aucune conversation trouvée</li>')
+            return
+        }
+
+        data.conversations.flat().forEach(convo => {
+            const listItem = $('<li></li>');
+            const button = $('<button></button>')
+                .addClass('chat-item')
+                .attr('data-id', convo.id_chat)
+
+            const chatName = $('<span></span>')
+                .addClass('chat-name')
+                .text(convo.chat_name || "Unnamed Conversation")
+
+            const chatDate = $('<span></span>')
+                .addClass('chat-date')
+                .text(formatDate(convo.date))
+
+            button.append(chatName, chatDate)
+            listItem.append(button)
+            chatList.append(listItem)
+        })
+
+        addEventConvo()
+    })
+    .catch(error => {
+        console.error("Erreur de recherche :", error);
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%");
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden");
+            $("#loading-bar").css("width", "0%");
+        }, 200)
+    })
+}
+
 const addEventConvo = () => {
     $(".chat-item").off("click").on("click", function() {
         const convoID = $(this).data('id')
@@ -169,13 +229,4 @@ const formatDate = (dateString) => {
     }
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return date.toLocaleDateString('fr-FR', options)
-}
-
-const userID = () => {
-    const user = JSON.parse(localStorage.getItem("user"))
-    if (user && user.user_id) {
-        $('#user-id').text("Voici votre id pour créer une conversation : " + user.user_id);
-    } else {
-        $('#user-id').text("Voici votre id pour créer une conversation : Utilisateur non connecté");
-    }
 }
