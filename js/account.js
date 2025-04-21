@@ -139,3 +139,30 @@ function populateUserInfo() {
         }, 200)
     })
 }
+
+function updateBalancesDisplay({coins, xpTotal}) {
+    const coinSpan = document.querySelector(".coins-xp .coins span");
+    if (coinSpan) coinSpan.textContent = coins;
+  
+    const xpSpan = document.querySelector(".coins-xp .xp span");
+    if (xpSpan) {
+      // par exemple "LV 5" reste inchangé ici, mais si tu voulais mettre xpTotal :
+      // xpSpan.textContent = `XP ${xpTotal}`
+    }
+  
+    // si la page profil est présente
+    const userCoinsEl = document.getElementById("userCoins");
+    if (userCoinsEl) userCoinsEl.textContent = coins;
+  
+    // const userXPEl = document.getElementById("userXP");
+    // if (userXPEl) {
+    //   const xpForLevel = xpTotal % 60;
+    //   userXPEl.textContent = `${xpForLevel} / 60`;
+    // }
+  
+    // const userLevelEl = document.getElementById("userLevel");
+    // if (userLevelEl) {
+    //   const level = Math.floor(xpTotal / 60);
+    //   userLevelEl.textContent = level;
+    // }
+  }
