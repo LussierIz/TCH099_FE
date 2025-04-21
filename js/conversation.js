@@ -230,3 +230,200 @@ const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return date.toLocaleDateString('fr-FR', options)
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnVoirDevoirs = document.getElementById('btn-voir-devoirs');
+    const btnMasquerDevoirs = document.getElementById('btn-masquer-devoirs');
+    const listeDevoirs = document.getElementById('liste-devoirs');
+
+    if (btnVoirDevoirs) {
+        btnVoirDevoirs.addEventListener('click', function() {
+            loadDevoirsRecus();
+            btnVoirDevoirs.style.display = 'none';
+            btnMasquerDevoirs.style.display = 'inline-block';
+        });
+    }
+
+    if (btnMasquerDevoirs) {
+        btnMasquerDevoirs.addEventListener('click', function() {
+            listeDevoirs.innerHTML = '';
+            btnMasquerDevoirs.style.display = 'none';
+            btnVoirDevoirs.style.display = 'inline-block';
+        });
+    }
+});
+
+// Modifiez la fonction loadDevoirsRecus pour gérer le bouton masquer
+function loadDevoirsRecus() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user?.user_id) {
+        console.error("Utilisateur non connecté");
+        return;
+    }
+
+    const section = document.getElementById('liste-devoirs');
+    section.innerHTML = '<p>Chargement des devoirs...</p>';
+
+    fetch(`http://localhost:8000/api/get-devoirs-recus/${user.user_id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Erreur serveur");
+        }
+        return response.json();
+    })
+    .then(data => {
+        section.innerHTML = '';
+
+        if (data.success && data.devoirs?.length > 0) {
+            data.devoirs.forEach(devoir => {
+                addDevoirRecuToUI(devoir, section);
+            });
+        } else {
+            section.innerHTML = '<p class="no-devoirs">Aucun devoir reçu.</p>';
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        section.innerHTML = `<p class="error-msg">Erreur lors du chargement: ${error.message}</p>`;
+    });
+}
+
+function loadDevoirsRecus() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user?.user_id) {
+        console.error("Utilisateur non connecté");
+        return;
+    }
+
+    // Afficher un indicateur de chargement
+    const section = document.getElementById('liste-devoirs');
+    section.innerHTML = '<p>Chargement des devoirs...</p>';
+
+    fetch(`http://localhost:8000/api/get-devoirs-recus/${user.user_id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Erreur serveur");
+        }
+        return response.json();
+    })
+    .then(data => {
+        section.innerHTML = '';
+
+        if (data.success && data.devoirs?.length > 0) {
+            data.devoirs.forEach(devoir => {
+                addDevoirRecuToUI(devoir, section);
+            });
+        } else {
+            section.innerHTML = '<p class="no-devoirs">Aucun devoir reçu.</p>';
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        section.innerHTML = `<p class="error-msg">Erreur lors du chargement: ${error.message}</p>`;
+    });
+}
+
+function addDevoirRecuToUI(devoir, container) {
+    const card = document.createElement("div");
+    card.classList.add("devoir-card");
+    card.setAttribute("data-id", devoir.id_devoir);
+
+    // On tronque la description si elle est trop longue
+    const shortDescription = devoir.description.length > 150 
+        ? devoir.description.substring(0, 150) + '...' 
+        : devoir.description;
+
+    card.innerHTML = `
+        <div class="devoir-header">
+            <h3>${devoir.titre}</h3>
+            <button class="devoir-toggle">▼</button>
+        </div>
+        <div class="devoir-content">
+            <p class="devoir-description">
+                <span class="short-text">${shortDescription}</span>
+                ${devoir.description.length > 150 ? `<span class="full-text" style="display:none">${devoir.description}</span>` : ''}
+            </p>
+            <div class="devoir-meta">
+                <span class="goal-deadline">Pour le: ${new Date(devoir.date_limite).toLocaleDateString('fr-FR')}</span>
+                <span class="goal-deadline">De: ${devoir.nom_tuteur || "Tuteur inconnu"}</span>
+            </div>
+            ${devoir.description.length > 150 ? '<button class="btn-voir-plus">Voir plus</button>' : ''}
+        </div>
+    `;
+    if (devoir.description.length > 150) {
+        const btnVoirPlus = card.querySelector('.btn-voir-plus');
+        const shortText = card.querySelector('.short-text');
+        const fullText = card.querySelector('.full-text');
+
+        btnVoirPlus.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            if (shortText.style.display === 'none') {
+                shortText.style.display = 'inline';
+                fullText.style.display = 'none';
+                btnVoirPlus.textContent = 'Voir plus';
+            } else {
+                shortText.style.display = 'none';
+                fullText.style.display = 'inline';
+                btnVoirPlus.textContent = 'Voir moins';
+            }
+        });
+    }
+
+    // Gestion du toggle pour la carte entière
+    const toggleBtn = card.querySelector(".devoir-toggle");
+    toggleBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        card.classList.toggle("expanded");
+        
+        // Gestion de l'overlay
+        const overlay = document.querySelector('.devoir-overlay');
+        if (card.classList.contains("expanded")) {
+            const newOverlay = document.createElement("div");
+            newOverlay.classList.add("devoir-overlay");
+            document.body.appendChild(newOverlay);
+            document.body.style.overflow = 'hidden';
+            
+            newOverlay.addEventListener("click", function() {
+                card.classList.remove("expanded");
+                newOverlay.remove();
+                document.body.style.overflow = '';
+            });
+        } else if (overlay) {
+            overlay.remove();
+            document.body.style.overflow = '';
+        }
+    });
+
+    container.appendChild(card);
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    if (user?.statut === 'tuteur') {
+        const devoirSection = document.getElementById('devoirs-section');
+        if (devoirSection) {
+            devoirSection.style.display = 'none';
+        }
+    }
+
+    const btnVoirDevoirs = document.getElementById('btn-voir-devoirs');
+    
+    btnVoirDevoirs.addEventListener('click', function() {
+        loadDevoirsRecus(); 
+    });
+});
