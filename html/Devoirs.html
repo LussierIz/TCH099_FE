@@ -6,16 +6,17 @@
     <!-- pour le css -->
     <link rel="stylesheet" href="/css/style_sidebar.css">
     <link rel="stylesheet" href="/css/style_general.css">
-    <link rel="stylesheet" href="/css/style_messages.css">
+    <link rel="stylesheet" href="/css/style_devoirs.css">
     <link rel="stylesheet" href="/css/style_load.css">
     <!-- Les scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/sidebar.js"></script>
     <script defer src="/js/navigation.js"></script>
     <script defer src="/js/connexion.js"></script>
-    <script defer src="/js/message.js"></script>
     <script defer src="/js/account.js"></script>
-    <title>Document</title>
+    <script defer src="/js/devoirs.js"></script>
+    <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
+    <title>Devoirs</title>
 </head>
 <body>
     <div id="loading-bar"></div>
@@ -96,6 +97,7 @@
                 </div>
             </div> -->
         </div>
+
     </nav>
 
     <div class="main-container">
@@ -115,13 +117,53 @@
                 </div>
             </div>
         </header>
-
-        <div class="messages-container">
-        </div>
-
-        <div class="input-container">
-            <input type="text" class="message-input" id="message-text" placeholder="Écrivez votre message...">
-            <button class="send-btn">Envoyer</button>
+        <div class="devoirs-container">
+            <h1>Gestion des Devoirs</h1>
+            
+            <div class="devoirs-liste">
+                <h2>Mes devoirs créés</h2>
+                <div id="devoirs-list" class="devoirs-grid">
+                    <!-- Les devoirs seront chargés ici dynamiquement -->
+                </div>
+            </div>
+    
+            <div class="devoirs-ajout">
+                <div class="titre-devoirs">
+                    <img src="/images/star-logo-tr.png" class="logo" alt="Astrum Logo">
+                    <h2>Nouveau Devoir</h2>
+                </div>
+                
+                <div class="devoir-form">
+                    <form id="devoir-form">
+                        <div class="input-group">
+                            <label for="titre"><span class="star-icon">✦</span>Titre du devoir *</label>
+                            <input type="text" id="titre" name="titre" required 
+                                   placeholder="Ex: Exercices de mathématiques">
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="description"><span class="star-icon">✦</span>Description</label>
+                            <textarea id="description" name="description" rows="5"
+                                      placeholder="Détails du devoir..."></textarea>
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="date_limite"><span class="star-icon">✦</span>Date limite</label>
+                            <input type="date" id="date_limite" name="date_limite">
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="fichiers"><span class="star-icon">✦</span>Pièces jointes</label>
+                            <input type="file" id="fichiers" name="fichiers" multiple>
+                        </div>
+            
+                        <button type="submit" class="btn-devoir" id="submit-btn">
+                            <span class="star-pulse">✧</span> Créer le devoir
+                            <div class="star-trail"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>

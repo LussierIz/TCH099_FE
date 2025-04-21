@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body, .devoirs-container, .devoir-card, .devoir-form {
+    font-family: 'Inter', sans-serif;
+}
+/* Style général */
+.devoirs-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.devoirs-container h1 {
+    width: 100%;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Section liste des devoirs */
+.devoirs-liste {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.devoirs-liste h2 {
+    color: #ffd700;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.devoirs-grid {
+    display: grid;
+    gap: 15px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.devoirs-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.devoirs-grid::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 3px;
+}
+
+/* Section formulaire */
+.devoirs-ajout {
+    flex: 1;
+    min-width: 350px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.titre-devoirs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.titre-devoirs h2 {
+    color: #ffd700;
+    font-size: 1.5rem;
+}
+
+.titre-devoirs .logo {
+    width: 30px;
+    height: 30px;
+}
+
+/* Formulaire */
+.devoir-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    color: #ffd700;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.star-icon {
+    color: #ffd700;
+    font-size: 1.1rem;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+}
+
+.input-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input-group input[type="file"] {
+    padding: 8px;
+}
+
+/* Bouton */
+.btn-devoir {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: whitesmoke;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.btn-devoir:hover {
+    background: linear-gradient(135deg, #2980b9, #1a252f);
+    transform: translateY(-2px);
+}
+
+.star-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+.star-trail {
+    position: absolute;
+    background: rgba(255, 215, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    transition: all 0.3s;
+}
+
+.btn-devoir:hover .star-trail {
+    left: 100%;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+    .devoirs-container {
+        flex-direction: column;
+    }
+    
+    .devoirs-liste,
+    .devoirs-ajout {
+        min-width: 100%;
+    }
+}
+/* Style général des cartes de devoirs */
+.devoir-card {
+    background-color: whitesmoke;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    max-height: 150px;
+    transition: max-height 0.5s ease, transform 0.3s ease;
+}
+
+.devoir-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Style du titre */
+.devoir-card h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Style de la description */
+.devoir-card p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Style de la date limite */
+.devoir-card .goal-deadline {
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #dd1c07;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.devoir-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+}
+
+.btn-share {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-share:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Style du bouton Supprimer */
+.devoir-card .btn-delete {
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.devoir-card .btn-delete:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+}
+
+.devoir-card .btn-delete:active {
+    transform: translateY(0);
+}
+
+.devoir-card .btn-delete::before {
+    content: "🗑️́"; /* Icône de poubelle */
+    font-size: 1rem;
+}
+.devoir-card .btn-share::before {
+    content: "✉️́"; /* Icône de poubelle */
+    font-size: 1rem;
+}
+
+/* Style pour les états urgents (optionnel) */
+.devoir-card.urgent {
+    border-left-color: #ff6b6b;
+}
+
+.devoir-card.urgent .goal-deadline {
+    background-color: #ffebee;
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+/* Style pour les devoirs terminés (optionnel) */
+.devoir-card.completed {
+    border-left-color: #4caf50;
+    opacity: 0.8;
+}
+
+.devoir-card.completed .goal-deadline {
+    color: #4caf50;
+    background-color: #e8f5e9;
+}
+
+/* Animation de suppression */
+.devoir-card.deleting {
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.9); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .devoir-card {
+        padding: 15px;
+    }
+    
+    .devoir-card h3 {
+        font-size: 1.2rem;
+    }
+}
+.devoir-card.expanded {
+    max-height: 1000px;
+    z-index: 100;
+}
+
+.devoir-toggle {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.devoir-card.expanded .devoir-toggle {
+    transform: rotate(180deg);
+}
+
+/* Overlay flouté */
+.devoir-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+    z-index: 90;
+    display: none;
+}
+
+.devoir-card.expanded + .devoir-overlay {
+    display: block;
+}
+
+/* Contenu étendu */
+.devoir-content {
+    padding-right: 40px; /* Espace pour la flèche */
+}
+
+.devoir-card.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 100;
+}

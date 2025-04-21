@@ -39,14 +39,20 @@ const connect = () => {
 
         localStorage.setItem("user", JSON.stringify({
             token: data.token,
-            user_id: data.id
+            user_id: data.id,
+            statut: data.statut
         }))
 
-        setTimeout(() => {  window.location.href = "/html/accueil.html" }, 100)
-        } else {
-            alert(data.error || "Erreur lors de la connexion.")
-        }
-    })
+        if (data.statut === "tuteur") {
+            window.location.href = "/html/Devoirs.html"; 
+        } else if (data.statut === "etudiant") {
+            window.location.href = "/html/accueil.html";
+        } 
+    } else {
+        alert("Statut inconnu. Veuillez contacter l'administrateur.");
+        window.location.href = "/html/login.html"; 
+    }
+})
     .catch(error => {
         console.error("Erreur lors de la connexion :", error)
         alert("Une erreur est survenue, veuillez réessayer.")
@@ -105,7 +111,8 @@ const register = () => {
 
         localStorage.setItem("user", JSON.stringify({
             token: data.token,
-            user_id: data.id
+            user_id: data.id,
+            statut: data.statut
         }))
         
         setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
