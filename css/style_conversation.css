@@ -216,3 +216,165 @@
     box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
     outline: 0;
 }
+/* Section des devoirs */
+#devoirs-section {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #667eea;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 500px;
+}
+
+/* Liste des devoirs */
+.liste-devoirs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Boutons d'action */
+.devoir-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-action {
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 15px;
+    transition: all 0.3s;
+    border: 1px solid #667eea;
+}
+
+.btn-action:hover {
+    background-color: #667eea;
+    transform: scale(1.05);
+}
+
+.btn-action.secondary {
+    background-color: #f44336;
+}
+
+.btn-action.secondary:hover {
+    background-color: #d32f2f;
+}
+
+/* Cartes de devoirs */
+.devoir-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
+}
+
+.devoir-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.devoir-header h3 {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.devoir-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+/* Contenu des devoirs */
+.devoir-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+}
+
+.devoir-card.expanded .devoir-content {
+    max-height: 1000px;
+    padding: 5px 15px;
+}
+
+.devoir-description {
+    white-space: pre-line; 
+    margin-bottom: 10px;
+    margin-top: 0;
+    color: black;
+}
+
+.devoir-meta {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.goal-deadline {
+    display: block;
+    color: #868686;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Bouton voir plus */ 
+ .btn-voir-plus {
+    background: none;
+    border: none;
+    color:  #191970;
+    cursor: pointer;
+    padding: 5px 0;
+    margin-top: 10px;
+    text-align: left;
+} 
+
+ .btn-voir-plus:hover {
+    text-decoration: underline;
+} 
+
+/* Overlay pour les cartes étendues */
+.devoir-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+/* Carte étendue */
+.devoir-card.expanded {
+    position: relative;
+    z-index: 101;
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.no-devoirs {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+}
