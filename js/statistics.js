@@ -88,3 +88,65 @@ const getStats = () => {
         }, 200)
     })
 }
+
+const getObjectifStats = () => {
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    $("#loading-bar").css("visibility", "visible")
+    $("#loading-bar").css("width", "50%")
+
+    fetch(`http://localhost:8000/api/get-objectifs/${user.user_id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+
+        let nbObjectifs = 0
+
+        data.objectifs.forEach(obj => {
+            if(obj.statut === "complété"){nbObjectifs++}
+        })
+
+        const elementObjectif = $(`<h3>Objectifs Completes</h3>
+            <p class="stats-number">${nbObjectifs}</p>
+            <p>Tu as complete ${nbObjectifs} objectifs cette semaine!</p>`)
+        
+        $('#objectif-complete').empty().append(elementObjectif)
+    })
+    .catch(error => {
+        console.error("Erreur lors du chargement des objectifs :", error);
+        if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
+}

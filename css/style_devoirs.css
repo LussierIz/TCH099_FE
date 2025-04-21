@@ -148,6 +148,9 @@ body, .devoirs-container, .devoir-card, .devoir-form {
     background: linear-gradient(135deg, #2980b9, #1a252f);
     transform: translateY(-2px);
 }
+.no-devoirs{
+    color: whitesmoke
+}
 
 .star-pulse {
     animation: pulse 1.5s infinite;
@@ -237,17 +240,18 @@ body, .devoirs-container, .devoir-card, .devoir-form {
 }
 
 .btn-share {
-    background-color: #4CAF50;
+    background-color: #7070bbb5;
     color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s;
+    border: 1px solid #11114E;
 }
 
 .btn-share:hover {
-    background-color: #45a049;
+    background-color: #5E5E9A;
     transform: translateY(-2px);
 }
 
@@ -284,29 +288,6 @@ body, .devoirs-container, .devoir-card, .devoir-form {
     content: "✉️́"; /* Icône de poubelle */
     font-size: 1rem;
 }
-
-/* Style pour les états urgents (optionnel) */
-.devoir-card.urgent {
-    border-left-color: #ff6b6b;
-}
-
-.devoir-card.urgent .goal-deadline {
-    background-color: #ffebee;
-    color: #d32f2f;
-    font-weight: 600;
-}
-
-/* Style pour les devoirs terminés (optionnel) */
-.devoir-card.completed {
-    border-left-color: #4caf50;
-    opacity: 0.8;
-}
-
-.devoir-card.completed .goal-deadline {
-    color: #4caf50;
-    background-color: #e8f5e9;
-}
-
 /* Animation de suppression */
 .devoir-card.deleting {
     animation: fadeOut 0.3s forwards;

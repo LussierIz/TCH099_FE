@@ -102,11 +102,11 @@
                 <span>Salut, <strong id="username"></strong></span>
             </div>
             <div class="coins-xp">
-                <div class="coins">
+                <div class="coins" id="coins">
                     <i class="fas fa-coins"></i>
                     <span>1200</span>
                 </div>
-                <div class="xp">
+                <div class="xp" id="xp">
                     <i class="fas fa-star"></i>
                     <span>LVL 5</span>
                 </div>
@@ -146,7 +146,12 @@
                             <label for="date_limite"><span class="star-icon">✦</span>Date limite</label>
                             <input type="date" id="date_limite" name="date_limite">
                         </div>
-            
+
+                        <div class="input-group">
+                            <label for="destinataire"><span class="star-icon">✦</span>ID du destinataire *</label>
+                            <input type="number" id="id_destinataire" required placeholder="Ex: 123">
+                        </div>
+                        
                         <div class="input-group">
                             <label for="fichiers"><span class="star-icon">✦</span>Pièces jointes</label>
                             <input type="file" id="fichiers" name="fichiers" multiple>

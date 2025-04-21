@@ -29,8 +29,26 @@ function generateUsername() {
         })
         .then(data => {
             if (data.success) {
+                console.log(data)
+                let xpForLevel = (data.banque.quantite_xp % 60)
+                let levelUser =  (data.banque.quantite_xp - xpForLevel) / 60
+
+                let banque = {
+                    coins: data.banque.quantite_coins,
+                    xp: data.banque.quantite_xp,
+                    xpLevel: xpForLevel,
+                    xpLeft: (60 - xpForLevel),
+                    level: levelUser
+                }
+
                 localStorage.setItem('prenom', data.user.prenom);
+                localStorage.setItem('banque', JSON.stringify(banque))
                 document.getElementById('username').textContent = data.user.prenom;
+                const coinsElement = $(`<i class="fas fa-coins"></i><span>${data.banque.quantite_coins}</span>`)
+                const xpElement = $(`<i class="fas fa-star"></i><span>LV ${levelUser}</span>`)
+
+                $('#coins').empty().append(coinsElement)
+                $('#xp').empty().append(xpElement)
             } else {
                 console.error(data.error);
             }
@@ -86,15 +104,20 @@ function populateUserInfo() {
     })
     .then(data => {
         if (data.success && data.user) {
+            let xpForLevel = (data.banque.quantite_xp % 60)
+            let levelUser = (data.banque.quantite_xp - xpForLevel) / 60
+            
             document.getElementById('userNom').textContent = data.user.nom;
             document.getElementById('userPrenom').textContent = data.user.prenom;
             document.getElementById('userID').textContent = data.user.id_utilisateur;
             document.getElementById('userEmail2').textContent = data.user.email;
             document.getElementById('userStatut').textContent = data.user.statut;
             document.getElementById('userInsc').textContent = data.user.date_inscription;
-
             document.getElementById('userFullName').textContent = data.user.prenom + " " + data.user.nom;
             document.getElementById('userEmail').textContent = data.user.email;
+            document.getElementById('userLevel').textContent = levelUser;
+            document.getElementById('userXP').textContent = (xpForLevel + " / 60");
+            document.getElementById('userCoins').textContent = data.banque.quantite_coins;
 
         } else {
             console.error(data.error);
