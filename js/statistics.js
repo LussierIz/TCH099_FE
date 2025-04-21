@@ -30,6 +30,7 @@ const getStats = () => {
     })
     .then(data => {
         if (data.error){throw new Error("Erreur reçue du serveur: " + data.error)}
+        let allEtude = data
 
         console.log(data)
 
@@ -37,8 +38,7 @@ const getStats = () => {
         const startOfWeek = new Date(now)
         startOfWeek.setDate(now.getDate() - now.getDay())
         startOfWeek.setHours(0, 0, 0, 0)
-
-        let totalSeconds = 0
+        let totalSecondsHeb = 0
 
         $.each(data, function(_, session) {
             const sessionDate = new Date(session.date_debut + 'T00:00:00')
@@ -49,16 +49,28 @@ const getStats = () => {
                 const minutes = parseInt(durationParts[1])
                 const seconds = parseInt(durationParts[2])
 
-                totalSeconds += (hours * 3600) + (minutes * 60) + seconds
+                totalSecondsHeb += (hours * 3600) + (minutes * 60) + seconds
             } else {
                 console.log("Non dans la semaine: ", session.date_debut)
             }
         });
 
-        const totalHours = (totalSeconds / 3600).toFixed(1)
-        $('#weekly-hours .stats-number').text(`${totalHours} hrs`)
-
+        const totalHoursHeb = (totalSecondsHeb / 3600).toFixed(1)
         
+        let totalSeconds = 0
+        
+        allEtude.forEach(etude => {
+            const [h, m, s] = etude.Duree.split(':').map(Number)
+            totalSeconds += (h * 3600) + (m * 60) + s
+        })
+        
+        const totalHours = (totalSeconds / 3600).toFixed(1)
+        const moyenneHours = ((totalSeconds / allEtude.length) / 3600).toFixed(1)
+        
+        
+        $('#weekly-hours .stats-number').text(`${totalHoursHeb} hrs`)
+        $('#total-hours .stats-number').text(`${totalHours} hrs`)
+        $('#moyenne-hours .stats-number').text(`${moyenneHours} hrs`)
     })
     .catch(error => {
         console.error("Erreur lors de l'obtention des Messages :", error)

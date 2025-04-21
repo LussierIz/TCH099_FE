@@ -24,22 +24,22 @@ $(document).ready(() => {
     // Permet d'obtenir les informations importantes de l'url
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
-
-    if (JSON.parse(localStorage.getItem("user")).statut === "tuteur") {
-        const devoirsButton = $(`
-            <button class="nav-item" data-section="Devoirs" id="Devoirs-page">
-                <span class="nav-icon">📚</span>
-                <span class="nav-text">Devoirs</span>
-            </button>
-        `)
-        
-        $(".sidebar-bar").append(devoirsButton)
-        $("#conversation-page").before(devoirsButton)
-    }    
-
+    
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
         const sidebarManager = new SidebarManager()
         sidebarManager.init()
+        
+        if (JSON.parse(localStorage.getItem("user")).statut === "tuteur" && localStorage.getItem("user")) {
+            const devoirsButton = $(`
+                <button class="nav-item" data-section="Devoirs" id="Devoirs-page">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Devoirs</span>
+                </button>
+            `)
+            
+            $(".sidebar-bar").append(devoirsButton)
+            $("#conversation-page").before(devoirsButton)
+        }    
     }
 
     /**

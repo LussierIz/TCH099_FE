@@ -26,11 +26,13 @@ const connect = () => {
         },
         body: JSON.stringify(dataConnect)
     })
-    .then(response => {
+    .then(async response => {
+        const data = await response.json()
+
         if (!response.ok) {
-            throw new Error(`Erreur HTTP : ${response.status}`)
+            throw new Error(data.error || "Erreur lors de la connexion.")
         }
-        return response.json()
+        return data
     })
     .then(data => {
         if (data.token) {
@@ -43,19 +45,19 @@ const connect = () => {
             statut: data.statut
         }))
 
-        if (data.statut === "tuteur") {
-            window.location.href = "/html/Devoirs.html"; 
-        } else if (data.statut === "etudiant") {
-            window.location.href = "/html/accueil.html";
-        } 
-    } else {
-        alert("Statut inconnu. Veuillez contacter l'administrateur.");
-        window.location.href = "/html/login.html"; 
-    }
-})
+            if (data.statut === "tuteur") {
+                window.location.href = "/html/Devoirs.html"; 
+            } else if (data.statut === "etudiant") {
+                window.location.href = "/html/accueil.html";
+            } else {
+                alert("Statut inconnu. Veuillez contacter l'administrateur.");
+                window.location.href = "/html/login.html";
+            }
+        }
+    })
     .catch(error => {
         console.error("Erreur lors de la connexion :", error)
-        alert("Une erreur est survenue, veuillez réessayer.")
+        alert(error.message)
     })
     .finally(() => {
         loginButton.prop('disabled', false)
