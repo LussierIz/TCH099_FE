@@ -9,12 +9,12 @@ function addDevoirToUI(dev) {
         <h3>${dev.titre}</h3>
         <p>${dev.description}</p>
         <span class="goal-deadline">${new Date(dev.date_limite).toLocaleDateString('fr-FR')}</span>
-         <div class="devoir-actions">
-        <button class="btn-delete">Supprimer</button>
-        <button class="btn-share">Envoyer</button>
+        <div class="devoir-actions">
+            <button class="btn-delete">Supprimer</button>
+            <button class="btn-share" data-id="${dev.id_devoir}">Envoyer</button> <!-- Ajout de data-id -->
+        </div>
     </div>
-    </div>
-    `;
+`;
 
     // Création de l'overlay
     const overlay = document.createElement("div");
@@ -51,6 +51,12 @@ function addDevoirToUI(dev) {
         }
     });
 
+    card.querySelector(".btn-share").addEventListener("click", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        shareDevoir(dev.id_devoir);
+    });
+
     document.getElementById("devoirs-list").appendChild(card);
 }
    
@@ -71,6 +77,7 @@ function createDevoir() {
         titre: document.getElementById("titre").value,
         description: document.getElementById("description").value,
         date_limite: document.getElementById("date_limite").value,
+        id_destinataire: document.getElementById("id_destinataire").value,
         statut: "à faire"
     };
 
@@ -243,5 +250,76 @@ function deleteDevoir(id) {
     })
     .finally(() => {
         $("#loading-bar").stop().css({width: "0%", visibility: "hidden"});
+    });
+}
+function fetchDevoirsEnvoyes(tuteurId) {
+    fetch(`/api/get-devoirs-envoyes/${tuteurId}`)
+        .then(response => response.json())
+        .then(data => {
+            const devoirsSection = document.getElementById('liste-devoirs');
+            devoirsSection.innerHTML = ''; 
+            if (data.success && data.devoirs.length > 0) {
+                data.devoirs.forEach(devoir => {
+                    const devoirItem = document.createElement('div');
+                    devoirItem.classList.add('devoir-item');
+                    devoirItem.innerHTML = `
+                        <h3>${devoir.titre}</h3>
+                        <p>${devoir.description}</p>
+                        <p>Date limite: ${new Date(devoir.date_limite).toLocaleDateString()}</p>
+                    `;
+                    devoirsSection.appendChild(devoirItem);
+                });
+            } else {
+                devoirsSection.innerHTML = '<p>Aucun devoir trouvé.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des devoirs:', error);
+            document.getElementById('liste-devoirs').innerHTML = '<p>Erreur lors du chargement des devoirs.</p>';
+        });
+}
+function shareDevoir(idDevoir) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user?.token) {
+        alert("Session expirée. Veuillez vous reconnecter.");
+        window.location.href = "/html/login.html";
+        return;
+    }
+
+    const btn = document.querySelector(`.btn-share[data-id="${idDevoir}"]`);
+    btn.disabled = true;
+    btn.textContent = "Envoi en cours...";
+
+    fetch(`http://localhost:8000/api/share-devoir/${idDevoir}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${user.token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            localStorage.removeItem("user");
+            window.location.href = "/html/login.html";
+            return;
+        }
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || "Erreur serveur");
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        alert("Devoir envoyé avec succès !");
+    })
+    .catch(error => {
+        console.error("Erreur:", error);
+        alert(`Échec de l'envoi : ${error.message}`);
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.textContent = "Envoyer";
     });
 }
