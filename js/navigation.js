@@ -122,6 +122,10 @@ $(document).ready(() => {
         })
     }
 
+    if (currentPage == "Boutique.html") {
+        loadBoutiqueItems();
+    }
+
     if (currentPage === "Friend.html"){
         $("#friend-page").addClass("active")
 
