@@ -64,6 +64,7 @@ $(document).ready(() => {
     if(currentPage === "statistiques.html"){
         $("#statistiques-page").addClass("active")
         getStats()
+        getObjectifStats()
         generateUsername()
     }
 
