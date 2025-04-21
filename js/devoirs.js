@@ -128,11 +128,21 @@ function loadDevoir(){
         }
     })
     .then(async response => {
-        if (!response.ok) {
+        if (response.status === 401) {
             const errorData = await response.json();
-            throw new Error(errorData.error || "Erreur serveur");
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
         }
-        return response.json();
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
     })
     .then(data => {
         const devoirsContainer = document.getElementById("devoirs-list");
@@ -235,6 +245,3 @@ function deleteDevoir(id) {
         $("#loading-bar").stop().css({width: "0%", visibility: "hidden"});
     });
 }
-
-// Lancement au chargement du DOM
-document.addEventListener("DOMContentLoaded", initDevoirs);

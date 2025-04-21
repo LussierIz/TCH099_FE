@@ -25,6 +25,18 @@ $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
 
+    if (JSON.parse(localStorage.getItem("user")).statut === "tuteur") {
+        const devoirsButton = $(`
+            <button class="nav-item" data-section="Devoirs" id="Devoirs-page">
+                <span class="nav-icon">📚</span>
+                <span class="nav-text">Devoirs</span>
+            </button>
+        `)
+        
+        $(".sidebar-bar").append(devoirsButton)
+        $("#conversation-page").before(devoirsButton)
+    }    
+
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
         const sidebarManager = new SidebarManager()
         sidebarManager.init()
@@ -176,6 +188,12 @@ $(document).ready(() => {
                 createObjective();
             });
         }
+    }
+
+    if (currentPage === "Devoirs.html") {
+        $("#Devoirs-page").addClass("active")
+        generateUsername()
+        initDevoirs()
     }
 
     if (currentPage === "conversation.html"){
