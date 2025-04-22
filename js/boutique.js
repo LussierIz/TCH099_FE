@@ -67,37 +67,49 @@ function loadBoutiqueItems() {
 
 function buyItem(userId, prodId) {
     const user = JSON.parse(localStorage.getItem("user"));
-    fetch("http://localhost:8000/api/shop/buy", {
+    const token = user.token;
+    fetch(`http://localhost:8000/api/shop/buy/${userId}/${prodId}`, {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${user.token}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            id_utilisateur: userId,
-            id_produit: prodId
-        })
+            "Authorization": `Bearer ${token}`
+        }
     })
-        .then(resp => resp.json())
+        .then(r => r.json())
         .then(json => {
             if (json.success) {
-                alert(json.success + "\nNouveau solde : " + json.newBalance);
+                alert(json.success + "\nNouveau solde : " + json.banque.quantite_coins);
+                // Mets à jour le localStorage et la top‐bar sans recharger la page :
                 const banque = JSON.parse(localStorage.getItem("banque")) || {};
                 banque.coins = json.newBalance;
-                localStorage.setItem("banque", JSON.stringify(banque));
+                updateBalancesDisplay(banque);
 
-                updateBalancesDisplay({
-                    coins: banque.coins,
-                    xpTotal: banque.xp
-                });
-
-                loadBoutiqueItems();  // raffraichir l’affichage
+                // Applique l’effet du produit acheté
+                productEffects(prodId);
+                loadBoutiqueItems();
             } else {
                 alert("Erreur : " + json.error);
             }
         })
         .catch(err => {
-            console.error("Erreur achat :", err);
+            console.error("Erreur achat :", err);
             alert("L'achat a échoué ; réessaie plus tard.");
         });
+}
+
+function loadBoughtItems() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.user_id || !user.token) return;
+
+    fetch(`http://localhost:8000/api/shop/bought/${user.user_id}`, {
+        headers: { "Authorization": `Bearer ${user.token}` }
+    })
+        .then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+        })
+        .then(json => {
+            if (!json.success) throw new Error(json.error);
+            json.bought.forEach(prodId => productEffects(prodId));
+        })
+        .catch(err => console.error("Impossible de charger les achats :", err));
 }

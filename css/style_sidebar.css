@@ -186,3 +186,9 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Produit 1 : thème alternatif pour la sidebar */
+.sidebar.theme-alternative {
+    background: linear-gradient(135deg, #4b0082, #2c003e);
+}
+  

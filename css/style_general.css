@@ -1,12 +1,17 @@
 body {
-    margin: 0;
-    min-height: 100vh; /**couvre toute l'hauteur de l'ecran **/
-    background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
-  }
-  
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
+}
+
 .main-content {
-    flex: 1; /* Remplit l'espace disponible */
-    width: 100%;
-    max-width: 1200px; /* Limite la largeur sur grands écrans */
-    margin: 0 auto; /* Centrage */
-  }
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* version personnalisée de la police */
+body.font-comic-neue {
+  font-family: 'Comic Neue', sans-serif;
+}

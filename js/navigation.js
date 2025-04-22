@@ -407,4 +407,8 @@ $(document).ready(() => {
         console.log("Back button clicked");
         window.location.href = "/html/accueil.html"
     });
+
+    if (typeof loadBoughtItems === "function") {
+        loadBoughtItems();
+    }
 });
