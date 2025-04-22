@@ -5,7 +5,7 @@ function productEffects(prodId) {
             document.querySelector(".sidebar").classList.add("theme-alternative");
             break;
         case 2: // companion
-            const nameEl = document.getElementById("username");
+            const nameEl = document.getElementById("pet-product");
             if (nameEl && !nameEl.textContent.includes("₍^. .^₎⟆")) {
                 nameEl.textContent = nameEl.textContent.trim() + " ₍^. .^₎⟆";
             }

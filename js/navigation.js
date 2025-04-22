@@ -26,6 +26,7 @@ $(document).ready(() => {
     const currentPage = window.location.pathname.split('/').pop()
     
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
+        loadBoughtItems()
         const sidebarManager = new SidebarManager()
         sidebarManager.init()
         
@@ -407,8 +408,4 @@ $(document).ready(() => {
         console.log("Back button clicked");
         window.location.href = "/html/accueil.html"
     });
-
-    if (typeof loadBoughtItems === "function") {
-        loadBoughtItems();
-    }
 });
