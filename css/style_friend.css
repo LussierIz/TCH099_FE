@@ -6,15 +6,15 @@
     padding: 20px;
     color: #fff;
 }
-  
+
 .friend-search {
     margin-bottom: 20px;
     text-align: left;
 }
-  
+
 .friend-search .search-bar {
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -23,13 +23,13 @@
     color: #ffd700;
     font-size: 1rem;
 }
-  
+
 .friends-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
 }
-  
+
 .friend-card {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
@@ -38,13 +38,13 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: #aab8ff;
 }
-  
+
 .friend-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-  
-  /* Example avatar placeholder */
+
+/* Example avatar placeholder */
 .friend-avatar {
     width: 60px;
     height: 60px;
@@ -53,9 +53,9 @@
     background: #666;
 }
 
-  
-  
-  /**************************************************
+
+
+/**************************************************
     LEADERBOARD 
   **************************************************/
 .leaderboard-container {
@@ -64,14 +64,17 @@
     right: 0;
     width: 270px;
     height: 100vh;
-    background: rgba(11, 15, 44, 0.95); /* or your choice */
+    background: rgba(11, 15, 44, 0.95);
+    /* or your choice */
     color: #ffd700;
     border-left: 1px solid rgba(255, 215, 0, 0.3);
     padding: 20px;
-    overflow-y: auto; /* so it scrolls if it gets long */
-    z-index: 999;    /* ensure it’s on top of other content */
+    overflow-y: auto;
+    /* so it scrolls if it gets long */
+    z-index: 999;
+    /* ensure it’s on top of other content */
 }
-  
+
 .leaderboard-container h2 {
     margin-top: 0;
     font-size: 1.5rem;
@@ -81,13 +84,13 @@
     border-bottom: 1px solid rgba(255, 215, 0, 0.3);
     padding-bottom: 10px;
 }
-  
+
 .leaderboard-container ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-  
+
 .leaderboard-container li {
     margin-bottom: 10px;
     padding: 10px;
@@ -96,11 +99,11 @@
     color: #aab8ff;
     transition: background 0.2s ease;
 }
-  
+
 .leaderboard-container li:hover {
     background: rgba(255, 255, 255, 0.15);
 }
-  
+
 
 
 /**************************************************
@@ -116,12 +119,12 @@
     gap: 10px;
     z-index: 1000;
 }
-  
+
 
 .widget-item {
     position: relative;
 }
-  
+
 
 .widget-btn {
     background: #ffd700;
@@ -136,12 +139,12 @@
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-  
+
 
 .widget-popup {
     display: none;
     position: absolute;
-    bottom: 0; 
+    bottom: 0;
     right: 60px;
     background: rgba(11, 15, 44, 0.95);
     padding: 10px;
@@ -149,11 +152,11 @@
     width: 200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-  
+
 .widget-item.open .widget-popup {
     display: block;
 }
-  
+
 .widget-popup input {
     width: 100%;
     padding: 8px;
@@ -177,12 +180,12 @@
     font-weight: bold;
     transition: background 0.3s ease;
 }
-  
+
 .widget-popup button:hover {
     background: #e6c200;
- }
+}
 
- .widget-btn.has-requests::after {
+.widget-btn.has-requests::after {
     content: '';
     position: absolute;
     top: -5px;
@@ -192,4 +195,15 @@
     background: #ff0000;
     border-radius: 50%;
     border: 2px solid rgba(11, 15, 44, 0.95);
-  }
+}
+
+.leader-item {
+    padding: .5rem;
+    margin-bottom: .3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leader-item.highlight {
+    background: rgba(255, 215, 0, 0.2);
+    font-weight: bold;
+}
