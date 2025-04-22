@@ -175,7 +175,7 @@ function addObjectiveToUI(obj) {
 
     if (obj.statut !== "complété") {
         html += `
-            <button onclick="completerObjectif(${obj.id_objectif})">
+            <button onclick="showCompleteModal(${obj.id_objectif})">
                 Compléter
             </button>
         `
@@ -186,9 +186,7 @@ function addObjectiveToUI(obj) {
     card.innerHTML = html;
 
     card.querySelector(".btn-delete").addEventListener("click", function () {
-        if (confirm("Voulez-vous vraiment supprimer cet objectif ?")) {
-            deleteObjective(obj.id_objectif);
-        }
+        showDeleteModal(obj.id_objectif);
     });
 
     document.getElementById("liste-objectifs").appendChild(card);
@@ -253,6 +251,7 @@ function deleteObjective(id) {
     })
 }
 
+
 function completerObjectif(id_objectif) {
     const user = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:8000/api/complet-objectif/${id_objectif}`, {
@@ -278,7 +277,7 @@ function completerObjectif(id_objectif) {
             alert(errorData.error);
             return await Promise.reject("Invalide");
         }
-
+        
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
         }
@@ -309,4 +308,38 @@ function completerObjectif(id_objectif) {
             $("#loading-bar").css("width", "0%")
         }, 200)
     })
+}
+
+function showCompleteModal(id_objectif) {
+    const modal = document.getElementById('confirmationModal');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    modal.style.display = 'flex';
+
+    confirmButton.onclick = function() {
+        completerObjectif(id_objectif);
+        modal.style.display = 'none';
+    };
+
+    cancelButton.onclick = function() {
+        modal.style.display = 'none';
+    };
+}
+
+function showDeleteModal(id_objectif) {
+    const modal = document.getElementById('confirmationModal');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    modal.style.display = 'flex';
+
+    confirmButton.onclick = function() {
+        deleteObjective(id_objectif);
+        modal.style.display = 'none';
+    };
+
+    cancelButton.onclick = function() {
+        modal.style.display = 'none';
+    };
 }
