@@ -159,6 +159,7 @@ $(document).ready(() => {
       
         getFriendList();
         getFriendRequests();
+        loadFriendLeaderboard();
     }
 
     if (currentPage === "login.html"){
