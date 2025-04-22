@@ -15,18 +15,6 @@
  * @version 1.1
  * @date 2025-03-11
  */
-
-/**
- * Objet exemple représentant une tâche.
- * Cet objet pourrait être utilisé comme modèle lors d'une requête asynchrone
- * pour récupérer ou envoyer des tâches à un serveur.
- */
-const tacheExemple = {
-    titre: "Devoir",
-    description: "Voici un courte description",
-    date: "2025-02-10"
-}
-
 /**
  * Tableau contenant la liste des tâches.
  * Chaque tâche est représentée sous forme d'objet avec ses propriétés.
@@ -164,7 +152,7 @@ let ajoutForm = () => {
     let nomTache = $("#nom-tache").val()
     let descTache = $("#desc-tache").val().trim()
     let dateTache = $("#date-tache").val().trim()
-    let nomObjectif = $('#objectif-tache').val()
+    let idObjectif = $('#objectif-tache').val()
 
     /**
      * Vérification et correction du format de la date.
@@ -183,7 +171,7 @@ let ajoutForm = () => {
     }
 
     // Vérifier que tous les champs sont remplis
-    if (nomTache === "" || descTache === "" || dateTache === "") {
+    if (nomTache === "" || descTache === "" || dateTache === "" ||  idObjectif === "") {
         alert("Veuillez remplir tous les champs.")
         return
     }
@@ -193,19 +181,17 @@ let ajoutForm = () => {
         titre: nomTache,
         description: descTache,
         date: dateTache,
-        titre_objectif: nomObjectif
+        id_objectif: idObjectif
     }
 
     // Ajouter la tâche au tableau des tâches et l'afficher dans le calendrier
-    tblTache.push(tache)
-    addTache(tache)
-
     createTache(tache)
     
     // Réinitialiser le formulaire et fermer la fenêtre d'ajout de tâche
     $(".ajout-form")[0].reset()
     $(".ajout-Tache").removeClass("show")
     $(".calendrier").removeClass("hidden")
+    $(".objectif-section").removeClass("hidden")
 }
 
 /**
@@ -247,8 +233,8 @@ let addTacheArray = (tblTacheInput) => {
     tblTache.forEach(tache => addTache(tache))
 }
 
-let afficherTachesParObjectif = (titreObjectif) => {
-    const tachesFiltrees = tblTache.filter(t => t.objectif_titre === titreObjectif)
+let afficherTachesParObjectif = (idObjectif) => {
+    const tachesFiltrees = tblTache.filter(t => t.id_objectif == idObjectif)
 
     const container = $("#taches-par-objectif")
     container.empty()
@@ -259,18 +245,17 @@ let afficherTachesParObjectif = (titreObjectif) => {
     }
 
     const today = new Date()
+    today.setHours(0, 0, 0, 0)
 
     tachesFiltrees.forEach(t => {
         const dateFin = new Date(t.date_fin)
-        const estEnRetard = dateFin < today.setHours(0, 0, 0, 0)
+        const estEnRetard = dateFin < today
 
         let couleur = "white"
         if (t.statut === "complété") {
             couleur = "lightblue"
         } else if (t.statut === "En cours" && estEnRetard) {
             couleur = "red"
-        } else if (t.statut === "En cours" && !estEnRetard) {
-            couleur = "white"
         }
 
         container.append(`
@@ -296,8 +281,16 @@ let afficherObjectifs = (objectifs) => {
                 <h4>${obj.titre}</h4>
             </div>
         `)
-        card.on("click", () => afficherTachesParObjectif(obj.titre))
+        card.on("click", () => afficherTachesParObjectif(obj.id))
         container.append(card)
+    })
+
+    const select = $("#objectif-tache")
+    select.empty()
+    select.append(`<option value="">-- Choisir un objectif --</option>`)
+
+    objectifs.forEach(obj => {
+        select.append(`<option value="${obj.id}">${obj.titre}</option>`)
     })
 }
 
@@ -332,6 +325,13 @@ let createTache = (tache) => {
             return await Promise.reject("Unauthorized");
         }
 
+        if (response.status === 400) {
+            const errorData = await response.json()
+            console.log(errorData.error)
+            alert("Erreur de l'objectif : " + errorData.error);
+            return await Promise.reject("Invalide objectif")
+        }
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(`Erreur HTTP : ${response.status}, Message: ${errorData.error || 'Erreur inconnue'}`);
@@ -342,6 +342,10 @@ let createTache = (tache) => {
     })
     .catch(error => {
         console.error("Erreur lors de la création de l'objectif:", error);
+
+        if (error === "Unauthorized" || error === "Invalide objectif") {
+            return;
+        }
         alert("Une erreur est survenue, veuillez réessayer.");
     })
     .finally(() => {

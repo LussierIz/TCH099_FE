@@ -217,6 +217,29 @@ caption {
     pointer-events: auto;
 }
 
+#objectif-tache {
+    width: 60%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #667eea;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    appearance: none;
+    backdrop-filter: blur(2px);
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+
+#objectif-tache option {
+    background-color: #1a1f4d;
+    color: white;
+}
+
 /* ===== Conteneur principal des objectifs ===== */
 .objectif-section {
     background-color: rgba(0, 0, 0, 0.1);
