@@ -152,19 +152,39 @@ function loadObjectifs() {
         }, 200)
     })
 }
-// Ajouter un objectif à l'interface utilisateur
+
 function addObjectiveToUI(obj) {
     const card = document.createElement("div");
     card.classList.add("objectif-card");
     card.setAttribute("data-id", obj.id_objectif);
-    card.innerHTML = `
-      <h3>${obj.titre}</h3>
-      <p>${obj.description}</p>
-      <span class="goal-deadline">${new Date(obj.date_fin).toLocaleDateString()}</span>
-      <button class="btn-delete">Supprimer</button>
+
+    const deadline = new Date(obj.date_fin);
+    const currentDate = new Date();
+
+    let html = `
+        <h3>${obj.titre}</h3>
+        <p>${obj.description}</p>
+        <span class="goal-deadline">${deadline.toLocaleDateString()}</span>
     `;
 
-    // Gestion de la suppression
+    if (obj.statut !== "complété" && deadline < currentDate) {
+        html += `<span class="overdue-notice">⏰ En retard !</span><br>`
+    }
+
+    html += '<button class="btn-delete">Supprimer</button>'
+
+    if (obj.statut !== "complété") {
+        html += `
+            <button onclick="completerObjectif(${obj.id_objectif})">
+                Compléter
+            </button>
+        `
+    } else {
+        html += `<span class="objectif-complete">✅ Objectif complété</span>`
+    }
+
+    card.innerHTML = html;
+
     card.querySelector(".btn-delete").addEventListener("click", function () {
         if (confirm("Voulez-vous vraiment supprimer cet objectif ?")) {
             deleteObjective(obj.id_objectif);
@@ -219,6 +239,64 @@ function deleteObjective(id) {
     .catch(error => {
         console.error("Erreur lors de la suppression de l'objectif :", error);
         if (error === "Unauthorized") {
+            return;
+        }
+
+        alert("Une erreur est survenue, veuillez réessayer.");
+    })
+    .finally(() => {
+        $("#loading-bar").css("width", "100%")
+        setTimeout(() => {
+            $("#loading-bar").css("visibility", "hidden")
+            $("#loading-bar").css("width", "0%")
+        }, 200)
+    })
+}
+
+function completerObjectif(id_objectif) {
+    const user = JSON.parse(localStorage.getItem("user"))
+    fetch(`http://localhost:8000/api/complet-objectif/${id_objectif}`, {
+        method: 'POST',
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            const errorData = await response.json();
+            if (errorData.error === "Token expiré!") {
+                alert("Votre session a expiré. Veuillez vous reconnecter.")
+            } else {
+                alert("Erreur d'authentification : " + errorData.error);
+            }
+            window.location.href = "/html/login.html";
+        }
+        
+        if (response.status === 400) {
+            const errorData = await response.json();
+            alert(errorData.error);
+            return await Promise.reject("Invalide");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        if (data.success) {
+            alert('🎉 Objectif complété !')
+        } else if (data.error && data.error.includes("tâches")) {
+            alert("⚠️ Vous devez d'abord compléter toutes les tâches liées à cet objectif.")
+        } else {
+            alert('❌ Erreur : ' + data.error)
+        }
+        location.reload()
+    })
+    .catch(error => {
+        console.error("Erreur lors de la suppression de l'objectif :", error);
+        if (error === "Unauthorized" || error === "Invalide") {
             return;
         }
 
