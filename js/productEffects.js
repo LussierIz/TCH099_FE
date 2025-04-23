@@ -18,8 +18,8 @@ function productEffects(prodId) {
     }
 }
 
-  // Charge dynamiquement une font Google et l'applique au body
-  function loadAndApplyFont(fontName) {
+// Charge dynamiquement une font Google et l'applique au body
+function loadAndApplyFont(fontName) {
     const link = document.createElement("link");
     link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g,"+")}:wght@400&display=swap`;
     link.rel = "stylesheet";

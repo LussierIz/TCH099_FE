@@ -25,20 +25,28 @@ function fetchQuotes() {
           "Content-Type": "application/json"
       }
   })
-  .then(response => {
-      if (response.status === 401) {
-          return response.json().then(errorData => {
-              if (errorData.error === "Token expiré!") {
-                  console.log("Session expirée");
-              }
-              return Promise.reject("Unauthorized");
-          });
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
       }
-
+        window.location.href = "/html/login.html";
+        return await Promise.reject("Unauthorized");
+      }
+    
       if (!response.ok) {
-          throw new Error(`Erreur HTTP : ${response.status}`);
+        throw new Error(`Erreur HTTP : ${response.status}`)
       }
-      return response.json();
+      return response.json()
   })
   .then(data => {
       const quoteElement = document.getElementById("random-quote");

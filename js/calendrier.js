@@ -162,17 +162,17 @@ let ajoutForm = () => {
     let dateParts = dateTache.split("-")
     if (dateParts.length === 3) {
         let year = dateParts[0]
-        let month = dateParts[1].padStart(2, '0') // Ajoute un zéro si nécessaire
-        let day = dateParts[2].padStart(2, '0')   // Ajoute un zéro si nécessaire
+        let month = dateParts[1].padStart(2, '0')
+        let day = dateParts[2].padStart(2, '0')
         dateTache = `${year}-${month}-${day}`
     } else {
-        alert("Format de date invalide. Utilisez YYYY-MM-DD.")
+        showMessage("Format de date invalide. Utilisez YYYY-MM-DD.", true)
         return
     }
 
     // Vérifier que tous les champs sont remplis
     if (nomTache === "" || descTache === "" || dateTache === "" ||  idObjectif === "") {
-        alert("Veuillez remplir tous les champs.")
+        showMessage("Veuillez remplir tous les champs.", true)
         return
     }
 
@@ -225,11 +225,8 @@ let addTache = (tache) => {
  * @param {Array<Object>} tblTacheInput - Tableau contenant toutes les tâches
  */
 let addTacheArray = (tblTacheInput) => {
-    // Vider le calendrier avant de le mettre à jour pour éviter les doublons
     $(".task").remove()
-    // Ajouter toute les taches dans le tableau
     tblTache = tblTacheInput
-    // Ajouter chaque tâche dans le calendrier
     tblTache.forEach(tache => addTache(tache))
 }
 
@@ -315,30 +312,34 @@ let createTache = (tache) => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (response.status === 400) {
-            const errorData = await response.json()
-            console.log(errorData.error)
-            alert("Erreur de l'objectif : " + errorData.error);
-            return await Promise.reject("Invalide objectif")
-        }
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Erreur HTTP : ${response.status}, Message: ${errorData.error || 'Erreur inconnue'}`);
-        }
-    })
+          }
+        
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+          }
+          return response.json()
+      })
     .then(data => {
-        window.location.reload();
+        console.log(data)
+        localStorage.setItem("flashMessage", JSON.stringify({
+            message: "Tâche ajoutée avec succès !",
+            type: "success"
+          }));
+        window.location.reload()
     })
     .catch(error => {
         console.error("Erreur lors de la création de l'objectif:", error);
@@ -346,7 +347,7 @@ let createTache = (tache) => {
         if (error === "Unauthorized" || error === "Invalide objectif") {
             return;
         }
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true)
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -372,21 +373,27 @@ let getTache = () => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         console.log(data)
         if(data.taches){addTacheArray(data.taches)}
@@ -398,7 +405,7 @@ let getTache = () => {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true)
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -441,30 +448,37 @@ function completerTache(tacheId) {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json()
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.")
-            } else {
-                alert("Erreur d'authentification : " + errorData.error)
-            }
-            window.location.href = "/html/login.html"
-            return await Promise.reject("Unauthorized")
-        }
-
-        if (!response.ok) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
-        console.log("Tâche mise à jour :", data)
+        localStorage.setItem("flashMessage", JSON.stringify({
+            message: "Tâche mise à jour !",
+            type: "success"
+          }));
         window.location.reload()
     })
     .catch(error => {
-        console.error("Erreur lors de la mise à jour :", error)
         if (error === "Unauthorized") return
-        alert("Une erreur est survenue, veuillez réessayer.")
+        showMessage("Une erreur est survenue, veuillez réessayer.", true)
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

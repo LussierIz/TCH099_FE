@@ -48,10 +48,6 @@ class Pomodoro {
     getTempsCumule() {
         return this.tempsCumule
     }
-
-    showNotification(message) {
-        
-    }
 }
 
 const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
@@ -77,22 +73,32 @@ const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
+        localStorage.setItem("flashMessage", JSON.stringify({
+            message: "Session enregistrer !",
+            type: "success"
+          }))
         location.reload()
     })
     .catch(error => {
@@ -101,7 +107,7 @@ const enregistrerSessionEtude = (tempsCumule, startTime, endTime) => {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -127,21 +133,27 @@ const getNombreSession = () => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         if (data.error) {
             throw new Error("Erreur reçue du serveur: " + data.error)
@@ -160,7 +172,7 @@ const getNombreSession = () => {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

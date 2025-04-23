@@ -21,7 +21,7 @@ function createObjective() {
     $("#loading-bar").css("width", "50%")
     
     if (!user || !user.user_id || !user.token) {
-        alert("Vous devez être connecté.");
+        showMessage("Vous devez être connecté.", true);
         return;
     }
 
@@ -45,30 +45,36 @@ function createObjective() {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         if (data.success) {
-            alert(data.success);
+            showMessage("Objectif créer !");
             // Actualiser la liste des objectifs
             loadObjectifs();
             // Réinitialiser le formulaire
             document.getElementById("objForm").reset();
         } else if (data.error) {
-            alert(data.error);
+            showMessage(data.error, true);
         }
     })
     .catch(error => {
@@ -77,7 +83,7 @@ function createObjective() {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -108,21 +114,27 @@ function loadObjectifs() {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         const objectifsContainer = document.getElementById("liste-objectifs");
         objectifsContainer.innerHTML = "";
@@ -142,7 +154,7 @@ function loadObjectifs() {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -196,7 +208,7 @@ function addObjectiveToUI(obj) {
 function deleteObjective(id) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.user_id || !user.token) {
-        alert("Vous devez être connecté.");
+        showMessage("Vous devez être connecté.", true);
         return;
     }
 
@@ -209,29 +221,35 @@ function deleteObjective(id) {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         if (data.success) {
-            alert(data.success);
+            showMessage("Objectif supprimer !");
             // Rafraîchir la liste des objectifs
             // apres suppression reussite
             loadObjectifs();
         } else if (data.error) {
-            alert(data.error);
+            showMessage(data.error, true);
         }
     })
     .catch(error => {
@@ -240,7 +258,7 @@ function deleteObjective(id) {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -263,33 +281,43 @@ function completerObjectif(id_objectif) {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.")
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
-        }
+            return await Promise.reject("Unauthorized");
+          }
         
-        if (response.status === 400) {
-            const errorData = await response.json();
-            alert(errorData.error);
-            return await Promise.reject("Invalide");
-        }
-        
-        if (!response.ok) {
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         if (data.success) {
-            alert('🎉 Objectif complété !')
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message: "🎉 Objectif complété !",
+                type: "success"
+              }))
         } else if (data.error && data.error.includes("tâches")) {
-            alert("⚠️ Vous devez d'abord compléter toutes les tâches liées à cet objectif.")
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message: "⚠️ Vous devez d'abord compléter toutes les tâches liées à cet objectif.",
+                type: "error"
+              }))
         } else {
-            alert('❌ Erreur : ' + data.error)
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message: '❌ Erreur : ' + data.error,
+                type: "error"
+              }))
         }
         location.reload()
     })
@@ -299,7 +327,7 @@ function completerObjectif(id_objectif) {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")

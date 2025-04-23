@@ -71,3 +71,28 @@ body.font-comic-neue {
 .btn-cancel:hover {
   background-color: #c82333;
 }
+.show-message {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw;
+  z-index: 9999;
+  background-color: #2ecc71;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: top 0.4s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.show-message.visible {
+  top: 30px;
+}
+
+.show-message.error {
+  background-color: #e74c3c;
+}

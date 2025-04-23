@@ -24,6 +24,14 @@ $(document).ready(() => {
     // Permet d'obtenir les informations importantes de l'url
     const urlParams = new URLSearchParams(window.location.search)
     const currentPage = window.location.pathname.split('/').pop()
+
+    const raw = localStorage.getItem("flashMessage");
+    if (raw) {
+        const { message, type } = JSON.parse(raw);
+
+        showMessage(message, type === "error");
+        localStorage.removeItem("flashMessage");
+    }
     
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
         loadBoughtItems()
@@ -410,3 +418,17 @@ $(document).ready(() => {
         window.location.href = "/html/accueil.html"
     });
 });
+
+function showMessage(message, isError = false) {
+    const messageDiv = $(".show-message");
+  
+    messageDiv
+      .text(message)
+      .removeClass("error")
+      .addClass(isError ? "error" : "")
+      .addClass("visible");
+  
+    setTimeout(() => {
+      messageDiv.removeClass("visible");
+    }, 2000);
+  }

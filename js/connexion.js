@@ -6,7 +6,7 @@ const connect = () => {
     $("#loading-bar").css("width", "50%")
 
     if (!email || !password) {
-        alert('Veuillez remplir tous les champs.')
+        showMessage('Veuillez remplir tous les champs.', true)
         return
     }
 
@@ -37,7 +37,10 @@ const connect = () => {
     .then(data => {
         if (data.token) {
             console.log(data)
-            alert("Connexion réussie !")
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message:"Connexion réussie !",
+                type: "success"
+              }));
 
         localStorage.setItem("user", JSON.stringify({
             token: data.token,
@@ -50,14 +53,14 @@ const connect = () => {
             } else if (data.statut === "etudiant") {
                 window.location.href = "/html/accueil.html";
             } else {
-                alert("Statut inconnu. Veuillez contacter l'administrateur.");
+                showMessage("Statut inconnu. Veuillez contacter l'administrateur.", true);
                 window.location.href = "/html/login.html";
             }
         }
     })
     .catch(error => {
         console.error("Erreur lors de la connexion :", error)
-        alert(error.message)
+        showMessage(error.message, true)
     })
     .finally(() => {
         loginButton.prop('disabled', false)
@@ -82,7 +85,7 @@ const register = () => {
     $("#loading-bar").css("width", "50%")
 
     if (!email || !password || !firstName || !lastName || !type) {
-        alert('Veuillez remplir tous les champs.')
+        showMessage('Veuillez remplir tous les champs.', true)
         return
     }
 
@@ -109,8 +112,10 @@ const register = () => {
     .then(data => {
         if (data.token) {
             console.log(data)
-            alert("Enregistrement réussi !")
-
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message:"Enregistrement réussie !",
+                type: "success"
+              }));
         localStorage.setItem("user", JSON.stringify({
             token: data.token,
             user_id: data.id,
@@ -119,12 +124,12 @@ const register = () => {
         
         setTimeout(() => { window.location.href = "/html/accueil.html" }, 100)
         } else {
-            alert(data.error || "Erreur lors de l'enregistrement.")
+            showMessage(data.error || "Erreur lors de l'enregistrement.", true)
         }
     })
     .catch(error => {
         console.error("Erreur lors de l'enregistrement :", error)
-        alert("Une erreur est survenue. Veuillez réessayer.")
+        showMessage("Une erreur est survenue. Veuillez réessayer.", true)
     })
     .finally(() => {
         registerButton.prop('disabled', false)
@@ -140,6 +145,10 @@ const register = () => {
 
 const deconnexion = () => {
     localStorage.removeItem("user")
+    localStorage.setItem("flashMessage", JSON.stringify({
+        message:"Déconnexion réussie !",
+        type: "success"
+      }));
     window.location.href = "/html/login.html"
 }
 

@@ -13,21 +13,27 @@ const getConvo = () => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
         if (data.error){throw new Error("Erreur reçue du serveur: " + data.error)}
 
@@ -69,7 +75,7 @@ const getConvo = () => {
             return;
         }
 
-        alert("Une erreur est survenue, veuillez réessayer.");
+        showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
         $("#loading-bar").css("width", "100%")
@@ -88,12 +94,12 @@ const newConvo = () => {
     $("#loading-bar").css("width", "50%")
 
     if (!user || !user.user_id) {
-        alert("Utilisateur non connecté !")
+        showMessage("Utilisateur non connecté !", true)
         return
     }
 
     if (!id_invite || !chat_name) {
-        alert("Veuillez remplir tous les champs !")
+        showMessage("Veuillez remplir tous les champs !", true)
         return
     }
 
@@ -116,29 +122,32 @@ const newConvo = () => {
     })
     .then(async response => {
         if (response.status === 401) {
-            const errorData = await response.json();
-            if (errorData.error === "Token expiré!") {
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-            } else {
-                alert("Erreur d'authentification : " + errorData.error);
-            }
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
-        }
-
-        if (response.status === 403) {
-            const errorData = await response.json();
-            alert(errorData.error);
-            location.reload();
-        }
-
-        if (!response.ok) {
+          }
+        
+          if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
-        }
-        return response.json()
-    })
+          }
+          return response.json()
+      })
     .then(data => {
-        alert("Conversation créée avec succès !")
+        localStorage.setItem("flashMessage", JSON.stringify({
+            message: "Création de la conversation réussi !",
+            type: "success"
+          }))
         location.reload()
     })
     .catch(error => {
@@ -171,7 +180,29 @@ const rechercherConversations = (terme) => {
             "Content-Type": "application/json"
         }
     })
-    .then(res => res.json())
+    .then(async response => {
+        if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+          }
+        
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+          }
+          return response.json()
+      })
     .then(data => {
         const chatList = $('.chat-list')
         chatList.empty()
@@ -272,12 +303,28 @@ function loadDevoirsRecus() {
         }
     })
     .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || "Erreur serveur");
-        }
-        return response.json();
-    })
+        if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+          }
+        
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+          }
+          return response.json()
+      })
     .then(data => {
         section.innerHTML = '';
 
@@ -314,12 +361,28 @@ function loadDevoirsRecus() {
         }
     })
     .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || "Erreur serveur");
-        }
-        return response.json();
-    })
+        if (response.status === 401) {
+          const errorData = await response.json();
+          if (errorData.error === "Token expiré!") {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Votre session a expiré. Veuillez vous reconnecter.",
+              type: "error"
+            }));
+          } else {
+            localStorage.setItem("flashMessage", JSON.stringify({
+              message: "Erreur d'authentification : " + errorData.error,
+              type: "error"
+            }));
+          }
+            window.location.href = "/html/login.html";
+            return await Promise.reject("Unauthorized");
+          }
+        
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`)
+          }
+          return response.json()
+      })
     .then(data => {
         section.innerHTML = '';
 

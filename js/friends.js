@@ -14,8 +14,8 @@ function sendFriendRequest() {
   $("#loading-bar").css("width", "50%")
 
   if (!receiverId) {
-    alert("Entrez un ID ami valide");
-    return;
+    showMessage("Entrez un ID ami valide", true)
+    return
   }
 
   const data = {
@@ -31,28 +31,34 @@ function sendFriendRequest() {
     },
     body: JSON.stringify(data)
   })
-    .then(async response => {
-      if (response.status === 401) {
-        const errorData = await response.json();
-        if (errorData.error === "Token expiré!") {
-          alert("Votre session a expiré. Veuillez vous reconnecter.");
-        } else {
-          alert("Erreur d'authentification : " + errorData.error);
-        }
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
+      }
         window.location.href = "/html/login.html";
         return await Promise.reject("Unauthorized");
       }
-
+    
       if (!response.ok) {
         throw new Error(`Erreur HTTP : ${response.status}`)
       }
       return response.json()
-    })
+  })
     .then(responseData => {
       if (responseData.success) {
-        alert(responseData.success);
+        showMessage(responseData.success);
       } else if (responseData.error) {
-        alert(responseData.error);
+        showMessage(responseData.error, true);
       }
     })
     .catch(error => {
@@ -61,7 +67,7 @@ function sendFriendRequest() {
         return;
       }
 
-      alert("Une erreur est survenue, veuillez réessayer.");
+      showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -91,22 +97,29 @@ function getFriendRequests() {
       "Content-Type": "application/json"
     }
   })
-    .then(async response => {
-      if (response.status === 401) {
-        const errorData = await response.json();
-        if (errorData.error === "Token expiré!") {
-          alert("Votre session a expiré. Veuillez vous reconnecter.");
-        } else {
-          alert("Erreur d'authentification : " + errorData.error);
-        }
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
+      }
         window.location.href = "/html/login.html";
         return await Promise.reject("Unauthorized");
       }
+    
       if (!response.ok) {
         throw new Error(`Erreur HTTP : ${response.status}`)
       }
       return response.json()
-    })
+  })
     .then(data => {
       const popup = document.querySelector(".widget-item.friend-requests .widget-popup");
       const requestBtn = document.querySelector(".widget-item.friend-requests .widget-btn");
@@ -134,7 +147,7 @@ function getFriendRequests() {
         return;
       }
 
-      alert("Une erreur est survenue, veuillez réessayer.");
+      showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -158,25 +171,36 @@ function updateFriendRequest(requestId, action) {
     },
     body: JSON.stringify({ action: action })
   })
-    .then(async response => {
-      if (response.status === 401) {
-        const errorData = await response.json();
-        if (errorData.error === "Token expiré!") {
-          alert("Votre session a expiré. Veuillez vous reconnecter.");
-        } else {
-          alert("Erreur d'authentification : " + errorData.error);
-        }
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
+      }
         window.location.href = "/html/login.html";
         return await Promise.reject("Unauthorized");
       }
-
+    
       if (!response.ok) {
         throw new Error(`Erreur HTTP : ${response.status}`)
       }
       return response.json()
-    })
+  })
     .then(data => {
-      alert(data.success || data.error);
+      if (data.success) {
+        showMessage(data.success);
+      } else if (data.error) {
+        showMessage(data.error, true);
+      }
+
       // Apres avoir renouvelé la requete, rafrachis la liste de requetes d'amis
       getFriendRequests();
       if (action == "accept") {
@@ -189,7 +213,7 @@ function updateFriendRequest(requestId, action) {
         return;
       }
 
-      alert("Une erreur est survenue, veuillez réessayer.");
+      showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -216,23 +240,29 @@ function getFriendList() {
       "Content-Type": "application/json"
     }
   })
-    .then(async response => {
-      if (response.status === 401) {
-        const errorData = await response.json();
-        if (errorData.error === "Token expiré!") {
-          alert("Votre session a expiré. Veuillez vous reconnecter.");
-        } else {
-          alert("Erreur d'authentification : " + errorData.error);
-        }
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
+      }
         window.location.href = "/html/login.html";
         return await Promise.reject("Unauthorized");
       }
-
+    
       if (!response.ok) {
         throw new Error(`Erreur HTTP : ${response.status}`)
       }
       return response.json()
-    })
+  })
     .then(data => {
       const friendsContainer = document.querySelector(".friends-grid");
       friendsContainer.innerHTML = "";
@@ -258,7 +288,7 @@ function getFriendList() {
         return;
       }
 
-      alert("Une erreur est survenue, veuillez réessayer.");
+      showMessage("Une erreur est survenue, veuillez réessayer.", true);
     })
     .finally(() => {
       $("#loading-bar").css("width", "100%")
@@ -282,23 +312,42 @@ function loadFriendLeaderboard() {
       "Authorization": `Bearer ${user.token}`
     }
   })
-    .then(r => r.json())
-    .then(json => {
-      if (!json.success) {
-        console.error("Leaderboard error:", json.error);
-        return;
+  .then(async response => {
+    if (response.status === 401) {
+      const errorData = await response.json();
+      if (errorData.error === "Token expiré!") {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Votre session a expiré. Veuillez vous reconnecter.",
+          type: "error"
+        }));
+      } else {
+        localStorage.setItem("flashMessage", JSON.stringify({
+          message: "Erreur d'authentification : " + errorData.error,
+          type: "error"
+        }));
       }
-      const container = document.getElementById("leaderboard-items");
-      container.innerHTML = "";  
-      json.friends.forEach(f => {
-        const row = document.createElement("div");
-        row.className = "leader-item" + (f.self ? " highlight" : "");
-        row.textContent = `${f.prenom} ${f.nom} • ${f.hours} heures`;
-        container.appendChild(row);
-      });
-    })
-    .catch(err => console.error("Could not load leaderboard:", err));
+        window.location.href = "/html/login.html";
+        return await Promise.reject("Unauthorized");
+      }
+    
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP : ${response.status}`)
+      }
+      return response.json()
+  })
+  .then(json => {
+    if (!json.success) {
+      console.error("Leaderboard error:", json.error);
+      return;
+    }
+    const container = document.getElementById("leaderboard-items");
+    container.innerHTML = "";  
+    json.friends.forEach(f => {
+      const row = document.createElement("div");
+      row.className = "leader-item" + (f.self ? " highlight" : "");
+      row.textContent = `${f.prenom} ${f.nom} • ${f.hours} heures`;
+      container.appendChild(row);
+    });
+  })
+  .catch(err => console.error("Could not load leaderboard:", err));
 }
-
-
-
