@@ -44,11 +44,12 @@ function generateUsername() {
                 localStorage.setItem('prenom', data.user.prenom);
                 localStorage.setItem('banque', JSON.stringify(banque))
                 document.getElementById('username').textContent = data.user.prenom;
-                const coinsElement = $(`<i class="fas fa-coins"></i><span>${data.banque.quantite_coins}</span>`)
-                const xpElement = $(`<i class="fas fa-star"></i><span>LV ${levelUser}</span>`)
+                const coinsElement = $(`<i data-lucide="coins" class="icon"></i><span>${data.banque.quantite_coins}</span>`);
+                const xpElement = $(`<i data-lucide="award" class="icon"></i><span>LV ${levelUser}</span>`);
 
-                $('#coins').empty().append(coinsElement)
-                $('#xp').empty().append(xpElement)
+                $('#coins').empty().append(coinsElement);
+                $('#xp').empty().append(xpElement);
+                lucide.createIcons();
             } else {
                 console.error(data.error);
             }
@@ -165,4 +166,5 @@ function updateBalancesDisplay({coins, xpTotal}) {
     //   const level = Math.floor(xpTotal / 60);
     //   userLevelEl.textContent = level;
     // }
+    lucide.createIcons();
   }
