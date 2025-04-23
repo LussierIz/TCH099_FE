@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- pour le css -->
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/src/lucide.css">
     <link rel="stylesheet" href="/css/style_sidebar.css">
     <link rel="stylesheet" href="/css/style_general.css">
     <link rel="stylesheet" href="/css/style_messages.css">
     <link rel="stylesheet" href="/css/style_load.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
     <!-- Les scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="/js/boutique.js"></script>
     <script defer src="/js/productEffects.js"></script>
@@ -17,8 +22,9 @@
     <script defer src="/js/connexion.js"></script>
     <script defer src="/js/message.js"></script>
     <script defer src="/js/account.js"></script>
-    <title>Document</title>
+    <title>Messages</title>
 </head>
+
 <body>
     <div id="loading-bar"></div>
     <nav class="sidebar">
@@ -29,68 +35,61 @@
 
         <div class="sidebar-bar">
             <button class="sidebar-toggle">◄</button>
-            
-            <button class="nav-item" data-section="Accueil" id="Accueil-page">
-                <span class="nav-icon">🏠</span>
+
+            <button class="nav-item" data-section="Accueil" id="Accueil-page" data-tooltip="Accueil">
+                <i data-lucide="home" class="nav-icon"></i>
                 <span class="nav-text">Accueil</span>
             </button>
 
-            <button class="nav-item" data-section="calendar" id="calendrier-page">
-                <span class="nav-icon">📅</span>
+            <button class="nav-item" data-section="calendar" id="calendrier-page" data-tooltip="Calendrier">
+                <i data-lucide="calendar" class="nav-icon"></i>
                 <span class="nav-text">Calendrier</span>
             </button>
 
-            <button class="nav-item" data-section="objectifs" id="objectifs-page">
-                <span class="nav-icon">🎯</span>
+            <button class="nav-item" data-section="objectifs" id="objectifs-page" data-tooltip="Objectifs">
+                <i data-lucide="target" class="nav-icon"></i>
                 <span class="nav-text">Objectifs</span>
             </button>
-    
-            <button class="nav-item" data-section="stats" id="statistiques-page">
-                <span class="nav-icon">📊</span>
+
+            <button class="nav-item" data-section="stats" id="statistiques-page" data-tooltip="Stats">
+                <i data-lucide="bar-chart" class="nav-icon"></i>
                 <span class="nav-text">Statistiques</span>
             </button>
-            
-            <button class="nav-item" data-section="" id="friend-page">
-                <span class="nav-icon">😺</span>
+
+            <button class="nav-item" data-section="" id="friend-page" data-tooltip="Friends">
+                <i data-lucide="users" class="nav-icon"></i>
                 <span class="nav-text">Friends</span>
             </button>
 
-            <button class="nav-item" data-section="" id="bloc-note-page">
-                <span class="nav-icon">📝</span>
+            <button class="nav-item" data-section="" id="bloc-note-page" data-tooltip="Bloc-Note">
+                <i data-lucide="notebook" class="nav-icon"></i>
                 <span class="nav-text">Bloc-Note</span>
             </button>
 
-            <button class="nav-item" data-section="" id="login-page">
-                <span class="nav-icon">🔑</span>
+            <!-- <button class="nav-item" data-section="" id="login-page" data-tooltip="Login">
+                <i data-lucide="log-in" class="nav-icon"></i>
                 <span class="nav-text">login</span>
-            </button>
+            </button> -->
 
-            <button class="nav-item" data-section="" id="boutique-page">
-                <span class="nav-icon">🛒</span>
+            <button class="nav-item" data-section="" id="boutique-page" data-tooltip="Boutique">
+                <i data-lucide="shopping-cart" class="nav-icon"></i>
                 <span class="nav-text">boutique</span>
             </button>
 
-            <button class="nav-item" data-section="" id="etude-page">
-                <span class="nav-icon">🎓</span>
+            <button class="nav-item" data-section="" id="etude-page" data-tooltip="Etude">
+                <i data-lucide="book" class="nav-icon"></i>
                 <span class="nav-text">Étude</span>
             </button>
 
-            <button class="nav-item" data-section="" id="conversation-page">
-                <span class="nav-icon">💬</span>
+            <button class="nav-item" data-section="" id="conversation-page" data-tooltip="Conversation">
+                <i data-lucide="message-circle" class="nav-icon"></i>
                 <span class="nav-text">Messages</span>
             </button>
-            
-            <button class="nav-item" data-section="" id="profile-page">
-                <span class="nav-icon">😎</span>
+
+            <button class="nav-item" data-section="" id="profile-page" data-tooltip="Profile">
+                <i data-lucide="user" class="nav-icon"></i>
                 <span class="nav-text">Profile</span>
             </button>
-    
-            <!-- <div class="sidebar-footer">
-                <div class="level-progress">
-                    <div class="progress-bar" style="width: 65%"></div>
-                    <span>Niveau 3</span>
-                </div>
-            </div> -->
         </div>
     </nav>
 
@@ -100,7 +99,9 @@
         <header class="top-header">
             <div class="user-info">
                 <div class="avatar"></div>
-                <span>Salut, <strong id="username"></strong><p id="pet-product"></p></span>
+                <span>Salut, <strong id="username"></strong>
+                    <p id="pet-product"></p>
+                </span>
             </div>
             <div class="coins-xp">
                 <div class="coins" id="coins">
@@ -122,5 +123,9 @@
             <button class="send-btn">Envoyer</button>
         </div>
     </div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

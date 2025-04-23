@@ -29,6 +29,7 @@ class SidebarManager {
     init() {
 
         this.applyState(this.currentState);
+        lucide.createIcons();
 
         // Vérification si la sidebar est réduite dans le localStorage
         // if (localStorage.getItem('sidebarCollapsed') === 'true') {
@@ -54,6 +55,8 @@ class SidebarManager {
 
         this.applyState(this.currentState);
         localStorage.setItem('sidebarState', this.currentState);
+
+        lucide.createIcons();
     }
 
     applyState(state) {
@@ -71,5 +74,6 @@ class SidebarManager {
                 break;
             // 'expanded' est l'etat par defaut
         }
+        lucide.createIcons();
     }
 }
