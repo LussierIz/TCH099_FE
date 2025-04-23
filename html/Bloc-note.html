@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="/css/style_bloc-note.css">
         <link rel="stylesheet" href="/css/style_general.css">
         <link rel="stylesheet" href="/css/style_load.css">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
         <!-- Les scripts -->
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script defer src="/js/boutique.js"></script>
         <script defer src="/js/productEffects.js"></script>
@@ -29,78 +32,63 @@
 
         <div class="sidebar-bar">
             <button class="sidebar-toggle">◄</button>
-            
+
             <button class="nav-item" data-section="Accueil" id="Accueil-page">
-                <span class="nav-icon">🏠</span>
+                <i data-lucide="home" class="nav-icon"></i>
                 <span class="nav-text">Accueil</span>
             </button>
 
             <button class="nav-item" data-section="calendar" id="calendrier-page">
-                <span class="nav-icon">📅</span>
+                <i data-lucide="calendar" class="nav-icon"></i>
                 <span class="nav-text">Calendrier</span>
             </button>
 
             <button class="nav-item" data-section="objectifs" id="objectifs-page">
-                <span class="nav-icon">🎯</span>
+                <i data-lucide="target" class="nav-icon"></i>
                 <span class="nav-text">Objectifs</span>
             </button>
-    
+
             <button class="nav-item" data-section="stats" id="statistiques-page">
-                <span class="nav-icon">📊</span>
+                <i data-lucide="bar-chart" class="nav-icon"></i>
                 <span class="nav-text">Statistiques</span>
             </button>
-            
+
             <button class="nav-item" data-section="" id="friend-page">
-                <span class="nav-icon">😺</span>
+                <i data-lucide="users" class="nav-icon"></i>
                 <span class="nav-text">Friends</span>
             </button>
 
             <button class="nav-item" data-section="" id="bloc-note-page">
-                <span class="nav-icon">📝</span>
+                <i data-lucide="notebook" class="nav-icon"></i>
                 <span class="nav-text">Bloc-Note</span>
             </button>
 
             <button class="nav-item" data-section="" id="login-page">
-                <span class="nav-icon">🔑</span>
+                <i data-lucide="log-in" class="nav-icon"></i>
                 <span class="nav-text">login</span>
             </button>
 
             <button class="nav-item" data-section="" id="boutique-page">
-                <span class="nav-icon">🛒</span>
+                <i data-lucide="shopping-cart" class="nav-icon"></i>
                 <span class="nav-text">boutique</span>
             </button>
 
             <button class="nav-item" data-section="" id="etude-page">
-                <span class="nav-icon">🎓</span>
+                <i data-lucide="book" class="nav-icon"></i>
                 <span class="nav-text">Étude</span>
             </button>
 
             <button class="nav-item" data-section="" id="conversation-page">
-                <span class="nav-icon">💬</span>
+                <i data-lucide="message-circle" class="nav-icon"></i>
                 <span class="nav-text">Messages</span>
             </button>
-            
+
             <button class="nav-item" data-section="" id="profile-page">
-                <span class="nav-icon">😎</span>
+                <i data-lucide="user" class="nav-icon"></i>
                 <span class="nav-text">Profile</span>
             </button>
-    
-            <!-- <div class="sidebar-footer">
-                <div class="level-progress">
-                    <div class="progress-bar" style="width: 65%"></div>
-                    <span>Niveau 3</span>
-                </div>
-            </div> -->
+
         </div>
-
-        <!-- <div class="user-profile">
-            <img src="/images/user-avatar.png" alt="Profile" class="user-avatar">
-
-            <div class="user-info">
-                <span class="user-name">John Doe</span>
-                <span class="user-role">Etudiant</span>
-            </div>
-        </div> -->
     </nav>
     <div class="main-container">
         <div class="container">
@@ -113,5 +101,9 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
