@@ -11,6 +11,13 @@
     padding: 1rem;
 }
 
+.sidebar.collapsed .nav-icon {
+    position: absolute; 
+    left: 16px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
 .sidebar.transition-enabled {
     transition: all 0.3s ease-in-out;
 }
@@ -85,6 +92,7 @@
     border-right: 1px solid rgba(255, 215, 0, 0.1);
     display: flex;
     flex-direction: column;
+    overflow: visible;
 }
 
 .sidebar-nav {
