@@ -113,7 +113,6 @@
     border-radius: 5px;
     transition: all 0.3s ease;
     position: relative;
-    cursor: help;
 }
 
 .nav-icon {
@@ -237,6 +236,10 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
     pointer-events: none;
     margin-left: 10px;
+}
+
+.sidebar.collapsed .nav-item {
+    cursor: help;
 }
 
 .sidebar.collapsed .nav-item:hover::after {
