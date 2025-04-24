@@ -101,14 +101,12 @@
     </div>
     <!-- FRIENDS PAGE -->
     <div class="friend-page" id="friend-section">
-      <div class="friend-search">
-        <input type="text" placeholder="Search friends..." class="search-bar" />
-      </div>
+      <h1 class="titre-friend">Friends</h1>
 
       <!-- Friends List -->
       <div class="friends-grid">
         <div class="friend-card">
-          <div class="friend-avatar"></div>
+          <i data-lucide="user-pen" class="friend-avatar"></i>
           <h3>Friend 1</h3>
           <p>Niveau 1</p>
         </div>
@@ -119,7 +117,9 @@
   <div class="floating-widget">
     <!-- Add Friend -->
     <div class="widget-item add-friend">
-      <button class="widget-btn" id="addFriendBtn" title="Add Friend">➕</button>
+      <button class="widget-btn" id="addFriendBtn" title="Add Friend">
+        <i data-lucide="user-round-plus" class="nav-icon-pop"></i>
+      </button>
       <div class="widget-popup" id="addFriendPopup">
         <input type="text" id="friend-id" placeholder="Entrez le ID de l'ami" class="widget-search" />
         <button class="widget-send" onclick="sendFriendRequest()">Envoyer</button>
@@ -128,15 +128,17 @@
 
     <!-- Friend Requests -->
     <div class="widget-item friend-requests">
-      <button class="widget-btn" title="Friend Requests">🔔</button>
+      <button class="widget-btn" title="Friend Requests">
+        <i data-lucide="bell-ring" class="nav-icon-pop"></i>
+      </button>
       <div class="widget-popup">
-        <p>No new requests</p>
+        <p>Aucune demande d'ami</p>
       </div>
     </div>
   </div>
 
   <div class="leaderboard-container">
-    <h2>Leaderboard de la semaine</h2>
+    <h2>Leaderboard Hebdomadaire</h2>
     <ul id="leaderboard-items"></ul>
   </div>
   </div>

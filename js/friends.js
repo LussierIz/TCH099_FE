@@ -272,12 +272,13 @@ function getFriendList() {
           const card = document.createElement("div");
           card.classList.add("friend-card");
           card.innerHTML = `
-          <div class="friend-avatar"></div>
+          <i data-lucide="user-pen" class="friend-avatar"></i>
           <h3>${friend.prenom} ${friend.nom}</h3>
           <p>${friend.email}</p>
         `;
           friendsContainer.appendChild(card);
         });
+        lucide.createIcons();
       } else {
         friendsContainer.innerHTML = "<p>Aucun ami trouvé.</p>";
       }
@@ -297,6 +298,7 @@ function getFriendList() {
         $("#loading-bar").css("width", "0%")
       }, 200)
     })
+    
 }
 
 function loadFriendLeaderboard() {
