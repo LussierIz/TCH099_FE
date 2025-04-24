@@ -51,8 +51,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     color: white;
     width: 100%;
-    max-width: 600px;
-    cursor: pointer;
+    max-width: 70%;
     transition: transform 0.3s ease;
 }
 
