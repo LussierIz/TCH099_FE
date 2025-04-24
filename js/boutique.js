@@ -126,6 +126,7 @@ function buyItem(userId, prodId) {
             updateBalancesDisplay(banque);
             productEffects(prodId);
             loadBoutiqueItems();
+            generateUsername();
         } else {
             showMessage("Erreur : " + json.error, true);
         }
