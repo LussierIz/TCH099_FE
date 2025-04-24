@@ -1,20 +1,470 @@
-.accueil-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 25px;
-  }
-  
+/* Style pour la citation */
 .quotes {
     background: #fff5e6;
-    padding: 25px;
-    border-radius: 15px;
-    grid-column: 1 / -1;
-}
-  
-.objectifs-section {
-    background: white;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* Conteneur principal */
+.widgets-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espace entre les lignes */
+}
+
+/* Lignes de widgets */
+.widget-row {
+    display: grid;
+    gap: 20px; /* Espace entre colonnes */
+    width: 100%;
+}
+
+/* Première ligne : 3 colonnes égales */
+.widget-row:first-child {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Deuxième ligne : Friends (1) | Messages (1.5) | Stats (1) */
+.widget-row:nth-child(2) {
+    grid-template-columns: 1fr 1.5fr 1fr;
+}
+
+/* Style de base des widgets */
+.widget {
+    background: snow;
+    border-radius: 30px;
+    padding: 15px;
+    min-height: 250px;
+    box-sizing: border-box;
+}
+
+/* Ajustements spécifiques */
+.timer-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .widget-row,
+    .widget-row:first-child,
+    .widget-row:nth-child(2) {
+        grid-template-columns: 1fr;
+    }
+}
+#devoir {
+    margin-left: 50px;
+    max-width: 500px;
+}
+#friends{
+    margin-left: 50px;
+    max-height:325px;
+    max-width: 900px;
+}
+#messages{
+    max-height: 500px;
+    max-width: 600px;
+    margin-left: 50px;
+}
+#objectif{
+    max-width:500px;
+}
+#timer, #stats{
+    margin-right: 20px;
+}
+#stats{
+    margin-right: 20px;
+    max-height: 400px; 
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+.devoirs-widget {
+    grid-column: 1;
+}
+
+.objectifs-widget {
+    grid-column: 2;
+}
+
+.timer-widget {
+    grid-column: 3;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .widget-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .devoirs-widget,
+    .objectifs-widget,
+    .timer-widget {
+        grid-column: 1;
+    }
+}
+/* Deuxième ligne - Ligne du bas */
+.widget-row:nth-child(2) {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr; /* Friends (1) | Messages (1.5) | Stats (1) */
+    gap: 30px;
+  }
+  
+  /* Ajustements spécifiques */
+  .friends-widget {
+    grid-column: 1;
+  }
+  
+  .messages-widget {
+    grid-column: 2;
+  }
+  
+  .stats-widget {
+    grid-column: 3;
+  }
+  
+  /* Garantir que tous les widgets ont la même hauteur */
+  .widget-row {
+    align-items: stretch; /* Important pour l'alignement */
+  }
+  .widget-row:nth-child(2) {
+    margin-bottom: 40px;
+}
+  
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .widget-row:nth-child(2) {
+      grid-template-columns: 1fr;
+    }
+  }
+  .widget {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.widget-sm .widget-header h2 {
+    font-size: 1rem;
+}
+
+.widget-sm .widget-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Timer compact */
+.timer-widget .timer-display {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.timer-widget .timer-controls {
+    margin-bottom: 10px;
+}
+
+.timer-widget .timer-btn {
+    width: 35px;
+    height: 35px;
+}
+
+/* Statistiques compactes */
+.stats-widget .stat-value {
+    font-size: 1.2rem;
+}
+
+.stats-widget canvas {
+    height: 120px !important;
+}
+.stats-widget .widget-header {
+    margin-bottom: 20px;
+}
+
+.stats-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-widget canvas {
+    height: 200px !important; /* Graphique plus grand */
+    margin-bottom: 20px;
+}
+
+.stats-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: auto; /* Pour pousser vers le bas */
+}
+
+.stat-item {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem; /* Taille de police augmentée */
+    font-weight: bold;
+    color: #4f46e5;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Objectifs compact */
+.objectifs-widget .obj-liste li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.widget-icon {
+    margin-right: 10px;
+    color: #4f46e5;
+}
+/* Style spécifique pour le timer */
+.timer-display {
+    font-size: 3rem;
+    text-align: center;
+    font-family: monospace;
+    margin: 15px 0;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.timer-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.timer-modes {
+    display: flex;
+    gap: 10px;
+}
+
+.timer-mode {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.timer-mode.active {
+    background: #4f46e5;
+    color: white;
+}
+
+/* Style pour la liste de devoirs */
+.devoirs-liste li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.devoir-matiere {
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.devoir-titre {
+    margin: 5px 0;
+}
+
+.devoir-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Style pour les statistiques */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+/* Style pour le widget Friends */
+.friends-widget .friends-list {
+    margin-top: 10px;
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.friend-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.friend-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.friend-status {
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+
+.friend-status.online {
+    color: #1dd1a1;
+}
+
+.friend-status.idle {
+    color: #feca57;
+}
+
+.friend-status.offline {
+    color: #576574;
+}
+
+.friend-action {
+    background: none;
+    border: none;
+    color: #4f46e5;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Style pour le widget Messages */
+.messages-widget .messages-list {
+    margin-top: 10px;
+}
+
+.message-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.message-item.unread {
+    background-color: #f8f9fa;
+    border-left: 3px solid #4f46e5;
+    padding-left: 5px;
+}
+
+.message-sender {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.sender-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.sender-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.message-preview {
+    font-size: 0.8rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 32px;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    color: #999;
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* Style pour les pieds de widget */
+.widget-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.see-all-friends,
+.see-all-messages {
+    background: none;
+    border: none;
+    color: #4f46e5;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.see-all-friends:hover,
+.see-all-messages:hover {
+    text-decoration: underline;
 }
