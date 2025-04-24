@@ -127,7 +127,7 @@ body, .devoirs-container, .devoir-card, .devoir-form {
 
 /* Bouton */
 .btn-devoir {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
+    background: linear-gradient(45deg, #667eea, #764ba2);
     color: whitesmoke;
     border: none;
     padding: 12px 20px;
@@ -145,7 +145,7 @@ body, .devoirs-container, .devoir-card, .devoir-form {
 }
 
 .btn-devoir:hover {
-    background: linear-gradient(135deg, #2980b9, #1a252f);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     transform: translateY(-2px);
 }
 .no-devoirs{
