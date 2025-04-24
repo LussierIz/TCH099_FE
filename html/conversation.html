@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/style_conversation.css">
     <link rel="stylesheet" href="/css/style_load.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/star-logo-tr.png" type="image/png"/>
 
     <!-- Les scripts -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -101,7 +102,9 @@
         </div>
         <header class="top-header">
             <div class="user-info">
-                <div class="avatar"></div>
+                <button id="avatar-btn" class="avatar-btn">
+                    <i data-lucide="circle-user" class="nav-icon"></i>
+                </button>
                 <span>Salut, <strong id="username"></strong>
                     <p id="pet-product"></p>
                 </span>

@@ -471,7 +471,7 @@ $(document).ready(() => {
         }
     });
 
-    $("#username, .avatar").on("click", function () {
+    $("#username, .avatar-btn").on("click", function () {
         if (checkLoginStatus()) {
             window.location.href = "/html/profile.html"; 
         } else {
