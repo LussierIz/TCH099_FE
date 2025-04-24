@@ -123,177 +123,65 @@
             <div class="widgets-grid">
                 <div class="widget-row">
                  <!-- Widget Devoirs -->
-                <div class="widget widget-lg devoirs-widget" id="devoir">
+                <div class="widget widget-lg devoirs-widget" id="widget-devoir">
                     <div class="widget-header">
                         <i data-lucide="book-open" class="widget-icon"></i>
-                        <h2>  Devoirs </h2>
+                        <h2>Devoirs</h2>
                     </div>
-                    <ul class="devoirs-liste">
-                        <li>
-                            <span class="devoir-matiere">Mathématiques</span>
-                            <span class="devoir-titre">Exercices chapitre 4</span>
-                            <span class="devoir-date">Pour demain</span>
-                        </li>
-                        <li>
-                            <span class="devoir-matiere">Français</span>
-                            <span class="devoir-titre">Dissertation</span>
-                            <span class="devoir-date">Dans 3 jours</span>
-                        </li>
-
-                    </ul>
+                    <p class="widget-description">
+                        Gérez efficacement vos devoirs et tâches scolaires. Ce widget vous permet de consulter en un coup d'œil les devoirs à venir, de suivre leur progression, et de recevoir des rappels pour ne jamais oublier une échéance. Cliquez ici pour accéder à la section dédiée où vous pouvez voir tous vos devoirs et les organiser.                    </p>
                 </div>
                 
                 <!-- Widget Objectifs du Jour -->
-                <div class="widget widget-sm objectifs-widget" id="objectif">
-                    <div class="widget-header" >
+                <div class="widget widget-sm objectifs-widget" id="widget-objectif">
+                    <div class="widget-header">
                         <i data-lucide="target" class="widget-icon"></i>
                         <h2>Objectifs du Jour</h2>
                     </div>
-                    <ul class="obj-liste">
-                        <li><input type="checkbox">Reviser chapitre 5 physique</li>
-                        <li><input type="checkbox">Soumettre le TP de maths</li>
-                        <li><input type="checkbox">30 min de lecture</li>   
-                    </ul>
+                    <p class="widget-description">
+                        Restez organisé(e) et concentrez-vous sur ce qui est important. Ce widget vous fournit un aperçu clair de vos objectifs quotidiens, vous permettant de prioriser les tâches et d’optimiser votre journée. Cliquez ici pour gérer vos objectifs, ajouter de nouvelles tâches et suivre vos progrès.                    </p>
                 </div>
 
-                 <!-- Widget Timer Pomodoro -->
-                <div class="widget widget-sm timer-widget" id="timer">
+                <!-- Widget Timer Pomodoro -->
+                <div class="widget widget-sm timer-widget" id="widget-timer">
                     <div class="widget-header">
                         <i data-lucide="clock" class="widget-icon"></i>
                         <h2>Pomodoro Timer</h2>
                     </div>
-                    <div class="timer-display">
-                        <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
-                    </div>
-                    <div class="timer-controls">
-                        <button id="timer-start" class="timer-btn">
-                            <i data-lucide="play"></i>
-                        </button>
-                        <button id="timer-pause" class="timer-btn">
-                            <i data-lucide="pause"></i>
-                        </button>
-                        <button id="timer-reset" class="timer-btn">
-                            <i data-lucide="rotate-ccw"></i>
-                        </button>
-                    </div>
-                    <div class="timer-modes">
-                        <button class="timer-mode active" data-minutes="25">Travail</button>
-                        <button class="timer-mode" data-minutes="5">Pause courte</button>
-                        <button class="timer-mode" data-minutes="15">Pause longue</button>
-                    </div>
-                </div>
+                    <p class="widget-description">
+                        Maximisez votre concentration et votre efficacité avec la méthode Pomodoro. Ce widget vous aide à diviser votre travail en sessions de 25 minutes, suivies de courtes pauses, pour favoriser la productivité sans épuisement. Cliquez ici pour démarrer votre minuteur Pomodoro et améliorer votre gestion du temps.                    </p>
                 </div>
 
                 <div class="widget-row">
-                <!-- Widget Friends -->
-                <div class="widget widget-md friends-widget" id="friends">
-                    <div class="widget-header">
-                        <i data-lucide="users" class="widget-icon"></i>
-                        <h2>Amis en ligne (3)</h2>
-                    </div>
-                    <div class="friends-list">
-                        <div class="friend-item">
-                            <div class="friend-avatar" style="background-color: #ff6b6b;"></div>
-                            <div class="friend-info">
-                                <span class="friend-name">Sarah</span>
-                                <span class="friend-status online">En ligne</span>
-                            </div>
-                            <button class="friend-action" title="Envoyer un message">
-                                <i data-lucide="message-circle"></i>
-                            </button>
+                    <!-- Widget Friends -->
+                    <div class="widget widget-md friends-widget" id="widget-friends">
+                        <div class="widget-header">
+                            <i data-lucide="users" class="widget-icon"></i>
+                            <h2>Amis en ligne</h2>
                         </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar" style="background-color: #48dbfb;"></div>
-                            <div class="friend-info">
-                                <span class="friend-name">Ali</span>
-                                <span class="friend-status online">En ligne</span>
-                            </div>
-                            <button class="friend-action" title="Envoyer un message">
-                                <i data-lucide="message-circle"></i>
-                            </button>
-                        </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar" style="background-color: #1dd1a1;"></div>
-                            <div class="friend-info">
-                                <span class="friend-name">Sophie</span>
-                                <span class="friend-status idle">Inactive</span>
-                            </div>
-                            <button class="friend-action" title="Envoyer un message">
-                                <i data-lucide="message-circle"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="widget-footer">
-                        <button class="see-all-friends">
-                            <i data-lucide="plus-circle"></i>
-                            <span>Voir tous les amis</span>
-                        </button>
+                        <p class="widget-description">
+                            Restez informé(e) de l’activité de vos amis et collègues en ligne. Ce widget vous permet de voir qui est connecté et disponible pour discuter ou collaborer. Cliquez ici pour voir la liste complète de vos amis, envoyer des messages ou démarrer une nouvelle conversation.                        </p>
                     </div>
                 </div>
 
                 <!-- Widget Messages -->
-                <div class="widget widget-lg messages-widget" id="messages">
+                <div class="widget widget-lg messages-widget" id="widget-messages">
                     <div class="widget-header">
                         <i data-lucide="message-circle" class="widget-icon"></i>
                         <h2>Messages récents</h2>
                     </div>
-                    <div class="messages-list">
-                        <div class="message-item unread">
-                            <div class="message-sender">
-                                <div class="sender-avatar" style="background-color: #ff6b6b;"></div>
-                                <span class="sender-name">Sarah</span>
-                            </div>
-                            <div class="message-preview">Tu as fini le devoir de maths?</div>
-                            <div class="message-time">10:23</div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-sender">
-                                <div class="sender-avatar" style="background-color: #48dbfb;"></div>
-                                <span class="sender-name">Ali</span>
-                            </div>
-                            <div class="message-preview">On se voit pour réviser demain?</div>
-                            <div class="message-time">Hier</div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-sender">
-                                <div class="sender-avatar" style="background-color: #feca57;"></div>
-                                <span class="sender-name">Groupe Étude</span>
-                            </div>
-                            <div class="message-preview">Sophie: J'ai ajouté des notes sur le chapitre 4</div>
-                            <div class="message-time">Lundi</div>
-                        </div>
-                    </div>
-                    <div class="widget-footer">
-                        <button class="see-all-messages">
-                            <i data-lucide="inbox"></i>
-                            <span>Voir toutes les conversations</span>
-                        </button>
-                    </div>
+                    <p class="widget-description">
+                        Ne ratez aucun message important. Ce widget vous montre un aperçu de vos dernières discussions et messages reçus. Cliquez ici pour consulter l'intégralité de vos conversations, répondre rapidement et reprendre les échanges où vous les avez laissés.                    </p>
                 </div>
                 
-                <!-- Widget Statistiques -->
-                <div class="widget widget-sm stats-widget" id="stats">
+                <!-- Widget Statistiques - version accueil -->
+                <div class="widget widget-sm stats-widget" id="widget-stats">
                     <div class="widget-header">
                         <i data-lucide="bar-chart-2" class="widget-icon"></i>
                         <h2>Statistiques</h2>
                     </div>
-                    <div class="stats-container">
-                        <canvas id="productivity-chart"></canvas>
-                        <div class="stats-info">
-                            <div class="stat-item">
-                                <span class="stat-value">4h 30m</span>
-                                <span class="stat-label">Temps d'étude</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">78%</span>
-                                <span class="stat-label">Productivité</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">12</span>
-                                <span class="stat-label">Objectifs complétés</span>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="widget-description">
+                        Visualisez vos progrès et évaluez votre productivité. Ce widget vous offre des statistiques détaillées sur votre temps d’étude, vos objectifs atteints et votre productivité. Cliquez ici pour explorer vos statistiques détaillées et ajuster vos méthodes de travail pour atteindre vos objectifs plus efficacement.                    </p>
                 </div>
             </div>
         </div>

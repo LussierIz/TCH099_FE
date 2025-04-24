@@ -77,6 +77,37 @@ $(document).ready(() => {
     if (currentPage === "accueil.html"){
         $("#Accueil-page").addClass("active")
         generateUsername()
+
+        $(".widget").on("click", function() {
+            var widgetId = $(this).attr("id");
+    
+            switch (widgetId) {
+                case "widget-devoir":
+                    if (JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user")).statut === "etudiant") {
+                        redirectToPage("/html/conversation.html")
+                    } else {
+                        redirectToPage("/html/Devoirs.html")
+                    }
+                    break;
+                case "widget-objectif":
+                    redirectToPage("/html/objectifs.html")
+                    break;
+                case "widget-timer":
+                    redirectToPage("/html/Etude.html")
+                    break;
+                case "widget-friends":
+                    redirectToPage("/html/Friend.html")
+                    break;
+                case "widget-messages":
+                    redirectToPage("/html/conversation.html")
+                    break;
+                case "widget-stats":
+                    redirectToPage("/html/statistiques.html")
+                    break;
+                default:
+                    console.log("Widget inconnu")
+            }
+        });
     }
 
     if (currentPage === "Bloc-note.html"){
@@ -467,3 +498,11 @@ function showMessage(message, isError = false) {
       messageDiv.removeClass("visible");
     }, 2000);
   }
+
+  function redirectToPage(page) {
+    if (checkLoginStatus()) {
+        window.location.href = page;
+    } else {
+        window.location.href = "/html/login.html";
+    }
+}
