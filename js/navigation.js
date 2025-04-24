@@ -33,6 +33,21 @@ $(document).ready(() => {
         localStorage.removeItem("flashMessage");
     }
 
+    const header = document.querySelector('#main-header');
+
+    if (header) {
+        const onScroll = () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+    
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+    }
+
     
     
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
