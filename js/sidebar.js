@@ -16,7 +16,7 @@ class SidebarManager {
         this.sidebar = document.querySelector('.sidebar');
         this.toggleBtn = document.querySelector('.sidebar-toggle');
         this.mainContent = document.querySelector('.main-container');
-        this.states = ['expanded', 'collapsed', 'hidden'];
+        this.states = ['expanded', 'collapsed'];
         this.currentState = localStorage.getItem('sidebarState') || 'expanded';
     }
 
@@ -60,20 +60,25 @@ class SidebarManager {
     }
 
     applyState(state) {
-        this.sidebar.classList.remove('collapsed', 'hidden');
+        this.sidebar.classList.remove('collapsed');
         this.mainContent.style.marginLeft = '240px';
 
-        switch(state) {
-            case 'collapsed':
-                this.sidebar.classList.add('collapsed');
-                this.mainContent.style.marginLeft = '90px';
-                break;
-            case 'hidden':
-                this.sidebar.classList.add('hidden');
-                this.mainContent.style.marginLeft = '0';
-                break;
-            // 'expanded' est l'etat par defaut
+        if (state === 'collapsed') {
+            this.sidebar.classList.add('collapsed');
+            this.mainContent.style.marginLeft = '90px';
         }
+
+        // switch(state) {
+        //     case 'collapsed':
+        //         this.sidebar.classList.add('collapsed');
+        //         this.mainContent.style.marginLeft = '90px';
+        //         break;
+        //     case 'hidden':
+        //         this.sidebar.classList.add('hidden');
+        //         this.mainContent.style.marginLeft = '0';
+        //         break;
+        //     // 'expanded' est l'etat par defaut
+        // }
         lucide.createIcons();
     }
 }
