@@ -1,24 +1,33 @@
 /* Style pour la citation */
 .quotes {
-    background: #fff5e6;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     padding: 20px;
-    border-radius: 15px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 1.1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Conteneur principal */
 .widgets-grid {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Espace entre les lignes */
+    margin-left: 2%;
+    gap: 40px;
+    padding: 40px;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Lignes de widgets */
 .widget-row {
     display: grid;
-    gap: 20px; /* Espace entre colonnes */
+    gap: 20px;
     width: 100%;
 }
 
@@ -34,15 +43,28 @@
 
 /* Style de base des widgets */
 .widget {
-    background: snow;
-    border-radius: 30px;
-    padding: 15px;
-    min-height: 250px;
-    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: white;
+    width: 100%;
+    max-width: 600px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-/* Ajustements spécifiques */
-.timer-widget {
+/* Effet de zoom au survol des widgets */
+.widget:hover {
+    transform: scale(1.02);
+}
+
+/* Styles spécifiques aux widgets */
+.timer-widget,
+.objectifs-widget,
+.devoirs-widget {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,127 +72,14 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
-    .widget-row,
-    .widget-row:first-child,
-    .widget-row:nth-child(2) {
-        grid-template-columns: 1fr;
-    }
-}
-#devoir {
-    margin-left: 50px;
-    max-width: 500px;
-}
-#friends{
-    margin-left: 50px;
-    max-height:325px;
-    max-width: 900px;
-}
-#messages{
-    max-height: 500px;
-    max-width: 600px;
-    margin-left: 50px;
-}
-#objectif{
-    max-width:500px;
-}
-#timer, #stats{
-    margin-right: 20px;
-}
-#stats{
-    margin-right: 20px;
-    max-height: 400px; 
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-}
-.devoirs-widget {
-    grid-column: 1;
-}
-
-.objectifs-widget {
-    grid-column: 2;
-}
-
-.timer-widget {
-    grid-column: 3;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
     .widget-row {
         grid-template-columns: 1fr;
     }
-    
-    .devoirs-widget,
-    .objectifs-widget,
-    .timer-widget {
-        grid-column: 1;
+
+    .widget {
+        width: 100%;
+        max-width: none;
     }
-}
-/* Deuxième ligne - Ligne du bas */
-.widget-row:nth-child(2) {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr; /* Friends (1) | Messages (1.5) | Stats (1) */
-    gap: 30px;
-  }
-  
-  /* Ajustements spécifiques */
-  .friends-widget {
-    grid-column: 1;
-  }
-  
-  .messages-widget {
-    grid-column: 2;
-  }
-  
-  .stats-widget {
-    grid-column: 3;
-  }
-  
-  /* Garantir que tous les widgets ont la même hauteur */
-  .widget-row {
-    align-items: stretch; /* Important pour l'alignement */
-  }
-  .widget-row:nth-child(2) {
-    margin-bottom: 40px;
-}
-  
-  /* Responsive */
-  @media (max-width: 1200px) {
-    .widget-row:nth-child(2) {
-      grid-template-columns: 1fr;
-    }
-  }
-  .widget {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.widget:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-}
-
-.widget-sm .widget-header h2 {
-    font-size: 1rem;
-}
-
-.widget-sm .widget-icon {
-    width: 18px;
-    height: 18px;
-}
-
-/* Timer compact */
-.timer-widget .timer-display {
-    font-size: 2rem;
-    margin: 10px 0;
-}
-
-.timer-widget .timer-controls {
-    margin-bottom: 10px;
-}
-
-.timer-widget .timer-btn {
-    width: 35px;
-    height: 35px;
 }
 
 /* Statistiques compactes */
@@ -179,56 +88,26 @@
 }
 
 .stats-widget canvas {
-    height: 120px !important;
-}
-.stats-widget .widget-header {
+    height: 200px !important;
     margin-bottom: 20px;
 }
 
-.stats-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.stats-widget canvas {
-    height: 200px !important; /* Graphique plus grand */
-    margin-bottom: 20px;
-}
-
-.stats-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: auto; /* Pour pousser vers le bas */
-}
-
-.stat-item {
-    background: #f8f9fa;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.stat-value {
-    font-size: 1.8rem; /* Taille de police augmentée */
-    font-weight: bold;
-    color: #4f46e5;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Objectifs compact */
+/* Objectifs et devoirs */
 .objectifs-widget .obj-liste li {
     padding: 8px 0;
     font-size: 0.9rem;
 }
 
+/* Footer des widgets */
+.widget-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+/* Styles pour les icônes */
 .widget-header {
     display: flex;
     align-items: center;
@@ -240,6 +119,7 @@
     margin-right: 10px;
     color: #4f46e5;
 }
+
 /* Style spécifique pour le timer */
 .timer-display {
     font-size: 3rem;
@@ -335,6 +215,7 @@
     font-size: 0.8rem;
     color: #666;
 }
+
 /* Style pour le widget Friends */
 .friends-widget .friends-list {
     margin-top: 10px;
