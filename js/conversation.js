@@ -137,6 +137,13 @@ const newConvo = () => {
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
           }
+
+          if (response.status === 403) {
+            localStorage.setItem("flashMessage", JSON.stringify({
+                message: "Vous devez être amis avant tout",
+                type: "error"
+              }))
+          }
         
           if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
@@ -152,6 +159,7 @@ const newConvo = () => {
     })
     .catch(error => {
         console.error("Erreur lors de la création :", error);
+        location.reload()
     })
     .finally(() => {
         newChatButton.prop('disabled', false).text('Ajouter')

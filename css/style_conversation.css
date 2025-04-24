@@ -224,7 +224,8 @@
     border-radius: 10px;
     margin-top: 20px;
     width: 50%;
-    margin-left: 500px;
+    justify-self: center;
+    transition: all 0.4s ease-in-out;
 }
 
 /* Liste des devoirs */

@@ -42,6 +42,8 @@ class Pomodoro {
     reset(duration = this.duration) {
         this.stop()
         this.remainingTime = duration
+        this.tempsCumule = 0
+        this.startTime = null
         this.updateDisplay()
     }
 

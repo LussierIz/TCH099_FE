@@ -91,6 +91,15 @@ $(document).ready(() => {
             pomodoro.start()
             if (typeSession === "pomodoro"){
                 startTime = new Date().toISOString().slice(0, 19).replace('T', ' ')
+                showMessage("C’est parti pour une session de concentration maximale ! 💪")
+            }
+
+            if (typeSession === "short-break") {
+                showMessage("C'est une petite pause 💤")
+            }
+
+            if (typeSession === "long-break") {
+                showMessage("C'est une longue pause 💤")
             }
         })
 
@@ -116,17 +125,23 @@ $(document).ready(() => {
 
         $('#initial-pomodoro').on('click', () => {
             typeSession = "pomodoro"
+            tempsCumule = 0
+            startTime = null
             pomodoro.reset(25 * 60)
         })
 
         $('#short-break').on('click', () => {
             typeSession = "short-break"
+            tempsCumule = 0
+            startTime = null
             pomodoro.reset(5 * 60)
 
         })
         
         $('#long-break').on('click', () => {
             typeSession = "long-break"
+            tempsCumule = 0
+            startTime = null
             pomodoro.reset(15 * 60)
         })
     }
@@ -243,6 +258,7 @@ $(document).ready(() => {
         $("#new-chat").click(() => {
             $(".ajout-Convo").toggleClass("show")
             $(".chat-container").toggleClass("hidden")
+            $("#devoirs-section").toggleClass("hidden")
         })
         
         /**
@@ -254,6 +270,7 @@ $(document).ready(() => {
             event.preventDefault()
             $(".ajout-Convo").removeClass("show")
             $(".chat-container").removeClass("hidden")
+            $("#devoirs-section").removeClass("hidden")
         })
 
         $(".ajout-form").submit((event) => {
