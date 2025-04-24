@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- pour le css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style_sidebar.css">
-    <link rel="stylesheet" href="/css/style_general.css">
+
     <link rel="stylesheet" href="/css/style_login.css">
     <link rel="stylesheet" href="/css/style_load.css">
     <!-- Les scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script defer src="/js/sidebar.js"></script>
+    <script src="/js/custom/nodes.js" defer></script>
+    <script defer src="/js/custom/initNodes.js"></script>
     <script defer src="/js/navigation.js"></script>
     <script defer src="/js/connexion.js"></script>
     <script defer src="/js/login.js"></script> 
     <title>LOGIN</title>
 </head>
 <body>
+    <canvas id="nodesCanvas"></canvas>
     <div id="loading-bar"></div>
     <div class="main-container">
         <div class="show-message">

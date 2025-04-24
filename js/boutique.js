@@ -57,7 +57,7 @@ function loadBoutiqueItems() {
                 const card = document.createElement("div");
                 card.className = "card-shop";
                 card.innerHTML = `
-                  <img src="${item.image}" alt="${item.titre}">
+                  <i data-lucide="${item.image}" class="shop-icon"></i>
                   <p class="shop-title">${item.titre}</p>
                   <p class="shop-desc">${item.description}</p>
                   <button class="buy-btn" ${item.owned ? "disabled" : ""}>
@@ -73,6 +73,7 @@ function loadBoutiqueItems() {
 
                 container.appendChild(card);
             });
+            lucide.createIcons();
         } else {
             container.innerHTML = "<p>Erreur de chargement des articles.</p>";
             showMessage("La boutique est vide ou une erreur est survenue.", true);
