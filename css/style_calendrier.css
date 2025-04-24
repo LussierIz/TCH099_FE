@@ -1,12 +1,37 @@
 .main-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     height: 100vh;
     background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
     color: white;
+    padding: 1rem;
 }
+
+.titre-cal {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem; /* Space below the title */
+    color: #ffd700; /* Gold color for emphasis */
+}
+
+.dashboard {
+    display: flex;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */         /* aligne en haut */
+    gap: 2rem;                       /* un petit écart */
+    padding: 2rem 0;                 /* si tu veux du padding vertical */
+  }
+
+
+  .dashboard .calendrier {
+    width: 65%;
+  }
+  
+  .dashboard .objectif-section {
+    width: 30%;
+  }
 
 .today {
     color: #ffd700;
@@ -17,7 +42,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 100%;
     background: white;
     padding: 20px;
     border-radius: 10px;

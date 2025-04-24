@@ -108,54 +108,41 @@
     </div>
 
     <div class="main-container">
+        <h1 class="titre-cal">Calendrier</h1>
         <div class="show-message">
         </div>
-        <!-- <header class="top-header">
-            <div class="user-info">
-                <div class="avatar"></div>
-                <span>Salut, <strong>Victoria</strong></span>
-            </div>
-            <div class="coins-xp">
-                <div class="coins">
-                    <i class="fas fa-coins"></i>
-                    <span>1200</span>
-                </div>
-                <div class="xp">
-                    <i class="fas fa-star"></i>
-                    <span>LVL 5</span>
-                </div>
-            </div>
-        </header> -->
 
-        <div class="calendrier">
-            <div class="change-mois">            
-                <button id="prevMonth">Previous</button>
-                <button id="nextMonth">Next</button>
+        <div class="dashboard">
+            <div class="calendrier">
+                <div class="change-mois">            
+                    <button id="prevMonth">Previous</button>
+                    <button id="nextMonth">Next</button>
+                </div>
+                <table id="Calendrier">
+                    <caption id="titre"></caption>
+                    <thead>
+                        <tr>
+                        <th>dimanche</th>
+                        <th>lundi</th>
+                        <th>mardi</th>
+                        <th>mercredi</th>
+                        <th>jeudi</th>
+                        <th>vendredi</th>
+                        <th>samedi</th>
+                    </tr>
+                  </thead>
+                </table>
+        
+                <button id="montre-tache">Ajouter une Tâche</button>
             </div>
-            <table id="Calendrier">
-                <caption id="titre"></caption>
-                <thead>
-                    <tr>
-                    <th>dimanche</th>
-                    <th>lundi</th>
-                    <th>mardi</th>
-                    <th>mercredi</th>
-                    <th>jeudi</th>
-                    <th>vendredi</th>
-                    <th>samedi</th>
-                </tr>
-              </thead>
-            </table>
     
-            <button id="montre-tache">Ajouter une Tâche</button>
-        </div>
-
-        <div class="objectif-section">
-            <h3>Mes Objectifs</h3>
-            <div id="objectif-liste" class="flex flex-wrap gap-4"></div>
-            <div id="taches-par-objectif" class="taches-section mt-4">
-                <p>Aucun objectif selectionner</p>
-            </div>        
+            <div class="objectif-section">
+                <h3>Mes Objectifs</h3>
+                <div id="objectif-liste" class="flex flex-wrap gap-4"></div>
+                <div id="taches-par-objectif" class="taches-section mt-4">
+                    <p>Aucun objectif selectionné</p>
+                </div>        
+            </div>
         </div>
         
     
