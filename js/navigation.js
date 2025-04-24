@@ -32,6 +32,22 @@ $(document).ready(() => {
         showMessage(message, type === "error");
         localStorage.removeItem("flashMessage");
     }
+
+    const header = document.querySelector('#main-header');
+
+    const onScroll = () => {
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    // attacher l’écouteur
+    window.addEventListener('scroll', onScroll);
+
+    // appeler une fois pour le cas où la page est déjà défilée
+    onScroll();
     
     if(currentPage !== "profile.html" && currentPage !== "login.html"){
         loadBoughtItems()
