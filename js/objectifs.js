@@ -296,6 +296,12 @@ function completerObjectif(id_objectif) {
             window.location.href = "/html/login.html";
             return await Promise.reject("Unauthorized");
           }
+
+        if (response.status === 400) {
+            const errorData = await response.json();
+            showMessage("⚠️ Vous devez d'abord compléter toutes les tâches liées à cet objectif.", true);
+            return await Promise.reject("Invalide");
+        }
         
           if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`)
@@ -307,11 +313,6 @@ function completerObjectif(id_objectif) {
             localStorage.setItem("flashMessage", JSON.stringify({
                 message: "🎉 Objectif complété !",
                 type: "success"
-              }))
-        } else if (data.error && data.error.includes("tâches")) {
-            localStorage.setItem("flashMessage", JSON.stringify({
-                message: "⚠️ Vous devez d'abord compléter toutes les tâches liées à cet objectif.",
-                type: "error"
               }))
         } else {
             localStorage.setItem("flashMessage", JSON.stringify({
