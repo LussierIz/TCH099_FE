@@ -41,13 +41,14 @@ $(document).ready(() => {
         if (JSON.parse(localStorage.getItem("user")).statut === "tuteur" && localStorage.getItem("user")) {
             const devoirsButton = $(`
                 <button class="nav-item" data-section="Devoirs" id="Devoirs-page">
-                    <span class="nav-icon">📚</span>
+                   <i data-lucide="book-open" class="nav-icon"></i>
                     <span class="nav-text">Devoirs</span>
                 </button>
             `)
             
             $(".sidebar-bar").append(devoirsButton)
             $("#conversation-page").before(devoirsButton)
+            lucide.createIcons();
         }    
     }
 
