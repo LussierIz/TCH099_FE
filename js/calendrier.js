@@ -262,7 +262,7 @@ let afficherTachesParObjectif = (idObjectif) => {
                     (à remettre pour le <em>${t.date_fin}</em>${estEnRetard && t.statut !== "complété" ? " ⚠️ En retard" : ""})
                 </span><br>
                 <em style="color: ${couleur}">Statut : ${t.statut}</em><br>
-                ${t.statut !== "complété" ? `<button onclick="showConfirmationModal(${t.id_tache})">Marquer comme complété</button>` : ""}
+                ${t.statut !== "complété" ? `<button onclick="showConfirmationModal(${t.id_tache})">complété ?</button>` : ""}
             </div>
         `)
     })

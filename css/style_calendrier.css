@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    height: 100vh;
+    height: 94vh;
     background: linear-gradient(145deg, #1a1f4d, #0b0f2c);
     color: white;
     padding: 1rem;
@@ -88,23 +88,45 @@
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    text-align: center;
+    border-spacing: 0;
 }
+
 th, td {
-    padding: 15px;
+    padding: 20px;
     border: 1px solid #ddd;
-    text-align: left;
-    vertical-align: top;
+    color: white;
 }
+
 th {
     background-color: #667eea;
-    color: white;
+}
+
+td {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 60px;
 }
 
 tr {
     font-size: 0.8rem;
 }
+
+thead th:first-child {
+    border-top-left-radius: 15px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 15px;
+}
+
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+}
+
 
 #titre {
     font-size: 1.8rem;
@@ -222,6 +244,8 @@ caption {
 .ajout-Tache {
     position: absolute;
     display: flex;
+    justify-self: center;
+    align-self: center;
     justify-content: center;
     align-items: center;
     pointer-events: none;
@@ -272,8 +296,7 @@ caption {
     padding: 2rem;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    width: 60%;
-    margin: 2rem auto;
+    height: 86vh;
     font-family: 'Segoe UI', sans-serif;
     border: 1px solid #667eea;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
@@ -331,7 +354,7 @@ caption {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #667eea;
     color: white;
-    max-height: 150px;
+    max-height: 50vh;
     overflow-y: auto;
 }
 
