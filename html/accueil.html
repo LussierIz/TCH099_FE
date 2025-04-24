@@ -15,7 +15,9 @@
 
     <!-- Les scripts -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="/js/accueil.js"></script>
     <script defer src="/js/boutique.js"></script>
     <script defer src="/js/productEffects.js"></script>
     <script defer src="/js/sidebar.js"></script>
@@ -23,7 +25,7 @@
     <script defer src="/js/randomQuotes.js"></script>
     <script defer src="/js/connexion.js"></script>
     <script defer src="/js/account.js"></script>
-    <title>Dashboard</title>
+    <title>Accueil</title>
 </head>
 
 <body>
@@ -39,7 +41,6 @@
         </div>
 
         <div class="sidebar-bar">
-
             <button class="nav-item" data-section="Accueil" id="Accueil-page" data-tooltip="Accueil">
                 <i data-lucide="home" class="nav-icon"></i>
                 <span class="nav-text">Accueil</span>
@@ -70,14 +71,9 @@
                 <span class="nav-text">Bloc-Note</span>
             </button>
 
-            <!-- <button class="nav-item" data-section="" id="login-page" data-tooltip="Login">
-                <i data-lucide="log-in" class="nav-icon"></i>
-                <span class="nav-text">login</span>
-            </button> -->
-
             <button class="nav-item" data-section="" id="boutique-page" data-tooltip="Boutique">
                 <i data-lucide="shopping-cart" class="nav-icon"></i>
-                <span class="nav-text">Boutique</span>
+                <span class="nav-text">boutique</span>
             </button>
 
             <button class="nav-item" data-section="" id="etude-page" data-tooltip="Etude">
@@ -124,23 +120,187 @@
                 <div id="random-quote">"Chargement de la citation..."</div>
             </div>
 
-            <div class="objectifs-section">
-                <h2>🎯 Objectifs du Jour</h2>
-                <ul class="obj-liste">
-                    <li><input type="checkbox">Reviser chapitre 5</li>
-                    <li><input type="checkbox">Soumettre le TP de maths</li>
-                    <li><input type="checkbox">30 min de lecture</li>
-                </ul>
-            </div>
+            <div class="widgets-grid">
+                <div class="widget-row">
+                 <!-- Widget Devoirs -->
+                <div class="widget widget-lg devoirs-widget" id="devoir">
+                    <div class="widget-header">
+                        <i data-lucide="book-open" class="widget-icon"></i>
+                        <h2>  Devoirs </h2>
+                    </div>
+                    <ul class="devoirs-liste">
+                        <li>
+                            <span class="devoir-matiere">Mathématiques</span>
+                            <span class="devoir-titre">Exercices chapitre 4</span>
+                            <span class="devoir-date">Pour demain</span>
+                        </li>
+                        <li>
+                            <span class="devoir-matiere">Français</span>
+                            <span class="devoir-titre">Dissertation</span>
+                            <span class="devoir-date">Dans 3 jours</span>
+                        </li>
 
+                    </ul>
+                </div>
+                
+                <!-- Widget Objectifs du Jour -->
+                <div class="widget widget-sm objectifs-widget" id="objectif">
+                    <div class="widget-header" >
+                        <i data-lucide="target" class="widget-icon"></i>
+                        <h2>Objectifs du Jour</h2>
+                    </div>
+                    <ul class="obj-liste">
+                        <li><input type="checkbox">Reviser chapitre 5 physique</li>
+                        <li><input type="checkbox">Soumettre le TP de maths</li>
+                        <li><input type="checkbox">30 min de lecture</li>   
+                    </ul>
+                </div>
+
+                 <!-- Widget Timer Pomodoro -->
+                <div class="widget widget-sm timer-widget" id="timer">
+                    <div class="widget-header">
+                        <i data-lucide="clock" class="widget-icon"></i>
+                        <h2>Pomodoro Timer</h2>
+                    </div>
+                    <div class="timer-display">
+                        <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="timer-start" class="timer-btn">
+                            <i data-lucide="play"></i>
+                        </button>
+                        <button id="timer-pause" class="timer-btn">
+                            <i data-lucide="pause"></i>
+                        </button>
+                        <button id="timer-reset" class="timer-btn">
+                            <i data-lucide="rotate-ccw"></i>
+                        </button>
+                    </div>
+                    <div class="timer-modes">
+                        <button class="timer-mode active" data-minutes="25">Travail</button>
+                        <button class="timer-mode" data-minutes="5">Pause courte</button>
+                        <button class="timer-mode" data-minutes="15">Pause longue</button>
+                    </div>
+                </div>
+                </div>
+
+                <div class="widget-row">
+                <!-- Widget Friends -->
+                <div class="widget widget-md friends-widget" id="friends">
+                    <div class="widget-header">
+                        <i data-lucide="users" class="widget-icon"></i>
+                        <h2>Amis en ligne (3)</h2>
+                    </div>
+                    <div class="friends-list">
+                        <div class="friend-item">
+                            <div class="friend-avatar" style="background-color: #ff6b6b;"></div>
+                            <div class="friend-info">
+                                <span class="friend-name">Sarah</span>
+                                <span class="friend-status online">En ligne</span>
+                            </div>
+                            <button class="friend-action" title="Envoyer un message">
+                                <i data-lucide="message-circle"></i>
+                            </button>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar" style="background-color: #48dbfb;"></div>
+                            <div class="friend-info">
+                                <span class="friend-name">Ali</span>
+                                <span class="friend-status online">En ligne</span>
+                            </div>
+                            <button class="friend-action" title="Envoyer un message">
+                                <i data-lucide="message-circle"></i>
+                            </button>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar" style="background-color: #1dd1a1;"></div>
+                            <div class="friend-info">
+                                <span class="friend-name">Sophie</span>
+                                <span class="friend-status idle">Inactive</span>
+                            </div>
+                            <button class="friend-action" title="Envoyer un message">
+                                <i data-lucide="message-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-footer">
+                        <button class="see-all-friends">
+                            <i data-lucide="plus-circle"></i>
+                            <span>Voir tous les amis</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Widget Messages -->
+                <div class="widget widget-lg messages-widget" id="messages">
+                    <div class="widget-header">
+                        <i data-lucide="message-circle" class="widget-icon"></i>
+                        <h2>Messages récents</h2>
+                    </div>
+                    <div class="messages-list">
+                        <div class="message-item unread">
+                            <div class="message-sender">
+                                <div class="sender-avatar" style="background-color: #ff6b6b;"></div>
+                                <span class="sender-name">Sarah</span>
+                            </div>
+                            <div class="message-preview">Tu as fini le devoir de maths?</div>
+                            <div class="message-time">10:23</div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-sender">
+                                <div class="sender-avatar" style="background-color: #48dbfb;"></div>
+                                <span class="sender-name">Ali</span>
+                            </div>
+                            <div class="message-preview">On se voit pour réviser demain?</div>
+                            <div class="message-time">Hier</div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-sender">
+                                <div class="sender-avatar" style="background-color: #feca57;"></div>
+                                <span class="sender-name">Groupe Étude</span>
+                            </div>
+                            <div class="message-preview">Sophie: J'ai ajouté des notes sur le chapitre 4</div>
+                            <div class="message-time">Lundi</div>
+                        </div>
+                    </div>
+                    <div class="widget-footer">
+                        <button class="see-all-messages">
+                            <i data-lucide="inbox"></i>
+                            <span>Voir toutes les conversations</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Widget Statistiques -->
+                <div class="widget widget-sm stats-widget" id="stats">
+                    <div class="widget-header">
+                        <i data-lucide="bar-chart-2" class="widget-icon"></i>
+                        <h2>Statistiques</h2>
+                    </div>
+                    <div class="stats-container">
+                        <canvas id="productivity-chart"></canvas>
+                        <div class="stats-info">
+                            <div class="stat-item">
+                                <span class="stat-value">4h 30m</span>
+                                <span class="stat-label">Temps d'étude</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">78%</span>
+                                <span class="stat-label">Productivité</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Objectifs complétés</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
-        navigator.serviceWorker.register('/js/sw.js');
         lucide.createIcons();
-    </script>
+    </script> 
 </body>
-
 </html>
